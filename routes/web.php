@@ -10,7 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function(){
+	return view('welcome');
 });
+
+Route::get('admin/login', 'Admin\LoginController@login');
+Route::get('admin/yzm', 'Admin\LoginController@yzm');
+Route::post('admin/dologin', 'Admin\LoginController@dologin');
