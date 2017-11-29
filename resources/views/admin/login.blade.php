@@ -20,15 +20,31 @@
     <script>DD_belatedPNG.fix('*');</script>
     <![endif]-->
     <title>微博达人后台登录</title>
+   
+
     <meta name="keywords" content="微博，达人">
     <meta name="description" content="微博社交平台">
 </head>
 <body>
 <input type="hidden" id="TenantId" name="TenantId" value=""/>
-<div class="header">&nbsp;&nbsp;&nbsp;: )&nbsp;&nbsp;lamp179  微博达人 后台管理系统</div>
+<div class="header">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lamp193  微博达人 后台管理系统</div>
+ 
 <div class="loginWraper">
     <div id="loginform" class="loginBox">
         <form class="form form-horizontal" action="{{ asset('admin/dologin') }}" method="post">
+        @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @if(is_object($errors))
+                            @foreach ($errors->all() as $error)
+                                <li style="color:red">{{ $error }}</li>
+                            @endforeach
+                        @else
+                            <li style="color:red">{{ $errors }}</li>
+                        @endif
+                    </ul>
+                </div>
+            @endif
         {{csrf_field()}}
             <div class="row cl">
                 <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
@@ -44,7 +60,7 @@
             </div>
             <div class="row cl">
                 <div class="formControls col-xs-8 col-xs-offset-3">
-                    <input class="input-text size-L" type="text" name="admin_yzm" placeholder="验证码"
+                    <input class="input-text size-L" type="text" name="code" placeholder="验证码"
                            onblur="if(this.value==''){this.value='验证码:'}"
                            onclick="if(this.value=='验证码:'){this.value='';}" value="验证码:" style="width:150px;">
                     <img src="{{ url('admin/yzm') }}" onclick="this.src='{{url('admin/yzm')}}?'+Math.random()"> <a id="kanbuq" href="javascript:;">看不清，换一张</a></div>

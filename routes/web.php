@@ -17,3 +17,12 @@ Route::get('/', function(){
 Route::get('admin/login', 'Admin\LoginController@login');
 Route::get('admin/yzm', 'Admin\LoginController@yzm');
 Route::post('admin/dologin', 'Admin\LoginController@dologin');
+
+Route::get('sss', 'Admin\LoginController@sss');
+
+// 定义路由组
+// Route::group(['middleware'=>'islogin', 'prefix'=>'admin', 'nameapace'=>'Admin'], function(){
+	// 加入后台主页的路由
+	Route::get('admin/index', 'Admin\IndexController@index');
+
+// });
