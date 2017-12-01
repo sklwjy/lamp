@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\admin\User;
 
 class UserController extends Controller
 {
@@ -16,8 +15,7 @@ class UserController extends Controller
     public function index()
     {
         //
-        $user = User::orderBy('admin_id', 'asc')->get();
-        dd($user);
+        return view('admin/user/list');
     }
 
     /**
@@ -28,6 +26,7 @@ class UserController extends Controller
     public function create()
     {
         //
+        return view('admin/user/add');
     }
 
     /**
@@ -85,46 +84,4 @@ class UserController extends Controller
     {
         //
     }
-
-    //给页面返回页面
-    public function articleadd()
-    {
-        return view('admin/article-add');
-    }
-
-    public function articlelist()
-    {
-        return view('admin/article-list');
-    } 
-
-    public function adminrole()
-    { 
-        // return 111;
-        return view('admin/admin-role');
-    }
-
-     public function productbrand()
-    { 
-        // return 111;
-        return view('admin/product-brand');
-    }
-
-     public function productcategory()
-    { 
-        // return 111;
-        return view('admin/product-category');
-    }
-
-     public function productlist()
-    { 
-        // return 111;
-        return view('admin/product-list');
-    }  
-
-    public function productcategoryadd()
-    { 
-        // return 111;
-        return view('admin/product-category-add');
-    }
-    
 }

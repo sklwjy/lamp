@@ -20,6 +20,7 @@ Route::post('admin/dologin', 'Admin\LoginController@dologin');
 Route::group(['middleware'=>'islogin', 'prefix'=>'admin', 'namespace'=>'Admin'], function(){
 	// 加入后台主页的路由
 	Route::get('index', 'IndexController@index');
+	Route::get('info', 'IndexController@info');
 	// 退出登陆
 	Route::get('logout', 'IndexController@logout');
 	Route::get('welcome', 'IndexController@welcome');
@@ -29,11 +30,3 @@ Route::group(['middleware'=>'islogin', 'prefix'=>'admin', 'namespace'=>'Admin'],
 });
 
 
-// 页面中引入页面路由
-Route::get('admin/article-add', 'Admin\UserController@articleadd');
-Route::get('admin/article-list', 'Admin\UserController@articlelist');
-Route::get('admin/admin-role', 'Admin\UserController@adminrole');
-Route::get('admin/product-brand', 'Admin\UserController@productbrand');
-Route::get('admin/product-category', 'Admin\UserController@productcategory');
-Route::get('admin/product-list', 'Admin\UserController@productlist');
-Route::get('admin/product-category-add', 'Admin\UserController@productcategoryadd');

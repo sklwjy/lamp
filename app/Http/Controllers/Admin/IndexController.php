@@ -10,8 +10,13 @@ class IndexController extends Controller
     // 后台主页
    	public function index()
    	{
-   		return view('admin/index');
+   		return view('admin/index1');
    	}
+
+      public function info()
+      {
+         return view('admin/info');
+      }
 
    	// 退出登陆
    	public function logout()
