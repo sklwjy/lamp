@@ -10,5 +10,4 @@ class User extends Model
     public $primaryKey = 'admin_id';
     public $guarded = [];
     public $timestamps = false;
-
 }

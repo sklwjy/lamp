@@ -1,4 +1,4 @@
-﻿<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html>
 <head>
     <meta charset="utf-8">
@@ -12,11 +12,11 @@
     <script type="text/javascript" src="lib/html5shiv.js"></script>
     <script type="text/javascript" src="lib/respond.min.js"></script>
     <![endif]-->
-    <link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.min.css"/>
-    <link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/H-ui.admin.css"/>
-    <link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.8/iconfont.css"/>
-    <link rel="stylesheet" type="text/css" href="static/h-ui.admin/skin/default/skin.css" id="skin"/>
-    <link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('b/static/h-ui/css/H-ui.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('b/static/h-ui.admin/css/H-ui.admin.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('b/lib/Hui-iconfont/1.0.8/iconfont.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('b/static/h-ui.admin/skin/default/skin.css') }}" id="skin"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('b/static/h-ui.admin/css/style.css') }}"/>
     <!--[if IE 6]>
     <script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>DD_belatedPNG.fix('*');</script>
@@ -57,7 +57,7 @@
                         <ul class="dropDown-menu menu radius box-shadow">
                             <li><a href="javascript:;" onClick="myselfinfo()">个人信息</a></li>
                             <li><a href="#">切换账户</a></li>
-                            <li><a href="#">退出</a></li>
+                            <li><a href="{{ asset('admin/logout') }}">退出</a></li>
                         </ul>
                     </li>
                     <li id="Hui-msg"><a href="#" title="消息"><span class="badge badge-danger">1</span><i
@@ -187,13 +187,18 @@
                                                   href="javascript:;"><i class="Hui-iconfont">&#xe6d4;</i></a><a
                 id="js-tabNav-next" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d7;</i></a>
         </div>
-    </div>
-    <div id="iframe_box" class="Hui-article">
+
+
+<div id="iframe_box" class="Hui-article">
         <div class="show_iframe">
             <div style="display:none" class="loading"></div>
-            <iframe scrolling="yes" frameborder="0" src="welcome.html"></iframe>
+            <iframe scrolling="yes" frameborder="0" src="{{ asset('admin/welcome') }}"></iframe>
         </div>
     </div>
+
+    
+
+
 </section>
 
 <div class="contextMenu" id="Huiadminmenu">
@@ -203,10 +208,10 @@
     </ul>
 </div>
 <!--_footer 作为公共模版分离出去-->
-<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
-<script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
-<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="{{ asset('b/lib/jquery/1.9.1/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('b/lib/layer/2.4/layer.js') }}"></script>
+<script type="text/javascript" src="{{ asset('b/static/h-ui/js/H-ui.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('b/static/h-ui.admin/js/H-ui.admin.js') }}"></script>
 <!--/_footer 作为公共模版分离出去-->
 
 <!--请在下方写此页面业务相关的脚本-->

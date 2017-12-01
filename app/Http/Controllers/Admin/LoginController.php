@@ -129,11 +129,4 @@ class LoginController extends Controller
 
     }
 
-	public function sss()
-	{
-		$str = '123456';
-
-		$c = Crypt::encrypt($str);
-		return $c;
-	}
-}
+}	
