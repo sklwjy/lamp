@@ -67,7 +67,7 @@ class LoginController extends Controller
     {
     	// dd(11);
     	$input = $request->except('_token');
-    	// dd($input);
+    	 //dd($input);
 
     	// 对数据进行后台表单验证
     	// Validator::make(要验证的数据,验证规则,提示信息);
@@ -114,7 +114,7 @@ class LoginController extends Controller
        	 if(!$user){
        	 	return redirect('admin/login')->with('errors', '用户名不存在');
        	 }
-
+        
        	 // 3.2 密码是否正确
        	 // $user->admin_pass   $input['admin_pass']
        	if( Crypt::decrypt($user->admin_pass) != trim($input['admin_pass'])){
