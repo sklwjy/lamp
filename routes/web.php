@@ -21,9 +21,8 @@
 	Route::get('home/register', 'Home\LoginController@register');
 Route::group(['middleware'=>'homeislogin', 'prefix'=>'home', 'namespace'=>'Home'], function(){
 	Route::get('index', 'IndexController@index');
-	
 	Route::post('doregister', 'LoginController@doregister');
-	
+	Route::resource('message','MessageController');
 });
 
 
@@ -55,6 +54,12 @@ Route::group(['middleware'=>'islogin', 'prefix'=>'admin', 'namespace'=>'Admin'],
 	Route::resource('config', 'ConfigController');
 
 });
+
+
+
+
+
+
 
 
 
