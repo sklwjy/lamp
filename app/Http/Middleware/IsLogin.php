@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
+
 class IsLogin
 {
     /**
@@ -20,6 +21,5 @@ class IsLogin
         }else {
             return redirect('admin/login')->with('errors', '请先登录!!');
         }
-        
     }
 }

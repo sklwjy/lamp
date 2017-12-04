@@ -13,6 +13,58 @@
 
 // 后台路由
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 前台路由
+Route::get('home/login','Home\LoginController@login');
+
+Route::post('home/dologin', 'Home\LoginController@dologin');
+
+Route::get('home/index', 'Home\IndexController@index');
+Route::get('home/register', 'Home\LoginController@register');
+Route::post('home/doregister', 'Home\LoginController@doregister');
+Route::get('home/yzm', 'Home\LoginController@yzm');
+
+
+
+
 Route::get('admin/login', 'Admin\LoginController@login');
 Route::get('admin/yzm', 'Admin\LoginController@yzm');
 Route::post('admin/dologin', 'Admin\LoginController@dologin');
@@ -35,5 +87,6 @@ Route::group(['middleware'=>'islogin', 'prefix'=>'admin', 'namespace'=>'Admin'],
 	Route::post('upload', 'NewsController@upload');
 
 });
+
 
 
