@@ -3,11 +3,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>注册 灵步网微博-点滴生活，精彩每一天</title>
-<link href="{{ asset('a/styles/register.css') }}" type="text/css" rel="stylesheet" />
-<link href="{{ asset('a/styles/global.css') }}" type="text/css" rel="stylesheet" />
+<link href="{{ asset('home/styles/register.css') }}" type="text/css" rel="stylesheet" />
+<link href="{{ asset('home/styles/global.css') }}" type="text/css" rel="stylesheet" />
 {{--<script src="{{  asset('a/script/sitedata_bas.js') }}" language="javascript"></script>--}}
-<script src="{{  asset('a/script/datecreate.js') }}" language="javascript"></script>
-<script src="{{  asset('a/script/trim.js') }}" language="javascript"></script>
+<script src="{{  asset('home/script/datecreate.js') }}" language="javascript"></script>
+<script src="{{  asset('home/script/trim.js') }}" language="javascript"></script>
 {{--<script src="{{  asset('a/script/register.js') }}" language="javascript"></script>--}}
 </head>
 <body>
@@ -17,12 +17,12 @@
     	<!-- top部分的LogoDIV -->
     	<div id="topLogo">
         	<!-- topLogo部分的icoDIV -->
-            <div id="topLogoIco"> <a href="#"><img src="{{asset('a/images/logo_ipad.png')}}" width="72" height="72" alt="" /></a>
+            <div id="topLogoIco"> <a href="#"><img src="{{asset('home/images/logo_ipad.png')}}" width="72" height="72" alt="" /></a>
         </div>
             <!-- topLogo部分的icoDIV结束 -->
             
             <!-- topLogo部分的wordDIV -->
-            <div id="topLogoWord"> <a href="#"><img src="{{asset('a/images/LogoMaker.gif')}}" width="128" height="60" alt="" /></a>
+            <div id="topLogoWord"> <a href="#"><img src="{{asset('home/images/LogoMaker.gif')}}" width="128" height="60" alt="" /></a>
           </div>
             <!-- topLogo部分的wordDIV -->
         </div>

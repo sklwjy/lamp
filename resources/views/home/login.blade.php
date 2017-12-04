@@ -3,8 +3,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>΢������</title>
-    <link href="{{ asset('a/styles/global.css') }}" type="text/css" rel="stylesheet" />
-    <link href="{{ asset('a/styles/login.css') }}" type="text/css" rel="stylesheet" />
+    <link href="{{ asset('home/styles/global.css') }}" type="text/css" rel="stylesheet" />
+    <link href="{{ asset('home/styles/login.css') }}" type="text/css" rel="stylesheet" />
 
     <link rel="shortcut icon" href="./favicon.ico">
 </head>
@@ -17,12 +17,12 @@
     	<!-- top部分的LogoDIV -->
     	<div id="topLogo">
         	<!-- topLogo部分的icoDIV -->
-            <div id="topLogoIco"> <a href="index.html"><img src="{{asset('a/images/logo_ipad.png')}}" width="72" height="72" alt="" /></a>
+            <div id="topLogoIco"> <a href="index.html"><img src="{{asset('home/images/logo_ipad.png')}}" width="72" height="72" alt="" /></a>
           </div>
             <!-- topLogo部分的icoDIV结束 -->
             
             <!-- topLogo部分的wordDIV -->
-            <div id="topLogoWord"> <a href="index.html"><img src="{{asset('a/images/LogoMaker.gif')}}" width="128" height="60" alt="" /></a>
+            <div id="topLogoWord"> <a href="index.html"><img src="{{asset('home/images/LogoMaker.gif')}}" width="128" height="60" alt="" /></a>
           </div>
             {{--<!-- topLogo部分的wordDIV -->LogoMaker.gif--}}
         </div>
@@ -82,7 +82,7 @@
        <tr>
          <td class="le"></td>
          <td class="ld"></td>
-         <td><input name="checkbox" type="checkbox" id="checkbox" checked="checked" />
+         <td><input name="checkbox" type="checkbox" id="checkbox"  />
            下次自动登陆&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#">忘记密码</a></td>
          <td></td>
        </tr>
@@ -109,7 +109,7 @@
             <div class="cs">
            		赶快来注册一个吧
             </div>
-            <div class="ds"><a href="{{ url('home/register' )}}"><img src="{{asset('a/images/anniu.gif')}}" alt="立即注册" width="155" height="48" border="0" title="在这注册" /></a>
+            <div class="ds"><a href="{{ url('home/register' )}}"><img src="{{asset('home/images/anniu.gif')}}" alt="立即注册" width="155" height="48" border="0" title="在这注册" /></a>
             </div>
    	</div>
   </div>
