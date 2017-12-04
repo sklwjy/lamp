@@ -155,11 +155,11 @@ class NewsController extends Controller
 
         // 通过$request获取要修改的值
         $input = $request->except('_token', '_method');
-        dd($input);
+        // dd($input);
         
         // 3 使用模型的update方法进行更新
         $res = $news->update($input);
-
+        
 
         if($res){
             return redirect('admin/news')->with('msg', '修改成功');
