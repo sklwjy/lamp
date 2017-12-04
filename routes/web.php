@@ -11,60 +11,25 @@
 |
 */
 
-// 后台路由
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // 前台路由
-Route::get('home/login','Home\LoginController@login');
+	
+	Route::get('home/login','Home\LoginController@login');
+	Route::get('home/yzm', 'Home\LoginController@yzm');
+	Route::get('home/sss', 'Home\LoginController@sss');
+	Route::post('home/dologin', 'Home\LoginController@dologin');
+	Route::get('home/register', 'Home\LoginController@register');
+Route::group(['middleware'=>'homeislogin', 'prefix'=>'home', 'namespace'=>'Home'], function(){
+	Route::get('index', 'IndexController@index');
+	
+	Route::post('doregister', 'LoginController@doregister');
+	
+});
 
-Route::post('home/dologin', 'Home\LoginController@dologin');
-
-Route::get('home/index', 'Home\IndexController@index');
-Route::get('home/register', 'Home\LoginController@register');
-Route::post('home/doregister', 'Home\LoginController@doregister');
-Route::get('home/yzm', 'Home\LoginController@yzm');
 
 
 
-
+// 后台路由
 Route::get('admin/login', 'Admin\LoginController@login');
 Route::get('admin/yzm', 'Admin\LoginController@yzm');
 Route::post('admin/dologin', 'Admin\LoginController@dologin');
@@ -85,6 +50,9 @@ Route::group(['middleware'=>'islogin', 'prefix'=>'admin', 'namespace'=>'Admin'],
 	Route::resource('news', 'NewsController');
 	// 新闻模块上传文件(图片)路由
 	Route::post('upload', 'NewsController@upload');
+
+	// 网站配置模块路由
+	Route::resource('config', 'ConfigController');
 
 });
 

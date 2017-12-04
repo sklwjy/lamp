@@ -78,7 +78,7 @@ class LoginController extends Controller
         }
 
         //4 登陆成功, 将用户信息保存到session中, 用于判断用户是否登录以及获取用户信息
-        Session::put('user', $user);
+        Session::put('users', $user);
         return redirect('home/index');
 
     }
@@ -183,7 +183,7 @@ class LoginController extends Controller
             'user_name'=>$input['user_name'],
             'user_time'=>time(),
             'user_phone' =>$input['user_phone'],
-            'user_password' =>$input['user_password'],
+            'user_password' =>Crypt::encrypt($input['user_password']),
             'user_status' =>0,
             'user_email' =>$input['user_email'],
 
@@ -191,6 +191,7 @@ class LoginController extends Controller
             ];
            $res =   Users::create($data);
        // dd($res);
+        
         return redirect('home/login');
 
     }
