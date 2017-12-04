@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-    <title>后台用户添加页面</title>
+    <title>后台用户修改页面</title>
 @endsection
 @section('body')
     <!--面包屑导航 开始-->
@@ -34,54 +34,38 @@
     <!--结果集标题与导航组件 结束-->
     
     <div class="result_wrap">
-        <form action="{{url('admin/cate')}}" method="post">
+        <form action="{{url('admin/news/'.$news->news_id)}}" method="post">
             <table class="add_tab">
-                {{csrf_field()}}
                 <tbody>
-                <tr>
-                    <th width="120"><i class="require">*</i>父级分类：</th>
+                    <tr>
+                    {{csrf_field()}}
+                    {{method_field('put')}}                    
+                    <th><i class="require">*</i>新闻名称：</th>
                     <td>
-                        <select name="cate_pid">
-                            <option value="0">==顶级分类==</option>
-                            @foreach($cateOne as $k=>$v)
-                            <option value="{{$v->cate_id}}">{{$v->cate_name}}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" name="news_name" value="{{$news->news_name}}">
+                        <span><i class="fa fa-exclamation-circle yellow"></i>新闻名称必须填写</span>
                     </td>
                 </tr>
                 <tr>
-                    <th><i class="require">*</i>分类名称：</th>
+                    <th>新闻标题：</th>
                     <td>
-                        <input type="text" name="cate_name">
-                        <span><i class="fa fa-exclamation-circle yellow"></i>分类名称必须填写</span>
+                        <input type="text" class="lg" name="news_title" value="{{$news->news_title}}">
+                    </td>
+                </tr>    
+                <tr>
+                    <th>内容：</th>
+                    <td>
+                        <textarea name="news_content">{{$news->news_content}}</textarea>
                     </td>
                 </tr>
                 <tr>
-                    <th>分类标题：</th>
+                    <th><i class="require">*</i>新闻分类：</th>
                     <td>
-                        <input type="text" class="lg" name="cate_title">
-                    </td>
-                </tr>
-                <tr>
-                    <th>关键词：</th>
-                    <td>
-                        <textarea name="cate_keywords"></textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <th>描述：</th>
-                    <td>
-                        <textarea name="cate_description"></textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <th><i class="require">*</i>排序：</th>
-                    <td>
-                        <input type="text" class="sm" name="cate_order">
+                        <input type="text" class="sm" name="news_classify" value="{{$news->news_classify}}">
                     </td>
                 </tr>
 
-                <tr>
+                    <tr>
                         <th></th>
                         <td>
                             <input type="submit" value="提交">

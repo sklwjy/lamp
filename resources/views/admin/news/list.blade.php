@@ -18,12 +18,26 @@
     <!--结果页快捷搜索框 结束-->
 
     <!--搜索结果页面 列表 开始-->
-    <form action="#" method="post">
+    <form action="{{url('admin/news')}}" method="get">
         <div class="result_wrap">
             <!--快捷导航 开始-->
             <div class="result_content">
                 <div class="short_wrap">
                     <div class="alert alert-danger">
+                      
+            <table class="search_tab">
+            {{ csrf_field() }}
+                <tr>
+                    <th style="width:100px;"></th>
+                    
+                    <th width="70">用户名:</th>
+                    <td><input type="text" name="keywords1" value="" placeholder="用户名"></td>
+                    {{--<th width="70">邮箱:</th>--}}
+                    {{--<td><input type="text" name="keywords2" value="" placeholder="邮箱"></td>--}}
+                    <td><input type="submit"  value="查询"></td>
+                </tr>
+            </table>
+        </form>
                         <ul>
                             @if(session('msg'))
                                 <li style="color:red">{{session('msg')}}</li>
@@ -39,43 +53,56 @@
             <div class="result_content">
                 <table class="list_tab">
                     <tr>
-                        <th class="tc" width="5%">排序</th>
                         <th class="tc" width="5%">ID</th>
-                        <th>分类名称</th>
-                        <th>标题</th>
-                        <th>查看次数</th>
+                        <th>新闻名称</th>
+                        <th>新闻标题</th>
+                        <th>新闻内容</th>
+                        <th>新闻分类</th>
+                        <th>添加时间</th>
                         <th>操作</th>
                     </tr>
 
 
-                @foreach($cates as $k=>$v)
+                    @foreach($news as $k=>$v)
                     <tr>
-                        <td class="tc">
-                            <input type="text" onchange="changeOrder(this,{{$v->cate_id}})" value="{{$v->cate_order}}">
-                        </td>
-                        <td class="tc">{{$v->cate_id}}</td>
                         <td>
-                            <a href="#">{{$v->cate_names}}</a>
+                            <a href="#">{{$v->news_id}}</a>
                         </td>
-                        <td>{{$v->cate_title}}</td>
-                        <td>{{$v->cate_view}}</td>
+                        <td>{{$v->news_name}}</td>
+                        <td>{{$v->news_title}}</td>
+                        <td>{{$v->news_content}}</td>
+                        <td>{{$v->news_classify}}</td>
+                        <td>{{$v->news_time}}</td>
                         <td>
-                            <a href="#">修改</a>
-                            <a href="javascript:;" onclick="delCate(2)">删除</a>
+                            <a href="{{url('admin/news/'.$v->news_id.'/edit')}}">修改</a>
+                            <a href="javascript:;" onclick="delNews({{$v->news_id}})">删除</a>
                         </td>
                     </tr>
 
-
                     @endforeach
+      
 
                 </table>
+                <?php
+                    $v = empty($input) ? '' : $input;
+                ?>
+            
+                <div class="page_list">
 
+                    {!! $news->render() !!}
+                </div>
 
+                <style>
+                    .page_list ul li span{
+                        padding:6px 12px;
+                    }
+                </style>
 
 
             </div>
         </div>
-    </form>
+
+
     <!--搜索结果页面 列表 结束-->
 
     <script>
@@ -100,7 +127,7 @@
 
         }
         
-        function userDel(id) {
+        function delNews(id) {
 
             //询问框
             layer.confirm('您确认删除吗？', {
@@ -109,7 +136,7 @@
 //                如果用户发出删除请求，应该使用ajax向服务器发送删除请求
 //                $.get("请求服务器的路径","携带的参数", 获取执行成功后的额返回数据);
                 //admin/user/1
-                $.post("{{url('admin/user')}}/"+id,{"_method":"delete","_token":"{{csrf_token()}}"},function(data){
+                $.post("{{url('admin/news')}}/"+id,{"_method":"delete","_token":"{{csrf_token()}}"},function(data){
                     //alert(data);
 //                    data是json格式的字符串，在js中如何将一个json字符串变成json对象
                    //var res =  JSON.parse(data);

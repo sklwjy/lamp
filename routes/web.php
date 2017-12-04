@@ -11,6 +11,7 @@
 |
 */
 
+// 后台路由
 
 Route::get('admin/login', 'Admin\LoginController@login');
 Route::get('admin/yzm', 'Admin\LoginController@yzm');
@@ -27,6 +28,12 @@ Route::group(['middleware'=>'islogin', 'prefix'=>'admin', 'namespace'=>'Admin'],
 
 	// 用户模块路由
 	Route::resource('user', 'UserController');
+
+	// 新闻模块路由
+	Route::resource('news', 'NewsController');
+	// 新闻模块上传文件(图片)路由
+	Route::post('upload', 'NewsController@upload');
+
 });
 
 
