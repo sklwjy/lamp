@@ -6,55 +6,34 @@
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">商品管理</a> &raquo; 添加商品
+        <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">用户列表</a>
     </div>
     <!--面包屑导航 结束-->
 
 	<!--结果页快捷搜索框 开始-->
 	<div class="search_wrap">
-        {{--<form action="{{url('admin/user')}}" method="get">--}}
-            {{--<table class="search_tab">--}}
-                {{--<tr>--}}
-                    {{--<th width="120">选择分类:</th>--}}
-                    {{--<td>--}}
-                        {{--<select onchange="javascript:location.href=this.value;">--}}
-                            {{--<option value="">全部</option>--}}
-                            {{--<option value="http://www.baidu.com">百度</option>--}}
-                            {{--<option value="http://www.sina.com">新浪</option>--}}
-                        {{--</select>--}}
-                    {{--</td>--}}
-                    {{--<th width="70">关键字:</th>--}}
-                    {{--<td><input type="text" value="{{@$input}}" name="keywords" placeholder="关键字"></td>--}}
-                    {{--<td><input type="submit" name="sub" value="查询"></td>--}}
-                {{--</tr>--}}
-            {{--</table>--}}
-        {{--</form>--}}
 
-
-
-        {{--多条件--}}
 
         <form action="{{url('admin/user')}}" method="get">
             <table class="search_tab">
                 <tr>
                     <th style="width:100px;"></th>
-                    <th>
-                        每页条数：
-                        <select name="num">
-                            <option value="1"
-                                    @if($request['num'] == 1)  selected  @endif
-                            >1
-                            </option>
-                            <option value="2"
-                                    @if($request['num'] == 2)  selected  @endif
-                            >2
-                            </option>
-                        </select>
-                    </th>
-                    <th width="70">用户名:</th>
-                    <td><input type="text" name="keywords1" value="{{$request->keywords1}}" placeholder="用户名"></td>
-                    {{--<th width="70">邮箱:</th>--}}
-                    {{--<td><input type="text" name="keywords2" value="{{$request->keywords2}}" placeholder="邮箱"></td>--}}
+                    {{--<th>--}}
+                        {{--每页条数：--}}
+                        {{--<select name="num">--}}
+                            {{--<option value="1"--}}
+                                    {{--@if($request['num'] == 1)  selected  @endif--}}
+                            {{-->--}}
+                            {{--</option>--}}
+                            {{--<option value="2"--}}
+                                    {{--@if($request['num'] == 2)  selected  @endif--}}
+                            {{-->--}}
+                            {{--</option>--}}
+                        {{--</select>--}}
+                    {{--</th>--}}
+                    <th width="70">关键字:</th>
+                    <td><input type="text" name="keywords" value="" placeholder="关键字"></td>
+
                     <td><input type="submit"  value="查询"></td>
                 </tr>
             </table>
@@ -90,17 +69,18 @@
                         <th class="tc">操作</th>
                     </tr>
 
-            @foreach($user as $k=>$v)
+                @foreach($users as $k => $v)
                     <tr>
-                        <td class="tc">{{$v->user_id}}</td>
-                        <td class="tc">{{$v->user_name}}</td>
-                        <td class="tc award-name">{{$v->user_pass}}</td>
+                        <th class="tc">{{$v -> admin_id}}</th>
+                        <th class="tc">{{$v -> admin_name}}</th>
+                        <th class="tc award-name" >{{$v -> admin_password}}</th>
                         <td>
-                            <a href="{{url('admin/user/'.$v->user_id.'/edit')}}">修改</a>
-                            <a href="javascript:;" onclick="userDel({{$v->user_id}})">删除</a>
+                                <a href = "{{url('admin/user/'.$v -> admin_id.'/edit')}}">修改</a>
+                                <a href = "javascript:;" onclick="userDel({{$v -> admin_id}})">删除</a>
+
                         </td>
                     </tr>
-             @endforeach
+                @endforeach
 
                 </table>
                 <style>
@@ -115,19 +95,19 @@
 
 
                 {{--分页--}}
-                {{--<div class="page_list">--}}
+                <div class="page_list">
                    <?php
                         $v = empty($input) ? '' : $input;
                     ?>
-                    {{--{!! $users->appends(['keywords'=>$v])->render() !!}--}}
-                {{--</div>--}}
+                    {!! $users->appends(['keywords'=>$v])->render() !!}
+                </div>
 
 
 
                 <div class="page_list">
 
                     {{--appends(['keyword1'=>'a','keyword2'=>'aaa@q163.com','num'=>2])--}}
-                    {!! $user->appends($request->all())->render() !!}
+{{--                    {!! $user->appends($request->all())->render() !!}--}}
                 </div>
 
                 <style>

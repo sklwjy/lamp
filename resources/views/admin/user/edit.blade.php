@@ -6,7 +6,7 @@
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">商品管理</a> &raquo; 添加商品
+        <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">用户修改</a>
     </div>
     <!--面包屑导航 结束-->
 
@@ -34,19 +34,19 @@
     <!--结果集标题与导航组件 结束-->
     
     <div class="result_wrap">
-        <form action="{{url('admin/user/'.$user->user_id)}}" method="post">
+        <form action="{{url('admin/user/'.$users->admin_id)}}" method="post">
             <table class="add_tab">
                 <tbody>
                     <tr>
-                        {{--token认证--}}
+                       {{--token认证--}}
                         {{csrf_field()}}
-                        {{--<input type="hidden" name="_token" value="{{csrf_token()}}">--}}
-                        {{--提交方式为put--}}
-                        {{method_field()}}
-                        {{--<input type="hidden" name="_method" value="put">--}}
+                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                       {{--// 提交方式为put--}}
+                        {{method_field('put')}}
+                        <input type="hidden" name="_method" value="put">
                         <th><i class="require">*</i>用户名：</th>
                         <td>
-                            <input type="text" class="lg" name="user_name" value="{{$user->user_name}}">
+                            <input type="text" class="lg" name="admin_name" value="{{$users->admin_name}}">
                             <p>标题可以写30个字</p>
                         </td>
                     </tr>

@@ -6,14 +6,26 @@
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">商品管理</a> &raquo; 添加商品
+        <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">用户管理</a> &raquo; 添加用户
     </div>
     <!--面包屑导航 结束-->
 
 	<!--结果集标题与导航组件 开始-->
 	<div class="result_wrap">
         <div class="result_title">
-
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @if(is_object($errors))
+                            @foreach ($errors->all() as $error)
+                                <li style="color:red">{{ $error }}</li>
+                            @endforeach
+                        @else
+                            <li style="color:red">{{ $errors }}</li>
+                        @endif
+                    </ul>
+                </div>
+            @endif
                 <div class="alert alert-danger">
                     <ul>
                        @if(session('msg'))
@@ -41,14 +53,15 @@
                         {{csrf_field()}}
                         <th><i class="require">*</i>用户名：</th>
                         <td>
-                            <input type="text" class="lg" name="user_name" value="{{old('user_name')}}">
+                            <input type="text" class="lg" name="admin_name" value="{{old('admin_name')}}">
                             <p>标题可以写30个字</p>
                         </td>
                     </tr>
                     <tr>
+
                         <th><i class="require">*</i>密码：</th>
                         <td>
-                            <input type="text" class="lg" name="user_pass">
+                            <input type="password" class="lg" name="admin_pass" value="{{old('admin_pass')}}">
                             <p>标题可以写30个字</p>
                         </td>
                     </tr>

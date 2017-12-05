@@ -111,6 +111,7 @@ class LoginController extends Controller
         //3.1 判断是否有此用户
        	 $user = User::where('admin_name',  $input['admin_name'])->first();
        	// dd($user);
+
        	 if(!$user){
        	 	return redirect('admin/login')->with('errors', '用户名不存在');
        	 }
