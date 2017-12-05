@@ -52,13 +52,13 @@
                     <input id="" name="admin_name" type="text" placeholder="账户" class="input-text size-L">
                 </div>
             </div>
-            <div class="row cl">
-                <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
-                <div class="formControls col-xs-8">
-                    <input id="" name="admin_pass" type="password" placeholder="密码" class="input-text size-L">
+                <div class="row cl">
+                    <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
+                    <div class="formControls col-xs-8">
+                        <input id="" name="admin_pass" type="password" placeholder="密码" class="input-text size-L">
+                    </div>
                 </div>
-            </div>
-            <div class="row cl">
+                <div class="row cl">
                 <div class="formControls col-xs-8 col-xs-offset-3">
                     <input class="input-text size-L" type="text" name="code" placeholder="验证码"
                            onblur="if(this.value==''){this.value='验证码:'}"

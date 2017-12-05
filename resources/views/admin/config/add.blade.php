@@ -34,50 +34,49 @@
     <!--结果集标题与导航组件 结束-->
     
     <div class="result_wrap">
-        <form action="{{url('admin/cate')}}" method="post">
+        <form action="{{url('admin/config')}}" method="post">
             <table class="add_tab">
-                {{csrf_field()}}
                 <tbody>
                 <tr>
-                    <th width="120"><i class="require">*</i>父级分类：</th>
+                    {{csrf_field()}}
+                    <th><i class="require">*</i>标题：</th>
                     <td>
-                        <select name="cate_pid">
-                            <option value="0">==顶级分类==</option>
-                            @foreach($cateOne as $k=>$v)
-                            <option value="{{$v->cate_id}}">{{$v->cate_name}}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" name="conf_title" value="{{config('webconfig.web_title')}}">
+                        <span><i class="fa fa-exclamation-circle yellow"></i>配置项标题必须填写</span>
                     </td>
                 </tr>
                 <tr>
-                    <th><i class="require">*</i>分类名称：</th>
+                    <th><i class="require">*</i>名称：</th>
                     <td>
-                        <input type="text" name="cate_name">
-                        <span><i class="fa fa-exclamation-circle yellow"></i>分类名称必须填写</span>
+                        <input type="text" name="conf_name">
+                        <span><i class="fa fa-exclamation-circle yellow"></i>配置项名称必须填写</span>
                     </td>
                 </tr>
                 <tr>
-                    <th>分类标题：</th>
+                    <th>类型：</th>
                     <td>
-                        <input type="text" class="lg" name="cate_title">
+                        <input type="radio" name="field_type" value="input" checked onclick="showTr(this)">input　
+                        <input type="radio" name="field_type" value="textarea" onclick="showTr(this)">textarea　
+                        <input type="radio" name="field_type" value="radio" onclick="showTr(this)">radio
+                    </td>
+                </tr>
+                <tr class="field_value" style="display: none">
+                    <th>类型值：</th>
+                    <td>
+                        <input type="text" class="lg" name="field_value">
+                        <p><i class="fa fa-exclamation-circle yellow"></i>类型值只有在radio的情况下才需要配置，格式 1|开启,0|关闭</p>
                     </td>
                 </tr>
                 <tr>
-                    <th>关键词：</th>
+                    <th>排序：</th>
                     <td>
-                        <textarea name="cate_keywords"></textarea>
+                        <input type="text" class="sm" name="conf_order" value="0">
                     </td>
                 </tr>
                 <tr>
-                    <th>描述：</th>
+                    <th>说明：</th>
                     <td>
-                        <textarea name="cate_description"></textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <th><i class="require">*</i>排序：</th>
-                    <td>
-                        <input type="text" class="sm" name="cate_order">
+                        <textarea id="" cols="30" rows="10" name="conf_tips"></textarea>
                     </td>
                 </tr>
 
@@ -92,4 +91,20 @@
             </table>
         </form>
     </div>
+    <script>
+        function showTr(obj){
+            switch($(obj).val()){
+                case 'input':
+                    $('.field_value').hide();
+                    break;
+                case 'textarea':
+                    $('.field_value').hide();
+                    break;
+
+                case 'radio':
+                    $('.field_value').show();
+            }
+
+        }
+    </script>
 @endsection

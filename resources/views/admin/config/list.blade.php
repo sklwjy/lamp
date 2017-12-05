@@ -6,7 +6,7 @@
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">商品管理</a> &raquo; 添加商品
+        <i class="fa fa-home"></i> <a href="#">{{config('webconfig.web_title')}}</a> &raquo; <a href="#">商品管理</a> &raquo; 添加商品
     </div>
     <!--面包屑导航 结束-->
 
@@ -18,7 +18,7 @@
     <!--结果页快捷搜索框 结束-->
 
     <!--搜索结果页面 列表 开始-->
-    <form action="#" method="post">
+
         <div class="result_wrap">
             <!--快捷导航 开始-->
             <div class="result_content">
@@ -34,44 +34,49 @@
             </div>
             <!--快捷导航 结束-->
         </div>
-
+    <form action="{{url('admin/config/contentchange')}}" method="post">
         <div class="result_wrap">
             <div class="result_content">
                 <table class="list_tab">
                     <tr>
                         <th class="tc" width="5%">排序</th>
                         <th class="tc" width="5%">ID</th>
-                        <th>分类名称</th>
                         <th>标题</th>
-                        <th>查看次数</th>
+                        <th>名称</th>
+                        <th>内容</th>
                         <th>操作</th>
                     </tr>
+                {{csrf_field()}}
 
-
-                @foreach($cates as $k=>$v)
-                    <tr>
-                        <td class="tc">
-                            <input type="text" onchange="changeOrder(this,{{$v->cate_id}})" value="{{$v->cate_order}}">
-                        </td>
-                        <td class="tc">{{$v->cate_id}}</td>
-                        <td>
-                            <a href="#">{{$v->cate_names}}</a>
-                        </td>
-                        <td>{{$v->cate_title}}</td>
-                        <td>{{$v->cate_view}}</td>
-                        <td>
-                            <a href="#">修改</a>
-                            <a href="javascript:;" onclick="delCate(2)">删除</a>
-                        </td>
-                    </tr>
-
+                @foreach($config as $k=>$v)
+                        <tr>
+                            <td class="tc">
+                                <input type="text" onchange="changeOrder(this,{{$v->conf_id}})" value="{{$v->conf_order}}">
+                            </td>
+                            <td class="tc">{{$v->conf_id}}</td>
+                            <td>
+                                <a href="#">{{$v->conf_title}}</a>
+                            </td>
+                            <td>{{$v->conf_name}}</td>
+                            <td>
+                                <input type="hidden" name="conf_id[]" value="{{$v->conf_id}}">
+                               {!! $v->conf_contents !!}
+                            </td>
+                            <td>
+                                {{--http://www.myblog.com/admin/config/9/edit--}}
+                                <a href="{{url('admin/config/'.$v->conf_id.'/edit')}}">修改</a>
+                                <a href="javascript:;" onclick="delLinks({{$v->conf_id}})">删除</a>
+                            </td>
+                        </tr>
 
                     @endforeach
+                    <tr>
+                    <td colspan="6">
+                        <input type="submit" value="提交">
 
+                    </td>
+                    </tr>
                 </table>
-
-
-
 
             </div>
         </div>
@@ -79,26 +84,6 @@
     <!--搜索结果页面 列表 结束-->
 
     <script>
-
-        //排序
-        function changeOrder(obj,cate_id){
-            //获取当前需要排序的记录的ID,cate_id
-            //获取当前记录的排序文本框中的值
-            var cate_order = $(obj).val();
-            $.post("{{url('admin/cate/changeorder')}}",{'_token':"{{csrf_token()}}","cate_id":cate_id,"cate_order":cate_order},function(data){
-                //如果排序成功，提示排序成功
-                if(data.status == 0){
-
-                    layer.msg(data.msg,{icon: 6});
-                    location.href = location.href;
-                }else{
-                    //如果排序失败，提示排序失败
-                    layer.msg(data.msg,{icon: 5});
-                    location.href = location.href;
-                }
-            })
-
-        }
         
         function userDel(id) {
 

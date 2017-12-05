@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CateController extends Controller
+class ConfigController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +15,7 @@ class CateController extends Controller
     public function index()
     {
         //
+        return view('admin/config/list');
     }
 
     /**
@@ -25,6 +26,7 @@ class CateController extends Controller
     public function create()
     {
         //
+        return view('admin/config/add');
     }
 
     /**
