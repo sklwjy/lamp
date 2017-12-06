@@ -73,8 +73,9 @@
                     <tr>
                         <th class="tc">{{$v -> admin_id}}</th>
                         <th class="tc">{{$v -> admin_name}}</th>
-                        <th class="tc award-name" >{{$v -> admin_password}}</th>
+                        <th class="tc award-name" >{{$v -> admin_pass}}</th>
                         <td>
+                                <a href="{{url('admin/user/auth/'.$v->admin_id)}}">授权</a>
                                 <a href = "{{url('admin/user/'.$v -> admin_id.'/edit')}}">修改</a>
                                 <a href = "javascript:;" onclick="userDel({{$v -> admin_id}})">删除</a>
 

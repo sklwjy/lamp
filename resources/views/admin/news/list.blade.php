@@ -68,36 +68,30 @@
                         <td>
                             <a href="#">{{$v->news_id}}</a>
                         </td>
-                        <td>{{$v->news_name}}</td>
+                        <td>{{$v->news_names}}</td>
                         <td>{{$v->news_title}}</td>
                         <td>{{$v->news_content}}</td>
                         <td>{{$v->news_classify}}</td>
                         <td>{{$v->news_time}}</td>
                         <td>
                             <a href="{{url('admin/news/'.$v->news_id.'/edit')}}">修改</a>
-                            <a href="javascript:;" onclick="delNews({{$v->news_id}})">删除</a>
+                            
+                            @if($v->news_pid == 0)
+                            
+                                <button disabled onlick="delNews({{$v->news_id}})">删除</button>
+                            @else
+                            
+                              <button onclick="delNews({{$v->news_id}})">删除</button>
+
+                            @endif
+
                         </td>
                     </tr>
 
                     @endforeach
       
 
-                </table>
-                <?php
-                    $v = empty($input) ? '' : $input;
-                ?>
-            
-                <div class="page_list">
-
-                    {!! $news->render() !!}
-                </div>
-
-                <style>
-                    .page_list ul li span{
-                        padding:6px 12px;
-                    }
-                </style>
-
+                
 
             </div>
         </div>
@@ -107,11 +101,13 @@
 
     <script>
 
+
+
         //排序
         function changeOrder(obj,cate_id){
             //获取当前需要排序的记录的ID,cate_id
             //获取当前记录的排序文本框中的值
-            var cate_order = $(obj).val();
+            var news_order = $(obj).val();
             $.post("{{url('admin/cate/changeorder')}}",{'_token':"{{csrf_token()}}","cate_id":cate_id,"cate_order":cate_order},function(data){
                 //如果排序成功，提示排序成功
                 if(data.status == 0){
@@ -129,6 +125,7 @@
         
         function delNews(id) {
 
+           
             //询问框
             layer.confirm('您确认删除吗？', {
                 btn: ['确认','取消'] //按钮

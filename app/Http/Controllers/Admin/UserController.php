@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use DB;
+use App\Model\admin\Role;
 use App\Model\admin\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,6 +16,62 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
     /**
+     * 返回给用户授权的页面
+     */
+    public function auth($id)
+    {
+        // 获取当前用户
+        $user = User::find($id);
+
+        // 获取所有的角色
+        $roles = Role::get();
+        // dd($roles);
+
+        // 获取当前用户已经拥有的角色
+        $arr=[];
+        $own_roles = DB::table('admin_role')->where('admin_id', $id)->pluck('role_id');
+        foreach($own_roles as $k=>$v){
+            $arr[]=$v;
+        };
+        // dd($arr);
+        
+        return view('admin/user/auth', compact('user', 'roles', 'arr'));
+    }
+
+    /**
+     *  处理用户授权操作
+     */
+
+    public function doauth(Request $request)
+    {
+        // 1接受用户提交的所有数据
+        $input = $request->except('_token');
+        // dd($input);
+        
+        DB::beginTransaction();
+
+        try{
+            //删除用户以前拥有的角色
+            DB::table('admin_role')->where('admin_id',$input['admin_id'])->delete();
+//            给当前用户重新授权
+            if(isset($input['role_id'])){
+                foreach ($input['role_id'] as $k=>$v){
+                    DB::table('admin_role')->insert(['admin_id'=>$input['admin_id'],'role_id'=>$v]);
+                }
+            }
+
+
+        }catch (Exception $e){
+            DB::rollBack();
+        }
+
+        DB::commit();
+
+        // 添加成功后, 跳转到列表页
+        return redirect('admin/user');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -23,7 +81,7 @@ class UserController extends Controller
         // 获取用户的数据
 
         $users = User::orderBy('admin_id','asc')->get();
-       //将数据反水视图的三种方法
+       //将数据返回视图的三种方法
        // 1.return view('admin.user.list',['data'=>$users]);
 
         //2.return view('admin.user.list')->with('data',$users);
@@ -43,6 +101,7 @@ class UserController extends Controller
                 $query->where('admin_name','like','%'.$request->input('keywords').'%');
             }
         })->paginate(3);
+        // dd($users);
         return view('admin.user.list',compact('users'));
     }
 
@@ -67,7 +126,7 @@ class UserController extends Controller
     {
       //  1.获取用户和提交的表单数据
         $input = Input::except('_token');
-    //dd($input);
+    // dd($input);
      //   2.表单验证
         $rule = [
             'admin_name'=>'required|between:5,20',

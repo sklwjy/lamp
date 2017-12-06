@@ -10,4 +10,5 @@ class Users extends Model
     public $primaryKey = 'user_id';
     public $guarded = [];
     public $timestamps = false;
+
 }
