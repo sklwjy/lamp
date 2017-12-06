@@ -56,6 +56,22 @@
 
 				</ul>
 			</li>
+			<li>
+				<h3><i class="fa fa-fw fa-clipboard"></i>角色模块</h3>
+				<ul class="sub_menu">
+					<li><a href="{{url('admin/role/create')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>添加角色</a></li>
+					<li><a href="{{url('admin/role')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>角色列表</a></li>
+
+				</ul>
+			</li>
+			<li>
+				<h3><i class="fa fa-fw fa-clipboard"></i>权限模块</h3>
+				<ul class="sub_menu">
+					<li><a href="{{url('admin/permission/create')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>添加权限</a></li>
+					<li><a href="{{url('admin/permission')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>权限列表</a></li>
+
+				</ul>
+			</li>
             <li>
             	<h3><i class="fa fa-fw fa-cog"></i>系统设置</h3>
                 <ul class="sub_menu">
