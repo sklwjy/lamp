@@ -19,9 +19,10 @@
 	Route::get('home/sss', 'Home\LoginController@sss');
 	Route::post('home/dologin', 'Home\LoginController@dologin');
 	Route::get('home/register', 'Home\LoginController@register');
-Route::group(['middleware'=>'homeislogin', 'prefix'=>'home', 'namespace'=>'Home'], function(){
+    Route::post('home/doregister', 'Home\LoginController@doregister');
+    Route::group(['middleware'=>'homeislogin', 'prefix'=>'home', 'namespace'=>'Home'], function(){
 	Route::get('index', 'IndexController@index');
-	Route::post('doregister', 'LoginController@doregister');
+
 	Route::resource('message','MessageController');
 });
 
@@ -52,6 +53,12 @@ Route::group(['middleware'=>'islogin', 'prefix'=>'admin', 'namespace'=>'Admin'],
 
 	// 网站配置模块路由
 	Route::resource('config', 'ConfigController');
+
+
+
+//    友情链接路由
+    Route::resource('link','LinkController');
+
 
 });
 
