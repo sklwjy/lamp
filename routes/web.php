@@ -34,6 +34,7 @@ Route::get('admin/login', 'Admin\LoginController@login');
 Route::get('admin/yzm', 'Admin\LoginController@yzm');
 Route::post('admin/dologin', 'Admin\LoginController@dologin');
 
+<<<<<<< HEAD
 // 定义路由组
 Route::group(['middleware'=>'islogin', 'prefix'=>'admin', 'namespace'=>'Admin'], function(){
 	// 加入后台主页的路由
@@ -45,6 +46,34 @@ Route::group(['middleware'=>'islogin', 'prefix'=>'admin', 'namespace'=>'Admin'],
 
 	// 用户模块路由
 	Route::resource('user', 'UserController');
+=======
+<<<<<<< HEAD
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> master
 
 	// 新闻模块路由
 	Route::resource('news', 'NewsController');
@@ -70,3 +99,23 @@ Route::get('link', 'linkcontroller');
 
 
 
+<<<<<<< HEAD
+=======
+Route::get('yzm/', 'LoginController@yzm');
+=======
+// 定义路由组
+Route::group(['middleware'=>'islogin', 'prefix'=>'admin', 'namespace'=>'Admin'], function(){
+	// 加入后台主页的路由
+	Route::get('index', 'IndexController@index');
+	Route::get('info', 'IndexController@info');
+	// 退出登陆
+	Route::get('logout', 'IndexController@logout');
+	Route::get('welcome', 'IndexController@welcome');
+
+	// 用户模块路由
+	Route::resource('user', 'UserController');
+});
+
+
+>>>>>>> origin/master
+>>>>>>> master
