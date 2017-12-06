@@ -59,7 +59,7 @@ Route::resource('config', 'ConfigController');
 //    友情链接路由
 Route::resource('link','LinkController');
 
-
+Route::get('link', 'linkcontroller');
 });
 
 
