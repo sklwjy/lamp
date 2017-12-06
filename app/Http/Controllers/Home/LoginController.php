@@ -79,7 +79,7 @@ class LoginController extends Controller
 
         //4 登陆成功, 将用户信息保存到session中, 用于判断用户是否登录以及获取用户信息
         Session::put('users', $user);
-        return redirect('home/index');
+        return redirect('home/message');
 
     }
 
