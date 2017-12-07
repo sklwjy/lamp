@@ -113,8 +113,8 @@
                                         contentType: false,
                                         processData: false,
                                         success: function(data) {
-                                             // $('#img1').attr('src','/uploads/'+data);
-                                             $('#img1').attr('src', 'http://p0dwlzk2l.bkt.clouddn.com/uploads/'+data);
+                                              $('#img1').attr('src','/uploads/'+data);
+//                                             $('#img1').attr('src', 'http://p0dwlzk2l.bkt.clouddn.com/uploads/'+data);
                                             $('#img1').show();
                                             $('#art_thumb').val('/uploads/'+data);
                                         },

@@ -52,7 +52,10 @@ Route::group(['middleware'=>'islogin', 'prefix'=>'admin', 'namespace'=>'Admin'],
 
 	// 网站配置模块路由
 	Route::resource('config', 'ConfigController');
-
+	// 批量修改配置路由
+    Route::post('config/contentchange','ConfigController@ContentChange');
+    // 同步网站配置内容到webconfig 文件中
+    Route::get( 'deploy','ConfigController@PutFile');
 });
 
 

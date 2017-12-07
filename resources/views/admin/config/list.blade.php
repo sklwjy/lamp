@@ -26,7 +26,7 @@
                     <div class="alert alert-danger">
                         <ul>
                             @if(session('msg'))
-                                <li style="color:red">{{session('msg')}}</li>
+                                <li style="color:red">{{ session('msg') }}</li>
                             @endif
                         </ul>
                     </div>
@@ -59,13 +59,15 @@
                             </td>
                             <td>{{$v->conf_name}}</td>
                             <td>
-                                <input type="hidden" name="conf_id[]" value="{{$v->conf_id}}">
+                                <input type="hidden" name="conf_id[]" value="{{ $v->conf_id }}">
                                {!! $v->conf_contents !!}
+
                             </td>
                             <td>
                                 {{--http://www.myblog.com/admin/config/9/edit--}}
-                                <a href="{{url('admin/config/'.$v->conf_id.'/edit')}}">修改</a>
-                                <a href="javascript:;" onclick="delLinks({{$v->conf_id}})">删除</a>
+                                <a href="{{ url('admin/config/'.$v->conf_id.'/edit') }}">修改</a>
+
+                                <a href="javascript:;" onclick="delconfig({{$v->conf_id}})">删除</a>
                             </td>
                         </tr>
 
@@ -85,7 +87,7 @@
 
     <script>
         
-        function userDel(id) {
+        function delconfig(id) {
 
             //询问框
             layer.confirm('您确认删除吗？', {
@@ -94,8 +96,8 @@
 //                如果用户发出删除请求，应该使用ajax向服务器发送删除请求
 //                $.get("请求服务器的路径","携带的参数", 获取执行成功后的额返回数据);
                 //admin/user/1
-                $.post("{{url('admin/user')}}/"+id,{"_method":"delete","_token":"{{csrf_token()}}"},function(data){
-                    //alert(data);
+                $.post("{{ url('admin/config')}}/"+id,{"_method":"delete","_token":"{{ csrf_token() }}"},function(data){
+//                    alert(data);
 //                    data是json格式的字符串，在js中如何将一个json字符串变成json对象
                    //var res =  JSON.parse(data);
 //                    删除成功
