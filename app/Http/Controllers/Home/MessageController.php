@@ -82,4 +82,11 @@ class MessageController extends Controller
     {
         //
     }
+
+
+    // 微博详情页
+    public function info()
+    {
+        return 111;
+    }
 }

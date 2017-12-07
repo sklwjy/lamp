@@ -24,6 +24,7 @@
 	Route::get('index', 'IndexController@index');
 
 	Route::resource('message','MessageController');
+	Route::post('info','MessageController@info');
 });
 
 

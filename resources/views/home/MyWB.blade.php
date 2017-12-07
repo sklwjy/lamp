@@ -5,6 +5,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="format-detection" content="telephone=no" />
     <title>demo2</title>
+    <link rel="stylesheet" type="text/css" href="https://img.t.sinajs.cn/t6/style/css/module/list/comb_WB_feed_profile.css?version=d734c0d1947e41c8">
+    <link rel="stylesheet" type="text/css" href="https://img.t.sinajs.cn/t6/style/css/module/list/comb_WB_feed_profile.css?version=d734c0d1947e41c8">
+    <link rel="stylesheet" type="text/css" href="https://img.t.sinajs.cn/t6/skin/skin048/skin.css?version=d734c0d1947e41c8">
+    <link rel="stylesheet" type="text/css" href="https://img.t.sinajs.cn/t6/style/css/module/base/frame.css?version=d734c0d1947e41c8">
     <link rel="stylesheet" href="{{ asset('home/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('home/css/style2.css') }}">
     <link rel="stylesheet" href="{{ asset('home/css/style1.css') }}" media="screen" type="text/css" />
@@ -93,8 +97,10 @@
                 </nav>
             </div>
         </div>
+    
 
-        <div class="col-sm-6 col-xs-12 my_edit" >
+       <!--  微博显示区 -->
+        <div class="col-sm-6 col-xs-12 my_edit" id="weibo">
             <div class="row" id="edit_form" >
                 <span class="pull-left" style="margin:15px;">编写新鲜事</span>
                 <span class="tips pull-right" style="margin:15px;"></span>
@@ -142,6 +148,10 @@
                     </div>
                 </form>
             </div>
+            <!-- 微博显示区结束 -->
+            
+           
+
 
             <div class="row item_msg" >
                 <div class="col-sm-12 col-xs-12 message" >
@@ -153,6 +163,25 @@
                         <div class="msg_content">happy day!
                             <img class="mypic" src="{{ asset('home/images/mywb/bg_1.jpg') }}" >
                         </div>
+<ul class="WB_row_line WB_row_r4 clearfix S_line2">
+                                    <li>
+                        <a class="S_txt2" suda-uatrack="key=profile_feed&amp;value=collect_guest" href="javascript:void(0);" diss-data="fuid=6294417401" action-type="login"><span class="pos"><span class="line S_line1" node-type="favorite_btn_text"><span><em class="W_ficon ficon_favorite S_ficon">û</em><em>收藏</em></span></span></span></a>
+                    </li>
+                                                    <li>
+                        <a action-data="allowForward=1&amp;url=https://weibo.com/6294417401/FyqUw0oLU&amp;mid=4182066000095226&amp;name=老婆孩子在天堂&amp;uid=6294417401&amp;domain=6294417401&amp;pid=006RYJvjly1fm7cpd3incj30zk0qo152" action-type="fl_forward" action-history="rec=1" href="javascript:void(0);" class="S_txt2" suda-uatrack="key=profile_feed&amp;value=transfer"><span class="pos"><span class="line S_line1" node-type="forward_btn_text"><span><em class="W_ficon ficon_forward S_ficon"></em><em>19997</em></span></span></span></a>
+                        <span class="arrow"><span class="W_arrow_bor W_arrow_bor_t"><i class="S_line1"></i><em class="S_bg1_br"></em></span></span>
+                    </li>
+                                <li class=" curr">
+                                            <a href="javascript:void(0);" class="S_txt2" action-type="fl_comment" action-data="ouid=6294417401&amp;location=&amp;comment_type=0" suda-uatrack="key=profile_feed&amp;value=comment:4182066000095226"><span class="pos"><span class="line S_line1" node-type="comment_btn_text"><span><em class="W_ficon ficon_repeat S_ficon"></em><em>13308</em></span></span></span></a>
+                                        <span class="arrow"><span class="W_arrow_bor W_arrow_bor_t"><i class="S_line1"></i><em class="S_bg1_br"></em></span></span>
+                </li>
+                <li>
+                    <!--cuslike用于前端判断是否显示个性赞，1:显示-->
+                    <a href="javascript:void(0);" class="S_txt2" action-type="login" action-data="version=mini&amp;qid=heart&amp;mid=4182066000095226&amp;loc=profile&amp;cuslike=1" title="赞" suda-uatrack="key=profile_feed&amp;value=like"><span class="pos"><span class="line S_line1">
+                                                                                                                                                                                                                                <span node-type="like_status" class=""><em class="W_ficon ficon_praised S_txt2">ñ</em><em>84303</em></span>                        </span></span></a>
+                    <span class="arrow"><span class="W_arrow_bor W_arrow_bor_t"><i class="S_line1"></i><em class="S_bg1_br"></em></span></span>
+                </li>
+            </ul>
 
                     </div>
 
@@ -160,6 +189,7 @@
 
 
             </div>
+
 
 
         </div>
@@ -220,6 +250,8 @@
 
                 <div class="col-sm-12 text-center" style="padding: 10px"><a href="#">查看更多</a></div>
 
+
+
             </div>
 
         </div>
@@ -230,6 +262,24 @@
 <script src="{{ asset('home/js/jquery-3.1.0.js') }}"></script>
 <script src="{{ asset('home/js/bootstrap.min.js') }}"></script>
 <script type="text/javascript">
+
+
+                    $('#weibo').on('click', function(){
+                        alert(111);
+                        $.ajax({
+                            type:'POST',
+                            url:'{{url ("home/info")}}',
+                            data:{'_token':'{{csrf_token()}}'},
+                            success:function(data){
+                                alert(data);
+                            },
+                        });
+                    });
+                    
+
+          
+
+
     $(function(){
 
         $("#content").keyup(function(){
