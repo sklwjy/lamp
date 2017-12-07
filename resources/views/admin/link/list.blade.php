@@ -12,65 +12,44 @@
 
     <!--结果页快捷搜索框 开始-->
     <div class="search_wrap">
+        <form action="{{url('admin/link')}}" method="get">
+            <div class="result_wrap">
+                <!--快捷导航 开始-->
+                <div class="result_content">
+                    <div class="short_wrap">
+                        <div class="alert alert-danger">
 
+                            <table class="search_tab">
+                                {{ csrf_field() }}
+                                <tr>
+                                    <th style="width:100px;"></th>
+                                    <th>
+                                        每页条数：
+                                        <select name="num">
+                                            <option value="1"
+                                                    @if($request['num'] == 1)  selected  @endif
+                                            >1
+                                            </option>
+                                            <option value="2"
+                                                    @if($request['num'] == 2)  selected  @endif
+                                            >2
+                                            </option>
+                                        </select>
+                                    </th>
+                                    <th width="70">用户名:</th>
+                                    <td><input type="text" name="keywords1" value="" placeholder="用户名"></td>
+                                    {{--<th width="70">邮箱:</th>--}}
+                                    {{--<td><input type="text" name="keywords2" value="" placeholder="邮箱"></td>--}}
+                                    <td><input type="submit"  value="查询"></td>
+                                </tr>
+                            </table>
+                 </div>
+                    </div>
+                    </div>
+            </div>
+        </form>
 
-    </div>
-    <!--结果页快捷搜索框 结束-->
-    <div class="search_wrap">
-        {{--<form action="{{url('admin/user')}}" method="get">--}}
-        {{--<table class="search_tab">--}}
-        {{--<tr>--}}
-        {{--<th width="120">选择分类:</th>--}}
-        {{--<td>--}}
-        {{--<select onchange="javascript:location.href=this.value;">--}}
-        {{--<option value="">全部</option>--}}
-        {{--<option value="http://www.baidu.com">百度</option>--}}
-        {{--<option value="http://www.sina.com">新浪</option>--}}
-        {{--</select>--}}
-        {{--</td>--}}
-        {{--<th width="70">关键字:</th>--}}
-        {{--<td><input type="text" value="{{@$input}}" name="keywords" placeholder="关键字"></td>--}}
-        {{--<td><input type="submit" name="sub" value="查询"></td>--}}
-        {{--</tr>--}}
-        {{--</table>--}}
-        {{--</form>--}}
-
-
-
-        {{--多条件--}}
-
-        {{--<form action="#" method="get">--}}
-            {{--<table class="search_tab">--}}
-                {{--<tr>--}}
-                    {{--<th style="width:100px;"></th>--}}
-                    {{--<th>--}}
-                        {{--每页条数：--}}
-                        {{--<select name="num">--}}
-                            {{--<option value="1"--}}
-                                    {{--@if($request['num'] == 1)  selected  @endif--}}
-                            {{-->1--}}
-                            {{--</option>--}}
-                            {{--<option value="2"--}}
-                                    {{--@if($request['num'] == 2)  selected  @endif--}}
-                            {{-->2--}}
-                            {{--</option>--}}
-                        {{--</select>--}}
-                    {{--</th>--}}
-                    {{--<th width="70">用户名:</th>--}}
-                    {{--<td><input type="text" name="keywords1" value="{{$request->keywords1}}" placeholder="用户名"></td>--}}
-                    {{--<th width="70">邮箱:</th>--}}
-                    {{--<td><input type="text" name="keywords2" value="{{$request->keywords2}}" placeholder="邮箱"></td>--}}
-                    {{--<td><input type="submit"  value="查询"></td>--}}
-                {{--</tr>--}}
-            {{--</table>--}}
-        {{--</form>--}}
-    {{--</div>--}}
-    <!--搜索结果页面 列表 开始-->
-    <form action="{url('admin/link')}}" method="post">
-        <div class="result_wrap">
-            <!--快捷导航 开始-->
-            <div class="result_content">
-                <div class="short_wrap">
+                        <div class="short_wrap">
                     <div class="alert alert-danger">
                         <ul>
                             @if(session('msg'))
@@ -84,6 +63,8 @@
         </div>
 
         <div class="result_wrap">
+
+
             <div class="result_content">
                 <table class="list_tab">
                     <tr>
@@ -126,7 +107,7 @@
                 <?php
                 $v = empty($input) ? '' : $input;
                 ?>
-                {!! $link->appends(['keywords'=>$v])->render() !!}
+                {{--{!! $link->appends(['keywords'=>$v])->render() !!}--}}
                 </div>
 
 
@@ -134,7 +115,7 @@
                 <div class="page_list">
 
                     {{--appends(['keyword1'=>'a','keyword2'=>'aaa@q163.com','num'=>2])--}}
-{{--                                        {!! $link->appends($request->all())->render() !!}--}}
+                                        {!! $link->appends($request->all())->render() !!}
                 </div>
 
                 <style>
@@ -144,7 +125,7 @@
                 </style>
             </div>
         </div>
-    </form>
+
     <!--搜索结果页面 列表 结束-->
 
     <script>

@@ -26,14 +26,16 @@ class LinkController extends Controller
     // 多条件带分页搜索查询
     public function index(Request $request)
     {
-//        $request->all()
+       // $request->all();
 // dd(111);
+//        return 222;
         $link =Link::orderBy('link_id','asc')
             ->where(function($query) use($request){
                 //检测关键字
-                $username = $request->input('keywords1');
+                $linkname = $request->input('keywords1');
                 //$email = $request->input('keywords2');
                 //如果用户名不为空
+//                dd($linkname);
                 if(!empty($linkname)) {
                     $query->where('link_name','like','%'.$linkname.'%');
                 }
