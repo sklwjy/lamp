@@ -53,6 +53,10 @@ Route::group(['middleware'=>'islogin', 'prefix'=>'admin', 'namespace'=>'Admin'],
 	// 新闻模块上传文件(图片)路由
 	Route::post('upload', 'NewsController@upload');
 
+	//广告模块
+    Route::resource('advertising','AdvertisingController');
+    Route::post('upload','AdvertisingController@upload');
+
 // 网站配置模块路由
 Route::resource('config', 'ConfigController');
 
