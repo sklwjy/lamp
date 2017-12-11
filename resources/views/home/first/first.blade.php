@@ -78,8 +78,8 @@
             <div style="position:fixed;z-index:9999" class="container; ">
                 <nav>
                     <ul class="mcd-menu" style="width:185px;height:0px">
-                        <li> <a href=""> <i class="fa fa-home"></i> <strong>首页</strong> </a> </li>
-                        <li> <a href="" class="active"> <i class="fa fa-edit"></i> <strong>热门微博</strong></a> </li>
+                        <li> <a href=""> <i class=" fa-home"></i> <strong>首页</strong> </a> </li>
+                        <li> <a href="" class=""> <i class="fa fa-edit"></i> <strong>热门微博</strong></a> </li>
                         <li> <a href=""> <i class="fa fa-gift"></i> <strong>我的收藏</strong></a> </li>
                         <li> <a href=""> <i class="fa fa-globe"></i> <strong>我的赞</strong> </a> </li>
                         <li> <a href=""> <i class="fa fa-comments-o"></i> <strong>好友圈</strong>  </a>
@@ -111,13 +111,9 @@
 
                <div class="layui-carousel" id="sunjiashigedashuaige">
                    <div carousel-item>
-                       <div><a href="https://www.baidu.com"><img style="width:590px" src="{{ asset('./uploads/151296343145325a2dfd6790db2.jpg') }}" alt=""></a></div>
-                       <div><a href="https://www.jd.com"><img style="width:590px" src="{{ asset('./uploads/151299153819805a2e6b325554e.jpg') }}" alt=""></a></div>
-                       <div><a href="https://www.taobao.com"><img style="width:590px" src="{{ asset('./uploads/151299525537025a2e79b7d7471.jpg') }}" alt=""></a></div>
-                       <div><a href="https://weibo.com/"><img style="width:590px" src="{{ asset('./uploads/151299527169955a2e79c7e9452.jpg') }}" alt=""></a></div>
-                       <div><a href="https://github.com/"><img style="width:590px" src="{{ asset('./uploads/151299530996175a2e79edb7605.jpg') }}" alt=""></a></div>
-
-
+                       @foreach($advertising as $x=>$y)
+                       <div><a href="https://www.baidu.com"><img style="width:590px" src="{{$y->advertising_picture}}" alt=""></a></div>
+                       @endforeach
                    </div>
                </div>
 
