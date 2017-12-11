@@ -104,12 +104,18 @@ Route::group(['middleware'=>['islogin', 'hasrole'], 'prefix'=>'admin', 'namespac
 	Route::post('upload', 'NewsController@upload');
 
 
+
 	// 网站配置模块路由
 	Route::resource('config', 'ConfigController');
 	// 批量修改配置路由
     Route::post('config/contentchange','ConfigController@ContentChange');
     // 同步网站配置内容到webconfig 文件中
     Route::get( 'deploy','ConfigController@PutFile');
+
+	//广告模块
+    Route::resource('advertising','AdvertisingController');
+    Route::post('upload','AdvertisingController@upload');
+
 
 
     //    友情链接路由
@@ -129,6 +135,3 @@ Route::group(['middleware'=>['islogin', 'hasrole'], 'prefix'=>'admin', 'namespac
 });
 
 
-Route::get('sss', function(){
-	$res = Hash::check('$2y$10$l2m1yCWB81Z.T1WbbySILuhqbtjonI7dJsCUq2RIHIQEJK1ZxCkVu');
-});
