@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>用户登录页面</title>
+    <title>找回密码</title>
     <link href="{{ asset('home/styles/global.css') }}" type="text/css" rel="stylesheet" />
     <link href="{{ asset('home/styles/login.css') }}" type="text/css" rel="stylesheet" />
 
@@ -45,20 +45,8 @@
    <!-- 页面左部 -->
    <div id="left">
    <!--页面左部表单设置-->
-   <form id="LoginForm" action="{{ asset('home/dologin') }}" method="post">
-       @if (count($errors) > 0)
-           <div class="alert alert-danger">
-               <ul>
-                   @if(is_object($errors))
-                       @foreach ($errors->all() as $error)
-                           <li style="color:red">{{ $error }}</li>
-                       @endforeach
-                   @else
-                       <li style="color:red">{{ $errors }}</li>
-                   @endif
-               </ul>
-           </div>
-       @endif
+   <form id="LoginForm" action="{{ asset('home/doforget') }}" method="post">
+      
        {{csrf_field()}}
      <table width="565" border="0" cellspacing="0" cellpadding="0">
        <tr class="lb">
@@ -69,30 +57,19 @@
        </tr>
        <tr>
          <td class="le"></td>
-         <td class="ld">手机/邮箱</td>
+         <td class="ld">输入要找回的账号:</td>
          <td class="if"><input name="user_email" type="text" class="la" id="user_email" /></td>
          <td></td>
        </tr>
-       <tr>
-         <td class="le"></td>
-         <td class="ld">密码</td>
-         <td class="if"><input name="user_password" type="password" class="la" id="user_password" /></td>
-         <td></td>
-       </tr>
-       <tr>
-         <td class="le"></td>
-         <td class="ld"></td>
-         <td><input name="checkbox" type="checkbox" id="checkbox"  />
-           下次自动登陆&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="{{ url('home/forget') }}">忘记密码</a></td>
-         <td></td>
-       </tr>
+       
+       
        <tr>
          <td class="le"></td>
          <td class="ld"></td>
          <td>
 
-           {{--<input name="button" type="submit" class="lc" id="button" value="登  录" />--}}
-             <button class="lc" id="button">登录</button>
+           <input type="submit" class="lc" value="立即找回" />
+             <!-- <button class="lc" id="button">立即找回</button> -->
          </td>
          <td></td>
        </tr>

@@ -31,9 +31,9 @@ class LoginController extends Controller
     {
 
         $input = $request->except('_token');
-        //dd($input);
+        // dd($input);
 
-        // éªŒè¯è§„åˆ™
+        // ÑéÖ¤¹æÔò
         $rule = [
             'user_email' => 'email',
             'user_password' => 'required|between:5,20',
@@ -41,46 +41,54 @@ class LoginController extends Controller
 //            'user_phone' => 'required|size:11',
         ];
 
-        // æç¤ºä¿¡æ¯
+        // ÌáÊ¾ÐÅÏ¢
         $mess = [
-               'user_email.email' => 'é‚®ç®±æ ¼å¼ä¸æ­£ç¡®',
-                'user_password.required' => 'å¯†ç å¿…é¡»è¾“å…¥',
-                'user_password.between' => 'å¯†ç å¿…é¡»åœ¨5åˆ°20ä½ä¹‹é—´',
-               'user_phone.required' => 'æ‰‹æœºå·ä¸èƒ½ä¸ºç©º',
-                'user_phone.size' => 'æ‰‹æœºå·é•¿åº¦ä¸åˆé€‚',
+               'user_email.email' => 'ÓÊÏä¸ñÊ½²»ÕýÈ·',
+                'user_password.required' => 'ÃÜÂë±ØÐëÊäÈë',
+                'user_password.between' => 'ÃÜÂë±ØÐëÔÚ5µ½20Î»Ö®¼ä',
+                'user_phone.required' => 'ÊÖ»úºÅ²»ÄÜÎª¿Õ',
+                'user_phone.size' => 'ÊÖ»úºÅ³¤¶È²»ºÏÊÊ',
             ];
 
 
             $validator = Validator::make($input, $rule, $mess);
-            //å¦‚æžœè¡¨å•éªŒè¯å¤±è´¥ passes()
+            //Èç¹û±íµ¥ÑéÖ¤Ê§°Ü passes()
             if ($validator->fails()) {
                 return redirect('home/login')
                     ->withErrors($validator)
                     ->withInput();
         }
-        // 3 ç™»å½•é€»è¾‘
+        // 3 µÇÂ¼Âß¼­
 
-        //3.1 åˆ¤æ–­æ˜¯å¦æœ‰æ­¤ç”¨æˆ·
+        //3.1 ÅÐ¶ÏÊÇ·ñÓÐ´ËÓÃ»§
 
         if($input['user_email']){
             $user = Users::where('user_email', $input['user_email'] )->first();
         }
 
-//         dd($user);
+        // dd($user);
         if(!$user){
-            return redirect('home/login')->with('errors', 'ç”¨æˆ·åä¸å­˜åœ¨');
+            return redirect('home/login')->with('errors', 'ÓÃ»§Ãû²»´æÔÚ');
         }
 
-        // 3.2 å¯†ç æ˜¯å¦æ­£ç¡®
+        // 3.2 ÃÜÂëÊÇ·ñÕýÈ·
         // $user->admin_pass   $input['admin_pass']
         if(!(Hash::check(trim($input['user_password']), $user->user_password))){
-            return redirect('home/login')->with('errors', 'å¯†ç ä¸æ­£ç¡®');
+            return redirect('home/login')->with('errors', 'ÃÜÂë²»ÕýÈ·');
         }
 
-        //4 ç™»é™†æˆåŠŸ, å°†ç”¨æˆ·ä¿¡æ¯ä¿å­˜åˆ°sessionä¸­, ç”¨äºŽåˆ¤æ–­ç”¨æˆ·æ˜¯å¦ç™»å½•ä»¥åŠèŽ·å–ç”¨æˆ·ä¿¡æ¯
+        //4 µÇÂ½³É¹¦, ½«ÓÃ»§ÐÅÏ¢±£´æµ½sessionÖÐ, ÓÃÓÚÅÐ¶ÏÓÃ»§ÊÇ·ñµÇÂ¼ÒÔ¼°»ñÈ¡ÓÃ»§ÐÅÏ¢
         Session::put('users', $user);
-        return redirect('home/message');
+        return redirect('home/index');
 
+    }
+
+    // ÍË³öµÇÂ¼
+    public function outlogin()
+    {
+        // return 111;
+        session()->flush();
+        return redirect('home/login');
     }
 
 
@@ -88,7 +96,7 @@ class LoginController extends Controller
 
 
 
-  //å¾®åšæ³¨å†Œ
+  //Î¢²©×¢²á
 
     public function register()
     {
@@ -103,26 +111,26 @@ class LoginController extends Controller
 //     	$code->make();
 //     }
 
-    // éªŒè¯ç ç”Ÿæˆ
+    // ÑéÖ¤ÂëÉú³É
     public function yzm()
     {
         $phrase = new PhraseBuilder;
-        // è®¾ç½®éªŒè¯ç ä½æ•°
+        // ÉèÖÃÑéÖ¤ÂëÎ»Êý
         $code = $phrase->build(4);
-        // ç”ŸæˆéªŒè¯ç å›¾ç‰‡çš„Builderå¯¹è±¡ï¼Œé…ç½®ç›¸åº”å±žæ€§
+        // Éú³ÉÑéÖ¤ÂëÍ¼Æ¬µÄBuilder¶ÔÏó£¬ÅäÖÃÏàÓ¦ÊôÐÔ
         $builder = new CaptchaBuilder($code, $phrase);
-        // è®¾ç½®èƒŒæ™¯é¢œè‰²
+        // ÉèÖÃ±³¾°ÑÕÉ«
         $builder->setBackgroundColor(220, 210, 230);
         $builder->setMaxAngle(25);
         $builder->setMaxBehindLines(0);
         $builder->setMaxFrontLines(0);
-        // å¯ä»¥è®¾ç½®å›¾ç‰‡å®½é«˜åŠå­—ä½“
+        // ¿ÉÒÔÉèÖÃÍ¼Æ¬¿í¸ß¼°×ÖÌå
         $builder->build($width = 100, $height = 40, $font = null);
-        // èŽ·å–éªŒè¯ç çš„å†…å®¹
+        // »ñÈ¡ÑéÖ¤ÂëµÄÄÚÈÝ
         $phrase = $builder->getPhrase();
-        // æŠŠå†…å®¹å­˜å…¥session
+        // °ÑÄÚÈÝ´æÈësession
         \Session::flash('code', $phrase);
-        // ç”Ÿæˆå›¾ç‰‡
+        // Éú³ÉÍ¼Æ¬
         header("Cache-Control: no-cache, must-revalidate");
         header("Content-Type:image/jpeg");
         $builder->output();
@@ -134,7 +142,7 @@ class LoginController extends Controller
         $input = $request->except('_token');
         //dd($input);
 
-        // éªŒè¯è§„åˆ™
+        // ÑéÖ¤¹æÔò
         $rule = [
             'user_name' => 'required|min:6|max:18',
             'user_email' =>  'email',
@@ -144,21 +152,21 @@ class LoginController extends Controller
 
         ];
 
-        // æç¤ºä¿¡æ¯
+        // ÌáÊ¾ÐÅÏ¢
         $mess = [
-            'user_name.required' => 'ç”¨æˆ·åä¸èƒ½ä¸ºç©º',
-            'user_name.required' => 'ç”¨æˆ·åå¿…é¡»åœ¨6åˆ°18ä½ä¹‹é—´',
-            'user_password.required' => 'å¯†ç å¿…é¡»è¾“å…¥',
-            'user_password.between' => 'å¯†ç å¿…é¡»åœ¨5åˆ°20ä½ä¹‹é—´',
-            'user_rpassword.same' => 'ç¡®è®¤å¯†ç ä¸ä¸€è‡´',
-            'user_email.email' => 'é‚®ç®±æ ¼å¼ä¸æ­£ç¡®',
-            'user_phone.required' => 'æ‰‹æœºå·ä¸èƒ½ä¸ºç©º',
-            'user_phone.size' => 'æ‰‹æœºå·é•¿åº¦ä¸åˆé€‚',
+            'user_name.required' => 'ÓÃ»§Ãû²»ÄÜÎª¿Õ',
+            'user_name.required' => 'ÓÃ»§Ãû±ØÐëÔÚ6µ½18Î»Ö®¼ä',
+            'user_password.required' => 'ÃÜÂë±ØÐëÊäÈë',
+            'user_password.between' => 'ÃÜÂë±ØÐëÔÚ5µ½20Î»Ö®¼ä',
+            'user_rpassword.same' => 'È·ÈÏÃÜÂë²»Ò»ÖÂ',
+            'user_email.email' => 'ÓÊÏä¸ñÊ½²»ÕýÈ·',
+            'user_phone.required' => 'ÊÖ»úºÅ²»ÄÜÎª¿Õ',
+            'user_phone.size' => 'ÊÖ»úºÅ³¤¶È²»ºÏÊÊ',
         ];
 
 
         $validator = Validator::make($input, $rule, $mess);
-        //å¦‚æžœè¡¨å•éªŒè¯å¤±è´¥ passes()
+        //Èç¹û±íµ¥ÑéÖ¤Ê§°Ü passes()
         if ($validator->fails()) {
             return redirect('home/register')
                 ->withErrors($validator)
@@ -166,7 +174,7 @@ class LoginController extends Controller
         }
 
         if($input['code'] != \Session::get('code')) {
-            return redirect('home/register')->with('errors', 'éªŒè¯ç é”™è¯¯');
+            return redirect('home/register')->with('errors', 'ÑéÖ¤Âë´íÎó');
         }
        // dd($input);
 //        $input = $request->except('code');

@@ -49,11 +49,11 @@
                     <tr>
                         <th><i class="require">*</i>权限：</th>
                         <td>
-                            @foreach($permissions as $k=>$v)
-                                @if(in_array($v->id,$arr))
-                                     <label for=""><input type="checkbox"  checked name="permission_id[]"  value="{{$v->id}}">{{$v->name}}</label>
+                            @foreach($group as $k=>$v)
+                                @if(in_array($k,$arr))
+                                     <label for=""><input type="checkbox"  checked name="group_id[]"  value="{{$k}}">{{$v}}</label>
                                 @else
-                                    <label for=""><input type="checkbox"   name="permission_id[]"  value="{{$v->id}}">{{$v->name}}</label>
+                                    <label for=""><input type="checkbox"   name="group_id[]"  value="{{$k}}">{{$v}}</label>
                                 @endif
 
                             @endforeach

@@ -19,20 +19,32 @@ class RoleController extends Controller
         $role = Role::find($id);
         // dd($role);
 
-        // 获取所有权限
-        $permissions = Permission::get();
-        // dd($permission);
+        // 获取所有权限分组
+        $group = DB::table('permissions')->pluck('group_name', 'group_id');
+        // dd($group);       
+       
+        // dd($permissions);
 
-        // 获取当前角色已经拥有的权限
+        // 获取当前角色已经拥有的权限分组
         $arr = [];
-        $own_permissions = DB::table('role_permission')->where('role_id', $id)->pluck('permission_id');
+        $own_permissions = DB::table('role_permission')->where('role_id', $id)->pluck('group_id');
+        // dd($own_permissions);
+
+        // 获取权限对应的分组
+        // foreach($own_permissions as $m=>$n){
+        //       $arr[] = DB::table('permissions')->where('id', $n)->get();
+        // }
+        //  dd($arr);
+
         foreach($own_permissions as $k=>$v){
             $arr[] = $v;
         }
         // dd($arr);
-        // dd($own_permission);
         
-        return view('admin/role/auth', compact('role', 'permissions', 'arr'));
+        $arr = array_unique($arr);
+        // dd($arr);
+        
+        return view('admin/role/auth', compact('role', 'group', 'arr'));
     }
 
     /**
@@ -55,6 +67,18 @@ class RoleController extends Controller
 //         6           2
 
 
+        // $arr = [];
+        // $arr1 = [];
+// 
+          // dd($arr);
+        // foreach($arr as $m=>$n){
+        //     foreach($n as $a){
+        //         $arr1[]=$a;
+        //     }
+        // }
+        // dd($arr1);
+        // dd($arr);
+
         // 开启事务
         DB::beginTransaction();
 
@@ -64,13 +88,19 @@ class RoleController extends Controller
 //            给当前角色重新授权
 
 
-//        2. 将授权数据添加到permission_role表中
-            if(isset($input['permission_id'])){
-                foreach ($input['permission_id'] as $k=>$v){
-                    DB::table('role_permission')->insert(['role_id'=>$input['role_id'],'permission_id'=>$v]);
+            foreach($input['group_id'] as $k=>$v){
+            $arr = DB::table('permissions')->where('group_id', $v)->pluck('id'
+                );
+            // dd($arr);
+            foreach($arr as $h=>$l){
+                // $l=iterator_to_array($l);
+                // dd($l);
+                
+                    DB::table('role_permission')->insert(['role_id'=>$input['role_id'],'permission_id'=>$l, "group_id"=>$v]);
+               
+                // continue;
                 }
             }
-
 
         }catch (Exception $e){
             DB::rollBack();
@@ -148,7 +178,11 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
+
         $role = Role::find($id);
+        // dd($role);
+        
+        // 返回修改页面
         return view('admin/role/edit', compact('role'));
     }
 
@@ -161,7 +195,21 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // 通过id找到要修改的那个用户
+        $role = Role::find($id);
+
+        // 通过request获取要修改的值
+        $input = $request->except('_token');
+        // dd($input);
+        
+        // 使用模型update进行更新
+        $res = $role->update($input);
+
+        if($res){
+            return redirect('admin/role');
+        }else{
+            return redirect('admin/role/'.$role->id.'/edit');
+        }
     }
 
     /**
@@ -172,6 +220,19 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+       $res = Role::find($id)->delete();
+
+       // 定义一个数组存放数据
+       $data = [];
+       if($res){
+            $data['error'] = 0;
+            $data['msg'] ="删除成功";
+        }else{
+            $data['error'] = 1;
+            $data['msg'] ="删除失败";
+        }
+
+        return $data;
+
     }
 }

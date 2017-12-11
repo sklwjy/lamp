@@ -70,6 +70,9 @@
                     <label for="online">
                         <input type="checkbox" name="online" id="online" value="">
                         记住密码</label>
+                        
+                       
+                       
                 </div>
             </div>
             <div class="row cl">
@@ -85,6 +88,8 @@
 </div>
 <div class="footer">Copyright 微博达人 - by - lamp179 - v1.0</div>
 <script type="text/javascript" src="{{ asset('/admin/lib/jquery/1.9.1/jquery.min.js') }}"></script>
+
+
 <script type="text/javascript" src="{{ asset('/admin/static/h-ui/js/H-ui.min.js') }}"></script>
 </body>
 </html>

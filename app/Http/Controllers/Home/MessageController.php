@@ -35,7 +35,7 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return 111;
     }
 
     /**
@@ -87,6 +87,6 @@ class MessageController extends Controller
     // 微博详情页
     public function info()
     {
-        return 111;
+         
     }
 }
