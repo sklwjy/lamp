@@ -152,7 +152,8 @@
             
            
 
-      <!--  微博显示区 -->
+      <!--  ,微博显示区 -->
+
             <div class="row item_msg" >
                 <div class="col-sm-12 col-xs-12 message" onclick="info()">
                     <img src="{{ asset('home/images/mywb/icon.png') }}" class="col-sm-2 col-xs-2" style="border-radius: 50%">
@@ -261,6 +262,8 @@
 </div>
 <script src="{{ asset('home/js/jquery-3.1.0.js') }}"></script>
 <script src="{{ asset('home/js/bootstrap.min.js') }}"></script>
+
+
 <script type="text/javascript">
 
 

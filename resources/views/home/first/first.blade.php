@@ -11,7 +11,9 @@
     <link rel="stylesheet" type="text/css" href="https://img.t.sinajs.cn/t6/style/css/module/base/frame.css?version=d734c0d1947e41c8">
     <link rel="stylesheet" href="{{ asset('home/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('home/css/style2.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('home/css/lbt.css') }}">
     <link rel="stylesheet" href="{{ asset('home/css/style1.css') }}" media="screen" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('/layui/css/layui.css') }}" media="all">
 
 </head>
 <body>
@@ -106,6 +108,21 @@
            
 
       <!--  微博显示区 -->
+
+               <div class="layui-carousel" id="sunjiashigedashuaige">
+                   <div carousel-item>
+                       <div><a href="https://www.baidu.com"><img style="width:590px" src="{{ asset('./uploads/151296343145325a2dfd6790db2.jpg') }}" alt=""></a></div>
+                       <div><a href="https://www.jd.com"><img style="width:590px" src="{{ asset('./uploads/151299153819805a2e6b325554e.jpg') }}" alt=""></a></div>
+                       <div><a href="https://www.taobao.com"><img style="width:590px" src="{{ asset('./uploads/151299525537025a2e79b7d7471.jpg') }}" alt=""></a></div>
+                       <div><a href="https://weibo.com/"><img style="width:590px" src="{{ asset('./uploads/151299527169955a2e79c7e9452.jpg') }}" alt=""></a></div>
+                       <div><a href="https://github.com/"><img style="width:590px" src="{{ asset('./uploads/151299530996175a2e79edb7605.jpg') }}" alt=""></a></div>
+
+
+                   </div>
+               </div>
+
+
+
             <div class="row item_msg" >
                 <div class="col-sm-12 col-xs-12 message" onclick="info()">
                     <img src="{{ asset('home/images/mywb/icon.png') }}" class="col-sm-2 col-xs-2" style="border-radius: 50%">
@@ -212,6 +229,19 @@
 </div>
 <script src="{{ asset('home/js/jquery-3.1.0.js') }}"></script>
 <script src="{{ asset('home/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('layui/layui.js') }}"></script>
+<script>
+    layui.use('carousel', function(){
+        var carousel = layui.carousel;
+        //建造实例
+        carousel.render({
+            elem: '#sunjiashigedashuaige'
+            ,width: '100%' //设置容器宽度
+            ,arrow: 'always' //始终显示箭头
+            ,anim: 'fade' //切换动画方式
+        });
+    });
+</script>
 <script type="text/javascript">
 
 
@@ -343,5 +373,7 @@
         });
     });
 </script>
+
+
 </body>
 </html>

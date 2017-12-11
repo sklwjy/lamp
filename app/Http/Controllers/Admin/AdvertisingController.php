@@ -29,6 +29,7 @@ class AdvertisingController extends Controller
             $dirpath = public_path().'/uploads/';
 
             // 将文件移动到本地服务器的指定位置,并以新文件名命名
+
             //$file->move(移动到的目录, 新文件名);
             $file->move($dirpath, $newfile);
 
