@@ -45,7 +45,7 @@
    <!-- 页面左部 -->
    <div id="left">
    <!--页面左部表单设置-->
-   <form id="LoginForm" action="{{ asset('home/dologin') }}" method="post">
+   <form id="LoginForm" action="{{ asset('doreset') }}" method="post">
        @if (count($errors) > 0)
            <div class="alert alert-danger">
                <ul>
@@ -73,8 +73,8 @@
        </tr>
        <tr>
          <td class="le"></td>
-         <td class="ld">手机/邮箱</td>
-         <td class="if"><input name="user_email" type="text" class="la" id="user_email" /></td>
+         <td class="ld">请输入您要找回密码的账号</td>
+         <td class="if"><input name="user_email"value="{{ $user_name  }}" type="text" class="la" id="user_email" /></td>
          <td></td>
        </tr>
        <tr>
@@ -83,6 +83,12 @@
          <td class="if"><input name="user_password" type="password" class="la" id="user_password" /></td>
          <td></td>
        </tr>
+         <tr>
+             <td class="le"></td>
+             <td class="ld">确认密码</td>
+             <td class="if"><input name="user_rpassword" type="password" class="la" id="user_password" /></td>
+             <td></td>
+         </tr>
        <tr>
          <td class="le"></td>
          <td class="ld"></td>

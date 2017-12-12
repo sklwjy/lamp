@@ -31,7 +31,7 @@ class LoginController extends Controller
     {
 
         $input = $request->except('_token');
-        //dd($input);
+//        dd($input);
 
         // 验证规则
         $rule = [
@@ -42,12 +42,14 @@ class LoginController extends Controller
         ];
 
         // 提示信息
+      //  if($input[''])
         $mess = [
-               'user_email.email' => '邮箱格式不正确',
+                'user_email.email' => '邮箱格式不正确',
                 'user_password.required' => '密码必须输入',
                 'user_password.between' => '密码必须在5到20位之间',
-               'user_phone.required' => '手机号不能为空',
-                'user_phone.size' => '手机号长度不合适',
+                ''
+
+
             ];
 
 
@@ -66,11 +68,13 @@ class LoginController extends Controller
             $user = Users::where('user_email', $input['user_email'] )->first();
         }
 
-//         dd($user);
+         //dd($user);
         if(!$user){
             return redirect('home/login')->with('errors', '用户名不存在');
         }
-
+        if($user['is_active'] == 0 ){
+            return redirect('home/login')->with('errors', '请您先去邮箱激活');
+        }
         // 3.2 密码是否正确
         // $user->admin_pass   $input['admin_pass']
         if(!(Hash::check(trim($input['user_password']), $user->user_password))){
@@ -130,7 +134,7 @@ class LoginController extends Controller
 
     public function doregister(Request $request)
     {
-       // return 11;
+        //return 11;
         $input = $request->except('_token');
         //dd($input);
 

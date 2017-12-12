@@ -45,7 +45,7 @@
    <!-- 页面左部 -->
    <div id="left">
    <!--页面左部表单设置-->
-   <form id="LoginForm" action="{{ asset('home/dologin') }}" method="post">
+   <form id="LoginForm" action="{{ asset('doforget') }}" method="post">
        @if (count($errors) > 0)
            <div class="alert alert-danger">
                <ul>

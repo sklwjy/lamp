@@ -4,10 +4,10 @@ namespace App\Model\home;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Users extends Model
+class Account extends Model
 {
-    public $table = 'user';
-    public $primaryKey = 'user_id';
+    public $table = 'userinfo';
+    public $primaryKey = 'userinfo_id';
     public $guarded = [];
     public $timestamps = false;
 }

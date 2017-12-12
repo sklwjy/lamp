@@ -11,6 +11,32 @@
 |
 */
 
+//注册模块,发送短信和邮件
+Route::get('phoneregister','RegisterController@PhoneRegister');
+Route::post('sendcode','RegisterController@sendCode');
+Route::post('phoneregister','RegisterController@doPhoneRegister');
+
+//使用邮箱注册的路由
+Route::get('emailregister','RegisterController@EmailRegister');
+Route::post('emailregister','RegisterController@doEmailRegister');
+//邮件注册激活路由
+Route::get('active','RegisterController@active');
+
+//找回密码路由
+Route::get('forget','RegisterController@forget');
+Route::post('doforget','RegisterController@doforget');
+
+//找回密码页面
+Route::get('reset','RegisterController@reset');
+//重置密码
+Route::post('doreset','RegisterController@doreset');
+
+
+Route::get('SendReminderEmail','RegisterController@SendReminderEmail');
+
+//个人信息路由
+Route::get('account','Home\AccountController@account');
+Route::post('account','Home\AccountController@doaccount');
 
 // 前台路由
 	
@@ -19,8 +45,9 @@
 	Route::get('home/sss', 'Home\LoginController@sss');
 	Route::post('home/dologin', 'Home\LoginController@dologin');
 	Route::get('home/register', 'Home\LoginController@register');
-    Route::post('doregister', 'LoginController@doregister');
-    Route::group(['middleware'=>'homeislogin', 'prefix'=>'home', 'namespace'=>'Home'], function(){
+    Route::post('home/doregister', 'LoginController@doregister');
+
+    Route::group(['middleware' => 'homeislogin', 'prefix'=>'home', 'namespace'=>'Home'], function(){
 	Route::get('index', 'IndexController@index');
 
 	Route::resource('message','MessageController');
@@ -71,6 +98,7 @@ Route::resource('config', 'ConfigController');
     // 权限模块路由
     Route::resource('permission', 'PermissionController');
 
-//Route::get('link', 'linkcontroller');
-});
 
+});
+//修改密码路由
+Route::get('admin/pass','Admin\PassController@test');
