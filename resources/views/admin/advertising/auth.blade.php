@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 @section('title')
-    <title>后台用户添加页面</title>
+    <title>轮播图添加页面</title>
 @endsection
 @section('body')
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">商品管理</a> &raquo; 添加商品
+        <i class="fa fa-home"></i> <a href="#"></a> &raquo; <a href="#"></a> &raquo;
     </div>
     <!--面包屑导航 结束-->
 
@@ -39,7 +39,7 @@
                 <tbody>
                     <tr>
                         {{csrf_field()}}
-                        <th><i class="require">*</i>用户名：</th>
+                        <th><i class="require">*</i>名称：</th>
                         <td>
                             <input type="hidden" name="admin_id"  value="{{$user->admin_id}}">
                             <input type="text" class="lg" disabled name="admin_name" value="{{$user->admin_name}}">
@@ -47,7 +47,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th><i class="require">*</i>角色：</th>
+                        <th><i class="require">*</i>地址：</th>
                         <td>
                             @foreach($roles as $k=>$v)
                                 @if(in_array($v->id,$arr))

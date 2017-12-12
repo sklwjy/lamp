@@ -109,10 +109,10 @@
 
       <!--  微博显示区 -->
 
-               <div class="layui-carousel" id="sunjiashigedashuaige">
+               <div class="layui-carousel" id="cwx">
                    <div carousel-item>
                        @foreach($advertising as $x=>$y)
-                       <div><a href="https://www.baidu.com"><img style="width:590px" src="{{$y->advertising_picture}}" alt=""></a></div>
+                       <div><a href="{{$y->advertising_url}}"><img style="width:590px" src="{{$y->advertising_picture}}" alt=""></a></div>
                        @endforeach
                    </div>
                </div>
@@ -231,7 +231,7 @@
         var carousel = layui.carousel;
         //建造实例
         carousel.render({
-            elem: '#sunjiashigedashuaige'
+            elem: '#cwx'
             ,width: '100%' //设置容器宽度
             ,arrow: 'always' //始终显示箭头
             ,anim: 'fade' //切换动画方式
