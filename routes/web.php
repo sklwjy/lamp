@@ -42,6 +42,8 @@ use Illuminate\Support\Facades\Hash;
 
 	// 前台主页面(未登录)
 	Route::get('home/index', 'Home\IndexController@index');
+	Route::get('home/list', 'Home\IndexController@list');
+	Route::get('home/info', 'Home\IndexController@info');
 
     
 Route::group(['middleware'=>'homeislogin', 'prefix'=>'home', 'namespace'=>'Home'], function(){
@@ -49,12 +51,6 @@ Route::group(['middleware'=>'homeislogin', 'prefix'=>'home', 'namespace'=>'Home'
 	
 	// 主页信息页面
 	Route::resource('message','MessageController');
-	
-
-	// 微博详情页面
-	Route::get('info','MessageController@info');
-
-	
 
 });
 

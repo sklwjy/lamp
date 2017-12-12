@@ -58,6 +58,7 @@
                         <th>新闻标题</th>
                         <th>新闻内容</th>
                         <th>新闻分类</th>
+                        <th>新闻图片</th>
                         <th>添加时间</th>
                         <th>操作</th>
                     </tr>
@@ -72,7 +73,8 @@
                         <td>{{$v->news_title}}</td>
                         <td>{{$v->news_content}}</td>
                         <td>{{$v->news_classify}}</td>
-                        <td>{{$v->news_time}}</td>
+                        <td><img style="width:80px;height:80px" src="{{$v->news_picture}}"></td>
+                        <td>{{date('Y-m-d H:i:s', $v->news_time)}}</td>
                         <td>
                             <a href="{{url('admin/news/'.$v->news_id.'/edit')}}">修改</a>
                             
@@ -89,6 +91,18 @@
                     </tr>
 
                     @endforeach
+                   <style type="text/css">
+        /*表格固定布局*/
+        table{table-layout: fixed;word-break: break-all; word-wrap: break-word; }
+        .award-name{-o-text-overflow:ellipsis;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;width:100%; //超出部分显示省略号}
+        .award-name:hover {
+            text-overflow:inherit;
+            overflow: visible;
+            white-space: pre-line;
+        }
+        /*超出表格部分隐藏鼠标移动上去时显示*/
+    </style>
+
       
 
                 

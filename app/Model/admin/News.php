@@ -9,7 +9,7 @@ class News extends Model
     //
     public $table = 'news';
     public $primaryKey = 'news_id';
-    public $fillable = ['news_name', 'news_title', 'news_content', 'news_classify', 'news_pid', 'news_time'];
+    public $fillable = ['news_name', 'news_title', 'news_content', 'news_classify', 'news_pid', 'news_time', 'news_picture'];
     public $guarded = [];
     public $timestamps = false;
 
@@ -29,7 +29,7 @@ class News extends Model
         foreach($new as $k=>$v){
             //如果是当前遍历的类是一级类
             if($v->news_pid == $pid){
-                //复制当前分类的名称给cate_names字段
+                //复制当前分类的名称给news_names字段
                 $v->news_names = $v->news_name;
                 $arr[] = $v;
 
