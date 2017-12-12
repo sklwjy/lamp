@@ -9,13 +9,14 @@
 			<div class="logo">后台管理模板</div>
 			<ul>
 				<li><a href="#" class="active">首页</a></li>
-				<li><a href="#">管理页</a></li>
+				
 			</ul>
 		</div>
 		<div class="top_right">
 			<ul>
-				<li>管理员：admin</li>
-				<li><a href="{{url('admin/user/pass')}}" target="main">修改密码</a></li>
+				<li>管理员:{{session('user.admin_name')}}</li>
+				<li><a href="{{url('admin/change')}}" target="main">修改密码</a></li>
+
 				<li><a href="{{url('admin/logout')}}">退出</a></li>
 			</ul>
 		</div>
@@ -47,6 +48,14 @@
 					<li><a href="{{url('admin/link')}}" target="main"><i class="fa fa-fw fa-database"></i>友情链接列表</a></li>
 				</ul>
 			</li>
+			</li>
+			<li>
+				<h3><i class="fa fa-fw fa-clipboard"></i>广告模块</h3>
+				<ul class="sub_menu">
+					<li><a href="{{url('admin/advertising/create')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>添加广告</a></li>
+					<li><a href="{{url('admin/advertising')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>广告列表</a></li>
+
+				</ul>
 			</li>
 			<li>
 				<h3><i class="fa fa-fw fa-clipboard"></i>网站配置模块</h3>

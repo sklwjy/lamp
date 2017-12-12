@@ -98,57 +98,10 @@
             </div>
         </div>
     
-
- `     <!--  发表微博开始 -->
+     
         <div class="col-sm-6 col-xs-12 my_edit" id="weibo" >
-            <div class="row" id="edit_form" >
-                <span class="pull-left" style="margin:15px;">编写新鲜事</span>
-                <span class="tips pull-right" style="margin:15px;"></span>
-                <form action="{{ url('home/message') }}" mothod="post" role="form" style="margin-top: 50px;" enctype="multipart/form-data">
-                    {{ csrf_field() }}
-                    <div class="form-group">
-                        <div class="col-sm-12">
-
-                            <div contentEditable="true" id="content" class="form-control " ></div>
-                        </div>
-                        <div class="col-sm-12" style="margin-top: 12px;">
-                            <span class="emoji" >表情</span>
-
-                            <span class="pic" >图片</span>
-                            <span>
-							    		<input type="file" name="up"  class="select_Img" style="display: none" >
-							    	    <img class="preview" src="">
-                            </span>
-
-
-                            <div class="myEmoji" >
-                                <ul id="myTab" class="nav nav-tabs">
-                                    <li class="active">
-                                        <a href="#set" data-toggle="tab">
-                                            常用
-                                        </a>
-                                    </li>
-                                    <li><a href="#hot" data-toggle="tab">热门</a></li>
-
-                                </ul>
-                                <div id="myTabContent" class="tab-content">
-                                    <div class="tab-pane fade in active" id="set">
-                                        <div class="emoji_1"></div>
-
-                                    </div>
-                                    <div class="tab-pane fade" id="hot">
-                                        <div class="emoji_2"></div>
-                                    </div>
-
-                                </div>
-                            </div>
-                             {{--<span> <input type="file" id="selectImg" value=""></input> </span>--}}
-                            <button type="button" id="send" class="btn btn-default pull-right">发布</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <!-- 发表微博结束 -->
+           
+        
             
            
 
@@ -178,10 +131,8 @@
                 <li>
                     <!--cuslike用于前端判断是否显示个性赞，1:显示-->
                     <a href="javascript:void(0);" class="S_txt2" action-type="login" action-data="version=mini&amp;qid=heart&amp;mid=4182066000095226&amp;loc=profile&amp;cuslike=1" title="赞" suda-uatrack="key=profile_feed&amp;value=like"><span class="pos"><span class="line S_line1">
-                                                                                                                                                                                                                                <span node-type="like_status" class=""><em class="W_ficon ficon_praised S_txt2">ñ</em><em>84303</em></span>                        </span></span></a>
-                    <span class="arrow"><span class="W_arrow_bor W_arrow_bor_t"><i class="S_line1"></i><em class="S_bg1_br"></em></span></span>
                 </li>
-            </ul>
+                 </ul>
 
                     </div>
 

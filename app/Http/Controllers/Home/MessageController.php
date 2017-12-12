@@ -14,7 +14,8 @@ class MessageController extends Controller
      */
     public function index()
     {
-        return view( 'home/mywb');
+//        return 11;
+        return view( 'home/MyWB');
     }
 
     /**
@@ -35,7 +36,7 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return 111;
     }
 
     /**
@@ -81,5 +82,12 @@ class MessageController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    // 微博详情页
+    public function info()
+    {
+         
     }
 }

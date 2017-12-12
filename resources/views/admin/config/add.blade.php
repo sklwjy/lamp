@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 @section('title')
-    <title>后台用户添加页面</title>
+    <title>后台网站配置添加页面</title>
 @endsection
 @section('body')
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">商品管理</a> &raquo; 添加商品
+        <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">网站配置管理</a> &raquo; 添加网站配置
     </div>
     <!--面包屑导航 结束-->
 
@@ -16,8 +16,8 @@
 
                 <div class="alert alert-danger">
                     <ul>
-                       @if(session('msg'))
-                            <li style="color:red">{{session('msg')}}</li>
+                       @if(session(' msg '))
+                            <li style="color:red">{{ session('msg') }}</li>
                            @endif
                     </ul>
                 </div>
@@ -25,7 +25,7 @@
         </div>
         <div class="result_content">
             <div class="short_wrap">
-                <a href="#"><i class="fa fa-plus"></i>新增文章</a>
+                <a href="#"><i class="fa fa-plus"></i>新增网站配置</a>
                 <a href="#"><i class="fa fa-recycle"></i>批量删除</a>
                 <a href="#"><i class="fa fa-refresh"></i>更新排序</a>
             </div>
@@ -63,7 +63,7 @@
                 <tr class="field_value" style="display: none">
                     <th>类型值：</th>
                     <td>
-                        <input type="text" class="lg" name="field_value">
+                        <input type="text" class="lg" name="field_value" >
                         <p><i class="fa fa-exclamation-circle yellow"></i>类型值只有在radio的情况下才需要配置，格式 1|开启,0|关闭</p>
                     </td>
                 </tr>

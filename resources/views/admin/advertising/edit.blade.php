@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 @section('title')
-    <title>后台用户添加页面</title>
+    <title>后台广告修改页面</title>
 @endsection
 @section('body')
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">商品管理</a> &raquo; 添加商品
+        <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">广告修改</a>
     </div>
     <!--面包屑导航 结束-->
 
@@ -23,40 +23,39 @@
                 </div>
 
         </div>
-        <div class="result_content">
-            <div class="short_wrap">
-                <a href="#"><i class="fa fa-plus"></i>新增文章</a>
-                <a href="#"><i class="fa fa-recycle"></i>批量删除</a>
-                <a href="#"><i class="fa fa-refresh"></i>更新排序</a>
-            </div>
-        </div>
+
     </div>
     <!--结果集标题与导航组件 结束-->
     
     <div class="result_wrap">
-        <form action="{{url('admin/role/doauth')}}" method="post">
+        <form action="{{url('admin/advertising/'.$advertisings->advertising_id)}}" method="post">
             <table class="add_tab">
                 <tbody>
                     <tr>
+                       {{--token认证--}}
                         {{csrf_field()}}
-                        <th><i class="require">*</i>角色名：</th>
+                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                       {{--// 提交方式为put--}}
+                        {{method_field('put')}}
+                        <input type="hidden" name="_method" value="put">
+                        <th><i class="require">*</i>广告名称：</th>
                         <td>
-                            <input type="hidden" name="role_id"  value="{{$role->id}}">
-                            <input type="text" class="lg" disabled name="name" value="{{$role->name}}">
+                            <input type="text" class="lg" name="advertising_name" value="{{$advertisings->advertising_name}}">
                             <p>标题可以写30个字</p>
                         </td>
                     </tr>
-                    <tr>
-                        <th><i class="require">*</i>权限：</th>
-                        <td>
-                            @foreach($group as $k=>$v)
-                                @if(in_array($k,$arr))
-                                     <label for=""><input type="checkbox"  checked name="group_id[]"  value="{{$k}}">{{$v}}</label>
-                                @else
-                                    <label for=""><input type="checkbox"   name="group_id[]"  value="{{$k}}">{{$v}}</label>
-                                @endif
 
-                            @endforeach
+                    <tr>
+                        {{--token认证--}}
+                        {{csrf_field()}}
+                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                        {{--// 提交方式为put--}}
+                        {{method_field('put')}}
+                        <input type="hidden" name="_method" value="put">
+                        <th><i class="require">*</i>广告地址：</th>
+                        <td>
+                            <input type="text" class="lg" name="advertising_url" value="{{$advertisings->advertising_url}}">
+                            <p>标题可以写30个字</p>
                         </td>
                     </tr>
                     <tr>

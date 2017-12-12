@@ -34,26 +34,26 @@
     <!--结果集标题与导航组件 结束-->
     
     <div class="result_wrap">
-        <form action="{{url('admin/role/doauth')}}" method="post">
+        <form action="{{url('admin/user/doauth')}}" method="post">
             <table class="add_tab">
                 <tbody>
                     <tr>
                         {{csrf_field()}}
-                        <th><i class="require">*</i>角色名：</th>
+                        <th><i class="require">*</i>用户名：</th>
                         <td>
-                            <input type="hidden" name="role_id"  value="{{$role->id}}">
-                            <input type="text" class="lg" disabled name="name" value="{{$role->name}}">
+                            <input type="hidden" name="admin_id"  value="{{$user->admin_id}}">
+                            <input type="text" class="lg" disabled name="admin_name" value="{{$user->admin_name}}">
                             <p>标题可以写30个字</p>
                         </td>
                     </tr>
                     <tr>
-                        <th><i class="require">*</i>权限：</th>
+                        <th><i class="require">*</i>角色：</th>
                         <td>
-                            @foreach($group as $k=>$v)
-                                @if(in_array($k,$arr))
-                                     <label for=""><input type="checkbox"  checked name="group_id[]"  value="{{$k}}">{{$v}}</label>
+                            @foreach($roles as $k=>$v)
+                                @if(in_array($v->id,$arr))
+                                     <label for=""><input type="checkbox"  checked name="role_id[]"  value="{{$v->id}}">{{$v->name}}</label>
                                 @else
-                                    <label for=""><input type="checkbox"   name="group_id[]"  value="{{$k}}">{{$v}}</label>
+                                    <label for=""><input type="checkbox"   name="role_id[]"  value="{{$v->id}}">{{$v->name}}</label>
                                 @endif
 
                             @endforeach

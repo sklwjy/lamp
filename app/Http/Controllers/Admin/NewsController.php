@@ -216,15 +216,15 @@ class NewsController extends Controller
             $newfile = time().rand(1000, 9999).uniqid().'.'.$ext;
 
             // 设置上传文件的目录
-            // $dirpath = public_path().'/uploads/';
+             $dirpath = public_path().'/uploads/';
 
             // 将文件移动到本地服务器的指定位置,并以新文件名命名
             // $file->move(移动到的目录, 新文件名);
-            // $file->move($dirpath, $newfile);
+             $file->move($dirpath, $newfile);
 
 
             // 将文件移动到七牛云, 并以新文件名命名
-            \Storage::disk('qiniu')->writeStream('uploads/'.$newfile, fopen($file->getRealPath(), 'r'));
+//            \Storage::disk('qiniu')->writeStream('uploads/'.$newfile, fopen($file->getRealPath(), 'r'));
 
 
 

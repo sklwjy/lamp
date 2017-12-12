@@ -34,7 +34,7 @@
     <!--结果集标题与导航组件 结束-->
     
     <div class="result_wrap">
-        <form action="{{url('admin/user/'.$user->user_id)}}" method="post">
+        <form action="{{url('admin/role/'.$role->id)}}" method="post">
             <table class="add_tab">
                 <tbody>
                     <tr>
@@ -42,15 +42,21 @@
                         {{csrf_field()}}
                         {{--<input type="hidden" name="_token" value="{{csrf_token()}}">--}}
                         {{--提交方式为put--}}
-                        {{method_field()}}
+                        {{method_field('put')}}
                         {{--<input type="hidden" name="_method" value="put">--}}
                         <th><i class="require">*</i>用户名：</th>
                         <td>
-                            <input type="text" class="lg" name="user_name" value="{{$user->user_name}}">
+                            <input type="text" class="lg" name="name" value="{{$role->name}}">
                             <p>标题可以写30个字</p>
                         </td>
                     </tr>
-
+                    <tr>
+                        <th><i class="require">*</i>角色描述：</th>
+                        <td>
+                            <input type="text" class="lg" name="description" value="{{$role->description}}">
+                            
+                        </td>
+                    </tr>
                     <tr>
                         <th></th>
                         <td>
