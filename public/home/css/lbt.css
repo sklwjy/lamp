@@ -1,0 +1,21 @@
+@charset "utf-8";
+*{margin: 0;padding: 0;}
+a{text-decoration: none;color: #000000;}
+body{font-size: 1em;color: #000000;}
+.clear{clear: both;}
+ul{list-style: none;}
+img{border: none;vertical-align:bottom;}
+
+
+#banner{width: 80%;height: 500px;position: absolute;top: 100px;bottom: 0;left: 10%;right: 0;}
+#banner #img li img{width: 100%;height: 500px;}
+#banner #img li {position:absolute;width: 100%;height: 500px;display: block;}
+#button li{width: 20px;height: 20px;background: #ADC0D4;z-index: 100;margin: 10px 10px;display: inline-block;
+    font-size: 1em;border-radius: 50%;text-align: center;cursor: pointer;}
+#button{position: absolute;top: 420px;left: 520px;}
+#banner #button .action{background: red;}
+#banner .btn{z-index:100;position: absolute;top: 50%;width: 70px;height: 70px;display:none;background: rgba(0,0,0,0.2);
+    font-size: 50px;text-align: center;color: #FF9500;cursor: pointer;}
+#banner .left{left: 0;}
+#banner .right{right: 0;}
+#banner:hover .btn{display: block;}

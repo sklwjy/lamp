@@ -91,7 +91,7 @@
                     </tr>
 
                     @endforeach
-                   <style type="text/css">
+    <style type="text/css">
         /*表格固定布局*/
         table{table-layout: fixed;word-break: break-all; word-wrap: break-word; }
         .award-name{-o-text-overflow:ellipsis;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;width:100%; //超出部分显示省略号}

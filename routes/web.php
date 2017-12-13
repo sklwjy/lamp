@@ -44,10 +44,10 @@ use Illuminate\Support\Facades\Hash;
 	Route::get('home/index', 'Home\IndexController@index');
 	Route::get('home/list', 'Home\IndexController@list');
 	Route::get('home/info', 'Home\IndexController@info');
-
     
 Route::group(['middleware'=>'homeislogin', 'prefix'=>'home', 'namespace'=>'Home'], function(){
-
+	// 修改密码
+	Route::get('message/password', 'MessageController@password');
 	
 	// 主页信息页面
 	Route::resource('message','MessageController');

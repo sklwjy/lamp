@@ -29,6 +29,7 @@ class AdvertisingController extends Controller
             $dirpath = public_path().'/uploads/';
 
             // 将文件移动到本地服务器的指定位置,并以新文件名命名
+
             //$file->move(移动到的目录, 新文件名);
             $file->move($dirpath, $newfile);
 
@@ -109,7 +110,7 @@ class AdvertisingController extends Controller
         //  1.通过id找到要修改的用户
         $advertisings = Advertising::find($id);
 //        2.通过$request获取要修改的值
-        $input = $request -> only('advertising_name');
+        $input = $request -> only('advertising_name','advertising_url');
 //        3.使用模型的update进行更新
         $res = $advertisings->update($input);
 //        4.根据更新是否成功,跳转页面

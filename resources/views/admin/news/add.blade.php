@@ -99,7 +99,7 @@
                         <th>缩略图:</th>
                         <td>
                             <input type="text" size="50" id="art_thumb" name="news_picture">
-                            <input id="file_upload" name="file_upload" type="file" multiple="true" >
+                            <input id="file_upload" name="file_upload[]" type="file" multiple="true" >
                             <br>
                             <img src="" id="img1" alt="" style="width:80px;height:80px">
                            

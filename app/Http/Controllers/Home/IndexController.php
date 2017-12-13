@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
+
 use App\Model\home\Navs;
 use App\Model\home\News;
+use App\Model\home\Advertising;
 use App\Http\Controllers\Controller;
 
 class IndexController extends Controller
@@ -12,6 +14,7 @@ class IndexController extends Controller
 	// 首页
     public function index()
     {
+
     	// 左边栏 $navs
     	$navs = Navs::get();
     	// dd($navs);
@@ -19,9 +22,14 @@ class IndexController extends Controller
     	// 新闻内容
     	$news = News::orderBy('news_time', 'desc')->get();
     	// dd($news);
-    	
 
-        return view('home/first/first', compact('navs','news'));
+
+    	 $advertising = Advertising::get();
+//       dd($advertising);
+
+    	$order = News::orderBy('news_view', 'desc')->take(4)->get();
+
+        return view('home/first/first', compact('navs','news','advertising', 'order'));
     }
 
     // 列表页
@@ -38,13 +46,37 @@ class IndexController extends Controller
     	// 拿到导航数据
     	$navs = Navs::get();
 
-    	return view('home/first/list', compact('news', 'navs'));
+    	$order = News::orderBy('news_view', 'desc')->take(4)->get();
+
+    	return view('home/first/list', compact('news', 'navs', 'order'));
+
     }
 
     // 新闻的具体信息
     public function info()
     {
-    	return 111;
+    	// 获取传过来的id
+    	$id = $_GET['id'];
+
+    	$navs = Navs::get();
+
+    	// 通过id查出数据
+    	$news = News::where('news_id', $id)->first();
+    	// dd($news->news_view);
+
+    	// 让浏览次数加一,再存入数据库
+    	$news_view = ++$news->news_view;
+    	// dd($news_view);
+    	$news->news_view = $news_view;
+    	$news->save();
+    	// dd($news);
+    	
+    	// 通过点击次数进行排序
+    	$order = News::orderBy('news_view', 'desc')->take(4)->get();
+    	// dd($order);
+
+    	return view('home/first/show', compact('news', 'navs', 'order'));
+    	
     }
 
     

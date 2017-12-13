@@ -33,7 +33,7 @@ class LoginController extends Controller
         $input = $request->except('_token');
         // dd($input);
 
-        // 验证规则
+        // ?证???
         $rule = [
             'user_email' => 'email',
             'user_password' => 'required|between:5,20',
@@ -41,26 +41,26 @@ class LoginController extends Controller
 //            'user_phone' => 'required|size:11',
         ];
 
-        // 提示信息
+        // ?示?息
         $mess = [
-               'user_email.email' => '邮箱格式不正确',
-                'user_password.required' => '密码必须输入',
-                'user_password.between' => '密码必须在5到20位之间',
-                'user_phone.required' => '手机号不能为空',
-                'user_phone.size' => '手机号长度不合适',
+               'user_email.email' => '????????确',
+                'user_password.required' => '???????',
+                'user_password.between' => '????????20位之??',
+                'user_phone.required' => '????挪??为??',
+                'user_phone.size' => '????懦??炔????',
             ];
 
 
             $validator = Validator::make($input, $rule, $mess);
-            //如果表单验证失败 passes()
+            //???????证失??passes()
             if ($validator->fails()) {
                 return redirect('home/login')
                     ->withErrors($validator)
                     ->withInput();
         }
-        // 3 登录逻辑
+        // 3 ??????
 
-        //3.1 判断是否有此用户
+        //3.1 ???欠?写?没?
 
         if($input['user_email']){
             $user = Users::where('user_email', $input['user_email'] )->first();
@@ -68,22 +68,22 @@ class LoginController extends Controller
 
         // dd($user);
         if(!$user){
-            return redirect('home/login')->with('errors', '用户名不存在');
+            return redirect('home/login')->with('errors', '?????????');
         }
 
-        // 3.2 密码是否正确
+        // 3.2 ??????确
         // $user->admin_pass   $input['admin_pass']
         if(!(Hash::check(trim($input['user_password']), $user->user_password))){
-            return redirect('home/login')->with('errors', '密码不正确');
+            return redirect('home/login')->with('errors', '?????确');
         }
 
-        //4 登陆成功, 将用户信息保存到session中, 用于判断用户是否登录以及获取用户信息
+        //4 ????晒?, ??????息???娴絪ession?, ?????没????录??????????息
         Session::put('users', $user);
         return redirect('home/index');
 
     }
 
-    // 退出登录
+    // ??????
     public function outlogin()
     {
         // return 111;
@@ -96,7 +96,7 @@ class LoginController extends Controller
 
 
 
-  //微博注册
+  //微??注??
 
     public function register()
     {
@@ -111,26 +111,26 @@ class LoginController extends Controller
 //     	$code->make();
 //     }
 
-    // 验证码生成
+    // ?证????
     public function yzm()
     {
         $phrase = new PhraseBuilder;
-        // 设置验证码位数
+        // ???证?位?
         $code = $phrase->build(4);
-        // 生成验证码图片的Builder对象，配置相应属性
+        // ??????图片??uilder?????????
         $builder = new CaptchaBuilder($code, $phrase);
-        // 设置背景颜色
+        // ???????色
         $builder->setBackgroundColor(220, 210, 230);
         $builder->setMaxAngle(25);
         $builder->setMaxBehindLines(0);
         $builder->setMaxFrontLines(0);
-        // 可以设置图片宽高及字体
+        // ??????片??呒???
         $builder->build($width = 100, $height = 40, $font = null);
-        // 获取验证码的内容
+        // ????证?????
         $phrase = $builder->getPhrase();
-        // 把内容存入session
+        // ???荽??ession
         \Session::flash('code', $phrase);
-        // 生成图片
+        // ????片
         header("Cache-Control: no-cache, must-revalidate");
         header("Content-Type:image/jpeg");
         $builder->output();
@@ -142,7 +142,7 @@ class LoginController extends Controller
         $input = $request->except('_token');
         //dd($input);
 
-        // 验证规则
+        //?证???
         $rule = [
             'user_name' => 'required|min:6|max:18',
             'user_email' =>  'email',
@@ -152,21 +152,21 @@ class LoginController extends Controller
 
         ];
 
-        // 提示信息
-        $mess = [
-            'user_name.required' => '用户名不能为空',
-            'user_name.required' => '用户名必须在6到18位之间',
-            'user_password.required' => '密码必须输入',
-            'user_password.between' => '密码必须在5到20位之间',
-            'user_rpassword.same' => '确认密码不一致',
-            'user_email.email' => '邮箱格式不正确',
-            'user_phone.required' => '手机号不能为空',
-            'user_phone.size' => '手机号长度不合适',
-        ];
+        // ?示?息
+        // $mess = [
+        //     'user_name.required' => '???????为??,
+        //     'user_name.required' => '??????????18位之??,
+        //     'user_password.required' => '???????,
+        //     'user_password.between' => '????????20位之??,
+        //     'user_rpassword.same' => '确?????一?',
+        //     'user_email.email' => '????????确',
+        //     'user_phone.required' => '????挪??为??,
+        //     'user_phone.size' => '????懦??炔????,
+        // ];
 
 
         $validator = Validator::make($input, $rule, $mess);
-        //如果表单验证失败 passes()
+        //???????证失??passes()
         if ($validator->fails()) {
             return redirect('home/register')
                 ->withErrors($validator)
@@ -174,7 +174,7 @@ class LoginController extends Controller
         }
 
         if($input['code'] != \Session::get('code')) {
-            return redirect('home/register')->with('errors', '验证码错误');
+            return redirect('home/register')->with('errors', '?证????');
         }
        // dd($input);
 //        $input = $request->except('code');
