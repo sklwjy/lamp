@@ -51,7 +51,16 @@
             @endif
                 {{csrf_field()}}
                 <tbody>
-               
+               <tr>
+                    <th width="120"><i class="require">*</i>父级分类：</th>
+                    <td>
+                        <select name="news_pid">
+                            <option value="0">==顶级分类==</option>
+                           @foreach($newsOne as $k=>$v)
+                            <option value="{{$v->news_id}}">{{$v->news_name}}</option>
+                           @endforeach
+                        </select>
+                    </td>
                 <tr>
                     <th><i class="require">*</i>新闻名称：</th>
                     <td>
@@ -66,11 +75,26 @@
                     </td>
                 </tr>    
                 <tr>
-                    <th>内容：</th>
-                    <td>
-                        <textarea name="news_content"></textarea>
-                    </td>
-                </tr>
+                        <th>新闻内容：</th>
+                        <td>
+                            <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.config.js"></script>
+                            <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.all.min.js"> </script>
+                            <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+                            <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+                            <script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+                            <script id="editor" name="news_content" type="text/plain" style="width:800px;height:300px;"></script>
+                            <script>
+                                var ue = UE.getEditor('editor');
+                            </script>
+                            <style>
+                                .edui-default{line-height: 28px;}
+                                div.edui-combox-body,div.edui-button-body,div.edui-splitbutton-body
+                                {overflow: hidden; height:20px;}
+                                div.edui-box{overflow: hidden; height:22px;}
+                            </style>
+                        </td>
+                    </tr>
                 <tr>
                         <th>缩略图:</th>
                         <td>

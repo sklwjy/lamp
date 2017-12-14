@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Home;
 //use Illuminate\Http\Request;
 //use App\Http\Controllers\Controller;
 
-use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 use App\Model\home\Users;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Session;
@@ -73,33 +73,27 @@ class LoginController extends Controller
 
         // 3.2 密码是否正确
         // $user->admin_pass   $input['admin_pass']
-        if( Crypt::decrypt($user->user_password) != trim($input['user_password'])){
+        if(!(Hash::check(trim($input['user_password']), $user->user_password))){
             return redirect('home/login')->with('errors', '密码不正确');
         }
 
         //4 登陆成功, 将用户信息保存到session中, 用于判断用户是否登录以及获取用户信息
         Session::put('users', $user);
-        return redirect('home/index');
+
+        return redirect('home/message');
 
     }
 
 
-    public function sss()
-    {
-        $str = '123456';
-
-        $c = Crypt::encrypt($str);
-        return $c;
-    }
+   
 
 
 
-
-  ///微博注册
+  //微博注册
 
     public function register()
     {
-////        return 11;
+//        return 11;
             return view('home/register');
 
     }
@@ -175,7 +169,7 @@ class LoginController extends Controller
         if($input['code'] != \Session::get('code')) {
             return redirect('home/register')->with('errors', '验证码错误');
         }
-//        dd($input);
+       // dd($input);
 //        $input = $request->except('code');
 //         $res =   Users::create($input);
 //        dd($res);
@@ -183,13 +177,14 @@ class LoginController extends Controller
             'user_name'=>$input['user_name'],
             'user_time'=>time(),
             'user_phone' =>$input['user_phone'],
-            'user_password' =>Crypt::encrypt($input['user_password']),
+            'user_password' =>Hash::make($input['user_password']),
             'user_status' =>0,
             'user_email' =>$input['user_email'],
+        ];
 
+        // dd($data);
 
-            ];
-           $res =   Users::create($data);
+           $res =  Users::create($data);
        // dd($res);
         
         return redirect('home/login');

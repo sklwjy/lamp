@@ -25,20 +25,25 @@ class NewsController extends Controller
     {
 //        $request->all()
 //        $request->all()
-        $news = News::orderBy('news_id','asc')
-            ->where(function($query) use($request){
-                //检测关键字
-                $newsname = $request->input('keywords1');
-                // dd($newsname);
-                //$email = $request->input('keywords2');
-                //如果用户名不为空
-                if(!empty($newsname)) {
-                    $query->where('news_name','like','%'.$newsname.'%');
-                }
+        // $news = News::orderBy('news_id','asc')
+        //     ->where(function($query) use($request){
+        //         //检测关键字
+        //         $newsname = $request->input('keywords1');
+        //         // dd($newsname);
+        //         //$email = $request->input('keywords2');
+        //         //如果用户名不为空
+        //         if(!empty($newsname)) {
+        //             $query->where('news_name','like','%'.$newsname.'%');
+        //         }
 
-            })
-            ->paginate($request->input('num', 2));
-            // dd($news);
+        //     });
+        //     ->paginate($request->input('num', 2));
+        
+
+        $news = (new News())->tree();
+        // dd($news);
+
+            
         return view('admin.news.list',['news'=>$news, 'request'=> $request]);
     }
 
@@ -49,9 +54,10 @@ class NewsController extends Controller
      */
     public function create()
     {
-        //
-        
-        return view('admin/news/add');
+        // 返回一级分类
+        $newsOne = News::where('news_pid', 0)->get();
+        // dd($news);
+        return view('admin/news/add', compact('newsOne'));
     }
 
     /**
@@ -64,7 +70,7 @@ class NewsController extends Controller
     {
         //
         $news = Input::except('_token');
-        // dd($new);
+        // dd($news);
 
         // 表单验证
         $rule = [
@@ -76,7 +82,6 @@ class NewsController extends Controller
 
         $mess = [
             'news_name.required'=>'新闻标题必须填写',
-            // 'news_name.regex'=>'新闻名必须是汉字',
             'news_title.required'=>'新闻标题必须填写',
             'news_content.required'=>'新闻内容必须填写',
             'news_classify.required'=>'新闻分类必须填写',
@@ -94,16 +99,16 @@ class NewsController extends Controller
         // 3执行添加操作
         $news['news_time'] = date('Y-m-d H:i:s');
         // dd($news);
-        // $res = News::create($news);
+        $res = News::create($news);
         
-        $new = new News();
-        $new->news_name = $news['news_name'];
-        $new->news_title = $news['news_title'];
-        $new->news_content = $news['news_content'];
-        $new->news_classify = $news['news_classify'];
-        $new->news_time = $news['news_time'];
-
-        $res = $new->save();
+        // $new = new News();
+        // $new->news_name = $news['news_name'];
+        // $new->news_title = $news['news_title'];
+        // $new->news_content = $news['news_content'];
+        // $new->news_classify = $news['news_classify'];
+        // $new->news_time = $news['news_time'];
+        // $new->news_pid = $news['news_pid'];
+        // $res = $new->save();
 
         if($res){
             return redirect('admin/news')->with('msg', '添加成功');

@@ -19,10 +19,12 @@
 	Route::get('home/sss', 'Home\LoginController@sss');
 	Route::post('home/dologin', 'Home\LoginController@dologin');
 	Route::get('home/register', 'Home\LoginController@register');
+    Route::post('home/doregister', 'Home\LoginController@doregister');
 Route::group(['middleware'=>'homeislogin', 'prefix'=>'home', 'namespace'=>'Home'], function(){
 	Route::get('index', 'IndexController@index');
-	Route::post('doregister', 'LoginController@doregister');
-	Route::resource('message','MessageController');
+    Route::resource('message','MessageController');
+    Route::post('upl','MessageController@upl');
+	Route::post('info','MessageController@info');
 });
 
 
@@ -32,6 +34,7 @@ Route::group(['middleware'=>'homeislogin', 'prefix'=>'home', 'namespace'=>'Home'
 Route::get('admin/login', 'Admin\LoginController@login');
 Route::get('admin/yzm', 'Admin\LoginController@yzm');
 Route::post('admin/dologin', 'Admin\LoginController@dologin');
+
 
 // 定义路由组
 Route::group(['middleware'=>'islogin', 'prefix'=>'admin', 'namespace'=>'Admin'], function(){
@@ -56,13 +59,23 @@ Route::group(['middleware'=>'islogin', 'prefix'=>'admin', 'namespace'=>'Admin'],
     Route::post('config/contentchange','ConfigController@ContentChange');
     // 同步网站配置内容到webconfig 文件中
     Route::get( 'deploy','ConfigController@PutFile');
+
+
+    //    友情链接路由
+    Route::resource('link','LinkController');
+//    Route::post('link/sou','LinkController@index');
+
+
+    // 角色模块路由
+    Route::resource('role', 'RoleController');
+    // 角色授权路由
+    Route::get('role/auth/{id}','RoleController@auth');
+    Route::post('role/doauth','RoleController@doauth');
+
+
+    // 权限模块路由
+    Route::resource('permission', 'PermissionController');
+
+//Route::get('link', 'linkcontroller');
 });
-
-
-
-
-
-
-
-
 
