@@ -28,6 +28,7 @@ class IndexController extends Controller
 //       dd($advertising);
 
     	$order = News::orderBy('news_view', 'desc')->take(4)->get();
+        // dd($order);
 
         return view('home/first/first', compact('navs','news','advertising', 'order'));
     }

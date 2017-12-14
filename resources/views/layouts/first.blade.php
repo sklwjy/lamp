@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('home/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('home/css/style2.css') }}">
     <link rel="stylesheet" href="{{ asset('home/css/style1.css') }}" media="screen" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('/layui/css/layui.css') }}" media="all">
 
 </head>
 <body>
@@ -87,13 +88,14 @@
             <div class="row part_hot" >
                 <div class="col-sm-12">
                     <span class="pull-left" style="padding: 10px;font-size:16px;font-weight: bold;">热门话题</span>
-                    <span class="pull-right" style="padding: 10px;">换话题</span>
+                    
                 </div>
                 <hr style="margin: 0;padding: 0;width: 100%">
                 
                 @foreach($order as $q=>$o)
                 <div class="col-sm-12 item_hot" >
-                    <span class="pull-left">{{$o->news_name}}</span>
+
+                    <span class="pull-left"><a href="{{url('home/info')}}?id={{$o->news_id}}">{{$o->news_name}}</a></span>
                     <span class="pull-right item_num">{{$o->news_view}}次</span>
                 </div>
                 @endforeach

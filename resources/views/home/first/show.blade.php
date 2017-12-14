@@ -107,7 +107,7 @@
 
 
 
-      <div class="col-sm-3 col-xs-12 part_right" >
+      <div class="col-sm-3 col-xs-12 part_right" style="position: fixed;top:0px;right:100px">
             <div class="row text-center inform">
                 <iframe allowtransparency="true" frameborder="0" width="305" height="201" scrolling="no" src="//tianqi.2345.com/plugin/widget/index.htm?s=1&z=1&t=1&v=0&d=2&bd=0&k=&f=&ltf=009944&htf=cc0000&q=1&e=1&a=1&c=54511&w=305&h=201&align=center"></iframe>
             </div>
@@ -116,13 +116,13 @@
             <div class="row part_hot" >
                 <div class="col-sm-12">
                     <span class="pull-left" style="padding: 10px;font-size:16px;font-weight: bold;">热门话题</span>
-                    <span class="pull-right" style="padding: 10px;">换话题</span>
+                    
                 </div>
                 <hr style="margin: 0;padding: 0;width: 100%">
                 
                 @foreach($order as $q=>$o)
                 <div class="col-sm-12 item_hot" >
-                    <span class="pull-left">{{$o->news_name}}</span>
+                    <span class="pull-left"><a href="{{url('home/info')}}?id={{$o->news_id}}">{{$o->news_name}}</a></span>
                     <span class="pull-right item_num">{{$o->news_view}}次</span>
                 </div>
                 @endforeach

@@ -13,7 +13,7 @@
                        @endforeach
                    </div>
                </div>
-               
+
 
 
 
@@ -37,7 +37,7 @@
                     </div>
 
                 </div>
-    @endforeach
+              @endforeach
                 
 
 
