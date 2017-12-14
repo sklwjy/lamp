@@ -42,17 +42,30 @@
                         <th><i class="require">*</i>权限名称：</th>
                         <td>
                             <input type="text" class="lg" name="name" value="">
-                            <p>标题可以写30个字</p>
+                  
                         </td>
                     </tr>
                     <tr>
                         <th><i class="require">*</i>权限描述：</th>
                         <td>
                             <input type="text" class="lg" name="description">
-                            <p>标题可以写30个字</p>
+                  
                         </td>
                     </tr>
-
+                    <tr>
+                        <th><i class="require">*</i>权限组号：</th>
+                        <td>
+                            <input type="text" class="lg" name="group_id">
+                          
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><i class="require">*</i>权限组名：</th>
+                        <td>
+                            <input type="text" class="lg" name="group_name">
+                          
+                        </td>
+                    </tr>
 
                     <tr>
                         <th></th>

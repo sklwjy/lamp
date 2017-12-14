@@ -31,7 +31,7 @@
         <!-- top部分的文字导航 -->
         <div id="topWordMenu">
         	<ul>
-            	<li>已有灵步账号，<a href="">请登录</a></li>
+            	<li>已有灵步账号，<a href="{{ asset('home/login')  }}">请登录</a></li>
                 <li><a href="SBGG.html">随便逛逛</a></li>
                 <li><a href="#">手机</a></li>
                 <li><a href="#">帮助</a></li>
@@ -59,6 +59,10 @@
                </ul>
            </div>
        @endif
+       @if(session('msg'))
+{{--           {{session('msg')}} --}}
+               <div class="alert alert-danger">{{session('msg')}}</div>
+       @endif
        {{csrf_field()}}
      <table width="565" border="0" cellspacing="0" cellpadding="0">
        <tr class="lb">
@@ -83,17 +87,19 @@
          <td class="le"></td>
          <td class="ld"></td>
          <td><input name="checkbox" type="checkbox" id="checkbox"  />
+
            下次自动登陆&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="{{ url('home/forget') }}">忘记密码</a></td>
          <td></td>
-       </tr>
-       <tr>
-         <td class="le"></td>
-         <td class="ld"></td>
-         <td>
 
-           {{--<input name="button" type="submit" class="lc" id="button" value="登  录" />--}}
-             <button class="lc" id="button">登录</button>
-         </td>
+       </tr>
+         <tr>
+             <td class="le"></td>
+             <td class="ld"></td>
+             <td>
+
+                 {{--<input name="button" type="submit" class="lc" id="button" value="登  录" />--}}
+                 <button class="lc" id="button">登录</button>
+             </td>
          <td></td>
        </tr>
      </table>
@@ -109,7 +115,7 @@
             <div class="cs">
            		赶快来注册一个吧
             </div>
-            <div class="ds"><a href="{{ url('home/register' )}}"><img src="{{asset('home/images/anniu.gif')}}" alt="立即注册" width="155" height="48" border="0" title="在这注册" /></a>
+            <div class="ds"><a href="{{ url('phoneregister' )}}"><img src="{{asset('home/images/anniu.gif')}}" alt="立即注册" width="155" height="48" border="0" title="在这注册" /></a>
             </div>
    	</div>
   </div>

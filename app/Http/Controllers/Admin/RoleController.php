@@ -149,6 +149,8 @@ class RoleController extends Controller
         $role = new Role();
         $role->name = $input['name'];
         $role->description = $input['description'];
+        $role->group_id = $input['group_id'];
+        $role->group_name = $input['group_name'];
 
         $res = $role->save();
 

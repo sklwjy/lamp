@@ -79,5 +79,11 @@ class IndexController extends Controller
     	
     }
 
+    // 瀑布流
+    public function pbl()
+    {
+        return 111;
+    }
+
     
 }

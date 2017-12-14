@@ -60,6 +60,17 @@
 
                 </table>
 
+    <style type="text/css">
+        /*表格固定布局*/
+        table{table-layout: fixed;word-break: break-all; word-wrap: break-word; }
+        .award-name{-o-text-overflow:ellipsis;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;width:100%; //超出部分显示省略号}
+        .award-name:hover {
+            text-overflow:inherit;
+            overflow: visible;
+            white-space: pre-line;
+        }
+        /*超出表格部分隐藏鼠标移动上去时显示*/
+    </style>
 
             </div>
         </div>

@@ -57,7 +57,12 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+
+
+        'from' => ['address' => '15024919495@163.com', 'name' => '小华仔'],
+
         'name' => env('MAIL_FROM_NAME', '微博官方'),
+
     ],
 
     /*

@@ -16,6 +16,7 @@ class PermissionController extends Controller
     public function index()
     {
         $permissions = Permission::get();
+       
        return view('admin/permission/list', compact('permissions'));
     }
 
@@ -73,7 +74,7 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-        //
+        return 111;
     }
 
     /**
@@ -96,6 +97,6 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return 111;
     }
 }

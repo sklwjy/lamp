@@ -23,16 +23,16 @@ class HasRole
 
         // 2 获取当前用户拥有的权限
         // 2.1 获取当前用户
-        $uid = session('user');
+        $uid = session('user')->admin_id;
         // dd($uid);
 
-        // $user = User::find($uid);
-         // dd($uid);
+        $user = User::find($uid);
+         // dd($user);
 
         // $roles = User::find(1)->roles()->get();
 
         // 2.2 获取当前用户拥有的角色
-        $roles = $uid->role;
+        $roles = $user->role;
         // dd($roles);
         
         // 定义一个数组,存放用户拥有的所有权限
@@ -41,6 +41,7 @@ class HasRole
         foreach($roles as $k=>$v){
             // 根据角色找到相关权限的数组
            $permission = $v->permission;
+           // dd($permission);
 
            // 把每个角色下的权限全部拿出来
            foreach($permission as $m=>$n){
@@ -73,6 +74,8 @@ class HasRole
 
         // 如果当前请求对应的方法在用户拥有的权限中,就放行,如果不在就表示没有权限
         if(in_array($controller[0], $arr)){
+            return $next($request);
+        }else if(in_array($route, $arr)){
             return $next($request);
         }else{
             return redirect('errors/auth');

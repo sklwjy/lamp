@@ -14,7 +14,8 @@ class MessageController extends Controller
      */
     public function index()
     {
-        return view( 'home/mywb');
+//        return 11;
+        return view( 'home/MyWB');
     }
 
     /**

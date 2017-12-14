@@ -45,7 +45,7 @@
                     <a  href="{{url('home/index')}}"><i class="glyphicon glyphicon-home">首页</i>
                         </a>
                 </li>
-                <li ><a href="{{url('home/login')}}"><i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;请登录</a></li>
+                <li ><a href="{{url('emailregister')}}"><i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;请登录</a></li>
                 
                     
                 </li>
@@ -78,7 +78,7 @@
      @show
 
     
-      <div class="col-sm-3 col-xs-12 part_right" >
+      <div class="col-sm-3 col-xs-12 part_right" style="position: fixed;top:0px;right:100px">
             <div class="row text-center inform">
                 <iframe allowtransparency="true" frameborder="0" width="305" height="201" scrolling="no" src="//tianqi.2345.com/plugin/widget/index.htm?s=1&z=1&t=1&v=0&d=2&bd=0&k=&f=&ltf=009944&htf=cc0000&q=1&e=1&a=1&c=54511&w=305&h=201&align=center"></iframe>
             </div>
