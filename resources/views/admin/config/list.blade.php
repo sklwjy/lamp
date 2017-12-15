@@ -122,6 +122,26 @@
 
             });
         }
+
+        //排序
+        function changeOrder(obj,conf_id){
+            //获取当前需要排序的记录的ID,cate_id
+            //获取当前记录的排序文本框中的值
+            var cate_order = $(obj).val();
+$.post("{{url('admin/config/changeorder')}}",{'_token':"{{csrf_token()}}","cate_id":conf_id,"conf_order":cate_order},function(data){
+                //如果排序成功，提示排序成功
+                if(data.status == 0){
+
+                    layer.msg(data.msg,{icon: 6});
+                    location.href = location.href;
+                }else{
+                    //如果排序失败，提示排序失败
+                    layer.msg(data.msg,{icon: 5});
+                    location.href = location.href;
+                }
+            })
+
+        }
         
 
 

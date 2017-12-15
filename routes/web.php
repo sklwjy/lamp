@@ -73,6 +73,8 @@ Route::group(['middleware'=>'homeislogin', 'prefix'=>'home', 'namespace'=>'Home'
 	
 	// 主页信息页面
 	Route::resource('message','MessageController');
+	Route::post('upl','MessageController@upl');
+
 
 });
 
@@ -94,10 +96,29 @@ Route::group(['middleware'=>'homeislogin', 'prefix'=>'home', 'namespace'=>'Home'
 
 
 // 定义路由组
-        Route::group(['middleware'=>['islogin', 'hasrole'], 'prefix'=>'admin', 'namespace'=>'Admin'], function(){
-            // 加入后台主页的路由
-            Route::get('index', 'IndexController@index');
-            Route::get('info', 'IndexController@info');
+
+Route::group(['middleware'=>['islogin', 'hasrole'], 'prefix'=>'admin', 'namespace'=>'Admin'], function(){
+	// 加入后台主页的路由
+	Route::get('index', 'IndexController@index');
+	Route::get('info', 'IndexController@info');
+	// 退出登陆
+	Route::get('logout', 'IndexController@logout');
+	Route::get('welcome', 'IndexController@welcome');
+
+	// 用户模块路由
+	Route::resource('user', 'UserController');
+
+	// 新闻模块路由
+	Route::resource('news', 'NewsController');
+	// 新闻模块上传文件(图片)路由
+	Route::post('upload', 'NewsController@upload');
+
+	// 网站配置模块路由
+	Route::resource('config', 'ConfigController');
+	// 批量修改配置路由
+    Route::post('config/contentchange','ConfigController@ContentChange');
+    // 同步网站配置内容到webconfig 文件中
+    Route::get( 'deploy','ConfigController@PutFile');
 
 
             // 退出登陆

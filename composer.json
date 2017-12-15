@@ -9,7 +9,8 @@
         "gregwar/captcha": "^1.1",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
-        "overtrue/laravel-filesystem-qiniu": "^1.0"
+        "overtrue/laravel-filesystem-qiniu": "^1.0",
+        "predis/predis": "^1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
