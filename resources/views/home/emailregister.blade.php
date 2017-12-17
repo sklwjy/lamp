@@ -98,6 +98,15 @@
                         {{--</td>--}}
                     {{--</tr>--}}
                     <tr>
+                     <td class="le"></td>
+                     <td class="ld"></td>
+                     <td><input name="checkbox" type="hidden" id="checkbox"  />
+                        
+                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="{{ url('home/forget') }}">忘记密码</a></td>
+                     <td></td>
+
+                   </tr>
+                    <tr>
                         <td class="le"></td>
                         <td class="ld"></td>
                         <td>

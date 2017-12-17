@@ -93,9 +93,10 @@
                         <td class="ld">验证码</td>
                         <td class="if">
                             <input name="code" type="text" class="la" style="width: 80px" id="user_password" />&nbsp;&nbsp;&nbsp;
-                            <a href="javascript:;" id="dd" onclick="sendcode();">发送验证码</a>
+                            <a id="dd" href="javascript:;" id="dd" onclick="sendcode();">发送验证码</a>
                         </td>
                     </tr>
+                    
 
                     <tr>
                         <td class="le"></td>
@@ -111,6 +112,8 @@
             </form>
             <!--页面左部表单结束-->
         </div>
+          
+
         <script type="text/javascript">
 //            function SetRemainTime() {
 //
@@ -118,25 +121,27 @@
 //            var InterValObj; //timer变量，控制时间
 //            var count = 5; //间隔函数，1秒执行
 //            var curCount;//当前剩余秒数
-                        function sendcode(){
-//                            if (curCount == 0) {
-//                                window.clearInterval(InterValObj);//停止计时器
-//                                $("#dd").removeAttr("disabled");//启用按钮
-//                                $("#dd").val("重新发送验证码");
-//                            }
-//                            else {
-//                                curCount--;
-//                                $("#dd").val("请在" + curCount + "秒内输入验证码");
-//                            }
-//                var d = 60;
-//                var i = setTimeout(function(){
-//                    var d = $("#dd").html();
-//                    --d;
-//                    $('#dd').html(d);
-//                }, 1000);
-//                if(d == 0){
-//                    clearInterval(i);
-//                }
+            function sendcode(){
+                // if (curCount == 0) {
+                //     window.clearInterval(InterValObj);//停止计时器
+                //     $("#dd").removeAttr("disabled");//启用按钮
+                //     $("#dd").val("重新发送验证码");
+                // }else {
+                //     curCount--;
+                //     $("#dd").val("请在" + curCount + "秒内输入验证码");
+                // }
+               $("#dd").html(60)
+               // var d = 60;
+               var i = setInterval(function(){
+                   var d = $("#dd").html();
+                   --d;
+                   $('#dd').html(d);
+                   if(d == 0){
+                    clearInterval(i);
+                    $("#dd").html('重新发送验证码');
+                    }
+               }, 1000);
+              
 //		    1. 获取要发送的手机号
                 $phone = $('[name="user_phone"]').val();
                alert($phone);
@@ -156,8 +161,6 @@
                     });
 
             }
-
-            //			2. 向服务器的发送短信的接口发送ajax请求
         </script>
         <!-- 页面右部 -->
         <div id="right">

@@ -12,43 +12,53 @@
 */
 
 
-//注册模块,发送短信和邮件
-Route::get('phoneregister','RegisterController@PhoneRegister');
-Route::post('sendcode','RegisterController@sendCode');
-Route::post('phoneregister','RegisterController@doPhoneRegister');
+// 前台路由
 
-//使用邮箱注册的路由
-Route::get('emailregister','RegisterController@EmailRegister');
-Route::post('emailregister','RegisterController@doEmailRegister');
-//邮件注册激活路由
-Route::get('active','RegisterController@active');
+	//注册模块,发送短信和邮件
+	Route::get('phoneregister','RegisterController@PhoneRegister');
+	Route::post('sendcode','RegisterController@sendCode');
+	Route::post('phoneregister','RegisterController@doPhoneRegister');
 
-
+<<<<<<< HEAD
 //个人信息路由
 //Route::get('account','Home\AccountController@account');
 //Route::post('account','Home\AccountController@doaccount');
+=======
+	//使用邮箱注册的路由
+	Route::get('emailregister','RegisterController@EmailRegister');
+	Route::post('emailregister','RegisterController@doEmailRegister');
+	//邮件注册激活路由
+	Route::get('active','RegisterController@active');
+>>>>>>> origin
 
 
+	//个人信息路由
+	Route::get('account','Home\AccountController@account');
+	Route::post('account','Home\AccountController@doaccount');
 
-// 前台路由
+	// 退出登陆路由
+	Route::get('home/outlogin','RegisterController@outlogin');
 	
+
+
 	// 前台登录路由
+<<<<<<< HEAD
 //	Route::get('home/login','Home\LoginController@login');
 //	Route::post('home/dologin', 'Home\LoginController@dologin');
 	Route::get('home/yzm', 'Home\LoginController@yzm');
+=======
+	// Route::get('home/login','Home\LoginController@login');
+	// Route::post('home/dologin', 'Home\LoginController@dologin');
+	// Route::get('home/yzm', 'Home\LoginController@yzm');
+>>>>>>> origin
 
-	// 退出登陆路由
-	Route::get('home/outlogin','Home\LoginController@outlogin');
+
 	
-
-	Route::get('home/sss', 'Home\LoginController@sss');
 	
 
 	// 前台注册路由
 	Route::get('home/register', 'Home\LoginController@register');
-
     Route::post('home/doregister', 'LoginController@doregister');
-
     Route::post('home/doregister', 'Home\LoginController@doregister');
 
 Route::post('home/asount','AccountController@update');
@@ -65,7 +75,10 @@ Route::post('home/asount','AccountController@update');
 
 	// 前台主页面(未登录)
 	Route::get('home/index', 'Home\IndexController@index');
+	Route::get('home/list', 'Home\IndexController@list');
+	Route::get('home/info', 'Home\IndexController@info');
 
+<<<<<<< HEAD
     Route::get('home/account','Home\AccountController@edit');
     Route::post('home/account','Home\AccountController@update');
     Route::post('home/file','Home\AccountController@file');
@@ -84,8 +97,19 @@ Route::post('home/asount','AccountController@update');
 
 	// 微博详情页面
 	Route::get('info','MessageController@info');
-
+=======
+	// 瀑布流效果
+	Route::post('home/pbl', 'Home\IndexController@pbl');
+    
+Route::group(['middleware'=>'homeislogin', 'prefix'=>'home', 'namespace'=>'Home'], function(){
+	// 修改密码
+	Route::get('message/password', 'MessageController@password');
 	
+	// 主页信息页面
+	Route::resource('message','MessageController');
+	Route::post('upl','MessageController@upl');
+>>>>>>> origin
+
 
 });
 
@@ -115,10 +139,29 @@ Route::post('home/asount','AccountController@update');
 
 
 // 定义路由组
-        Route::group(['middleware'=>['islogin', 'hasrole'], 'prefix'=>'admin', 'namespace'=>'Admin'], function(){
-            // 加入后台主页的路由
-            Route::get('index', 'IndexController@index');
-            Route::get('info', 'IndexController@info');
+
+Route::group(['middleware'=>['islogin', 'hasrole'], 'prefix'=>'admin', 'namespace'=>'Admin'], function(){
+	// 加入后台主页的路由
+	Route::get('index', 'IndexController@index');
+	Route::get('info', 'IndexController@info');
+	// 退出登陆
+	Route::get('logout', 'IndexController@logout');
+	Route::get('welcome', 'IndexController@welcome');
+
+	// 用户模块路由
+	Route::resource('user', 'UserController');
+
+	// 新闻模块路由
+	Route::resource('news', 'NewsController');
+	// 新闻模块上传文件(图片)路由
+	Route::post('upload', 'NewsController@upload');
+
+	// 网站配置模块路由
+	Route::resource('config', 'ConfigController');
+	// 批量修改配置路由
+    Route::post('config/contentchange','ConfigController@ContentChange');
+    // 同步网站配置内容到webconfig 文件中
+    Route::get( 'deploy','ConfigController@PutFile');
 
 
             // 退出登陆

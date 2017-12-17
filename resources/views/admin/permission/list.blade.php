@@ -51,7 +51,7 @@
                         <td class="tc">{{$v->name}}</td>
                         <td class="tc">{{$v->description}}</td>
                         <td>
-                            <a href="{{url('admin/role/'.$v->id.'/edit')}}">修改</a>
+                            <a href="{{url('admin/permission/'.$v->id.'/edit')}}">修改</a>
                             <a href="javascript:;" onclick="userDel({{$v->id}})">删除</a>
                         </td>
                     </tr>
@@ -76,7 +76,7 @@
 //                如果用户发出删除请求，应该使用ajax向服务器发送删除请求
 //                $.get("请求服务器的路径","携带的参数", 获取执行成功后的额返回数据);
                 //admin/user/1
-                $.post("{{url('admin/user')}}/"+id,{"_method":"delete","_token":"{{csrf_token()}}"},function(data){
+                $.post("{{url('admin/permission')}}/"+id,{"_method":"delete","_token":"{{csrf_token()}}"},function(data){
                     //alert(data);
 //                    data是json格式的字符串，在js中如何将一个json字符串变成json对象
                    //var res =  JSON.parse(data);

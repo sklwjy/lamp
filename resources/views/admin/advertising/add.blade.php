@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 @section('title')
-    <title>后台用户添加页面</title>
+    <title>轮播图添加页面</title>
 @endsection
 @section('body')
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">广告管理</a> &raquo;
+        <i class="fa fa-home"></i> <a href="#"></a> &raquo; <a href="#"></a> &raquo;
     </div>
     <!--面包屑导航 结束-->
 
@@ -51,7 +51,7 @@
                 <tbody>
                     <tr>
                         {{csrf_field()}}
-                        <th><i class="require">*</i>广告名称：</th>
+                        <th><i class="require">*</i>名称：</th>
                         <td>
                             <input type="text" class="lg" name="advertising_name" value="{{old('advertising_name')}}">
                             <p>标题可以写30个字</p>
@@ -59,7 +59,7 @@
                     </tr>
                     <tr>
                         {{csrf_field()}}
-                        <th><i class="require">*</i>广告地址：</th>
+                        <th><i class="require">*</i>地址：</th>
                         <td>
                             <input type="text" class="lg" name="advertising_url" value="{{old('advertising_url')}}">
                             <p>标题可以写30个字</p>

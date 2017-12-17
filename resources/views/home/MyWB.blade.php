@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('home/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('home/css/style2.css') }}">
     <link rel="stylesheet" href="{{ asset('home/css/style1.css') }}" media="screen" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('home/css/style3.css') }}">
 
 </head>
 <body>
@@ -42,10 +43,14 @@
             <ul class="nav navbar-nav navbar-right" >
 
                 <li>
-                    <a  href="{{url('home/message')}}"><i class="glyphicon glyphicon-home">首页</i>
-                        </a>
+                    <a  href="#"><i class="glyphicon glyphicon-home"></i>
+                        首页</a>
                 </li>
+<<<<<<< HEAD
                 <li ><a href="{{ asset('home/account')  }}"><i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;{{session('users.user_name')}}</a></li>
+=======
+                <li ><a href="#"><i class="glyphicon glyphicon-user"></i>{{ session('users.user_name') }}</a></li>
+>>>>>>> origin
                 <li>
                     <a data-ga="" data-ga-action="click" data-ga-category="Header Navigation " data-ga-title="Pricing" href="">
                         <i class="glyphicon glyphicon-envelope"></i>
@@ -57,7 +62,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="#">账号设置</a></li>
-                        <li><a href="{{url('home/outlogin')}}">退出</a></li>
+                        <li><a href="#">退出</a></li>
 
                     </ul>
                 </li>
@@ -99,28 +104,81 @@
         </div>
     
 
- `     <!--  发表微博开始 -->
-        <div class="col-sm-6 col-xs-12 my_edit" id="weibo" >
+       <!--  微博显示区 -->
+        <div class="col-sm-6 col-xs-12 my_edit" id="weibo">
             <div class="row" id="edit_form" >
-                <span class="pull-left" style="margin:15px;">编写新鲜事</span>
+                <span class="home/message"pull-left" style="margin:10px;font-size:18px;">编写新鲜事</span>
                 <span class="tips pull-right" style="margin:15px;"></span>
-                <form action="{{ url('home/message') }}" mothod="post" role="form" style="margin-top: 50px;" enctype="multipart/form-data">
-                    {{ csrf_field() }}
+    <form id="messages_form"  action="{{ url('home/message') }}" mothod="post" style="margin-top: 30px;" enctype="multipart/form-data">
+        {{ csrf_field() }}
                     <div class="form-group">
                         <div class="col-sm-12">
-
                             <div contentEditable="true" id="content" class="form-control " ></div>
                         </div>
+
                         <div class="col-sm-12" style="margin-top: 12px;">
                             <span class="emoji" >表情</span>
 
-                            <span class="pic" >图片</span>
-                            <span>
-							    		<input type="file" name="up"  class="select_Img" style="display: none" >
-							    	    <img class="preview" src="">
+                            <span id="picture"  ><input type="file"  id="file_upload" name="file_upload" multiple="true" />图片</span>
+                            <input type="hidden" id="message_thumb" name="message_thumb">
+                            <span id="pict">
+                                <img src="" id="image" alt="" style="width:50px;height:50px">
                             </span>
+                            <script src="{{ asset('home/js/jquery-3.1.0.js') }}"></script>
+                            <script type="text/javascript">
+                                $(function () {
+                                    $("#file_upload").change(function () {
+                                        $('#image').show();
+                                        uploadImage();
+                                    });
+                                });
+                                function uploadImage() {
+                                    // 判断是否有选择上传文件
+                                    var imgPath = $("#file_upload").val();
 
+                                    if (imgPath == "") {
+                                        alert("请选择上传图片！");
+                                        return;
+                                    }
+                                    //判断上传文件的后缀名
+                                    var strExtension = imgPath.substr(imgPath.lastIndexOf('.') + 1);
 
+                                    if (strExtension != 'jpeg' && strExtension != 'gif'
+                                        && strExtension != 'png' && strExtension != 'bmp' && strExtension != 'jpg') {
+                                        alert("请选择图片文件");
+                                        return;
+                                    }
+
+                                    // var formData = new FormData($('#art_form')[0]); // 这里必须是以数组的形式传过去的
+                                    var formData = new FormData();
+
+                                    formData.append('file_upload', $('#file_upload')[0].files[0]);
+                                    formData.append('_token',"{{csrf_token()}}");
+
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "/home/upl",
+                                        data: formData,
+                                        async: true,
+                                        cache: false,
+                                        contentType: false,
+                                        processData: false,
+                                        success: function(data) {
+                                            $('#image').attr('src','/uploads/'+data);
+//                                             $('#img1').attr('src', 'http://p0dwlzk2l.bkt.clouddn.com/uploads/'+data);
+                                            $('#image').show();
+                                            $('#message_thumb').val('/uploads/'+data);
+                                        },
+                                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                            alert("上传失败，请检查网络后重试");
+                                        }
+                                    });
+
+                                }
+                            </script>
+                            <span>
+                                <input type="hidden" idname="{{ session( 'users.user_id ') }}" >
+                            </span>
                             <div class="myEmoji" >
                                 <ul id="myTab" class="nav nav-tabs">
                                     <li class="active">
@@ -143,62 +201,55 @@
                                 </div>
                             </div>
                              {{--<span> <input type="file" id="selectImg" value=""></input> </span>--}}
-                            <button type="button" id="send" class="btn btn-default pull-right">发布</button>
+                            <button type="button" id="send" class="btn btn-default pull-right" >发布</button>
                         </div>
                     </div>
-                </form>
+    </form>
             </div>
-            <!-- 发表微博结束 -->
-            
-           
-
-      <!--  微博显示区 -->
+            <!-- 微博显示区结束 -->
             <div class="row item_msg" >
-                <div class="col-sm-12 col-xs-12 message" onclick="info()">
+                @foreach($messages as $k=>$v)
+                <div class="col-sm-12 col-xs-12 message" >
                     <img src="{{ asset('home/images/mywb/icon.png') }}" class="col-sm-2 col-xs-2" style="border-radius: 50%">
-                    <div class="col-sm-10 col-xs-10">
-                        <span style="font-weight: bold;">{{session('users.user_name')}}</span>
+                    <div class="col-sm-9 col-xs-9">
+                        <span style="font-weight: bold;">{{ session('users.user_name') }}</span>
                         <br>
-                        <small class="date" style="color:#999">1分钟前</small>
-                        <div class="msg_content">happy day!
-                            <img class="mypic" src="{{ asset('home/images/mywb/bg_1.jpg') }}" >
+                        <small class="date" style="color:#999">{{ $v['messages_time'] }}</small>
+                        <div class="msg_content">{!! $v['messages_content'] !!}
+                            @if( !$v['messages_picture'] == '')
+                                <img class="mypic" src="{{ asset($v['messages_picture']) }}" >
+                             @endif
                         </div>
-<ul class="WB_row_line WB_row_r4 clearfix S_line2">
-                                    <li>
-                        <a class="S_txt2" suda-uatrack="key=profile_feed&amp;value=collect_guest" href="javascript:void(0);" diss-data="fuid=6294417401" action-type="login"><span class="pos"><span class="line S_line1" node-type="favorite_btn_text"><span><em class="W_ficon ficon_favorite S_ficon">û</em><em>收藏</em></span></span></span></a>
-                    </li>
-                                                    <li>
-                        <a action-data="allowForward=1&amp;url=https://weibo.com/6294417401/FyqUw0oLU&amp;mid=4182066000095226&amp;name=老婆孩子在天堂&amp;uid=6294417401&amp;domain=6294417401&amp;pid=006RYJvjly1fm7cpd3incj30zk0qo152" action-type="fl_forward" action-history="rec=1" href="javascript:void(0);" class="S_txt2" suda-uatrack="key=profile_feed&amp;value=transfer"><span class="pos"><span class="line S_line1" node-type="forward_btn_text"><span><em class="W_ficon ficon_forward S_ficon"></em><em>19997</em></span></span></span></a>
-                        <span class="arrow"><span class="W_arrow_bor W_arrow_bor_t"><i class="S_line1"></i><em class="S_bg1_br"></em></span></span>
-                    </li>
-                                <li class=" curr">
-                                            <a href="javascript:void(0);" class="S_txt2" action-type="fl_comment" action-data="ouid=6294417401&amp;location=&amp;comment_type=0" suda-uatrack="key=profile_feed&amp;value=comment:4182066000095226"><span class="pos"><span class="line S_line1" node-type="comment_btn_text"><span><em class="W_ficon ficon_repeat S_ficon"></em><em>13308</em></span></span></span></a>
-                                        <span class="arrow"><span class="W_arrow_bor W_arrow_bor_t"><i class="S_line1"></i><em class="S_bg1_br"></em></span></span>
-                </li>
-                <li>
-                    <!--cuslike用于前端判断是否显示个性赞，1:显示-->
-                    <a href="javascript:void(0);" class="S_txt2" action-type="login" action-data="version=mini&amp;qid=heart&amp;mid=4182066000095226&amp;loc=profile&amp;cuslike=1" title="赞" suda-uatrack="key=profile_feed&amp;value=like"><span class="pos"><span class="line S_line1">
-                                                                                                                                                                                                                                <span node-type="like_status" class=""><em class="W_ficon ficon_praised S_txt2">ñ</em><em>84303</em></span>                        </span></span></a>
-                    <span class="arrow"><span class="W_arrow_bor W_arrow_bor_t"><i class="S_line1"></i><em class="S_bg1_br"></em></span></span>
-                </li>
-            </ul>
-
+                    <ul class="WB_row_line WB_row_r4 clearfix S_line2">
+                        <li>
+                            <a class="S_txt2" suda-uatrack="key=profile_feed&amp;value=collect_guest" href="javascript:void(0);"><span class="pos"><span class="line  " ><span><em class="W_ficon ficon_favorite S_ficon">û</em><em>收藏</em></span></span></span></a>
+                         </li>
+                         <li>
+                            <a href="javascript:void(0);" class="S_txt2" ><span class="pos"><span class="line  "><span><em class="W_ficon ficon_forward S_ficon"></em><em>0</em></span></span></span></a>
+                        </li>
+                        <li class=" curr">
+                            <a href="javascript:void(0);" class="S_txt2"><span class="pos"><span class="line  "><span><em class="W_ficon ficon_repeat S_ficon"></em><em>0</em></span></span></span></a>
+                        </li>
+                        <li>
+                            <!--cuslike用于前端判断是否显示个性赞，1:显示-->
+                            <a href="javascript:void(0);" class="S_txt2"  title="赞" ><span class="pos"><span class="line  ">
+                                <span class=""><em class="W_ficon ficon_praised S_txt2">ñ</em><em>0</em></span>
+                         </li>
+                    </ul>
                     </div>
-
+                    <div>
+                            <span><a href="javascript:;" onclick="delmessage( {{ $v['messages_id'] }} )"><i class="glyphicon glyphicon-trash"></i> 删除</a></span>
+                    </div>
                 </div>
-
-
+                @endforeach
             </div>
-
-
-
         </div>
 
 
         <div class="col-sm-3 col-xs-12 part_right" >
             <div class="row text-center inform">
                 <img src="{{ asset('home/images/mywb/icon.png') }}" >
-                <h4 style="font-weight: bold;">{{session('users.user_name')}}</h4>
+                <h4 style="font-weight: bold;">{{ session('users.user_name') }}</h4>
                 <div class="col-sm-12 my_inform" >
                     <div class="col-sm-4 col-xs-4">
                         <div>111</div>
@@ -259,16 +310,55 @@
 
 
 </div>
-<script src="{{ asset('home/js/jquery-3.1.0.js') }}"></script>
 <script src="{{ asset('home/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{asset('layer/layer.js')}}"></script>
 <script type="text/javascript">
-
-
-    function info()
-    {
-        window.location.href="{{url('home/info')}}";
-    }
-
+    //  获取div 中的内容
+         $("#send").on('click',function(){
+             var content = $("#content").html();
+             var p = $("#message_thumb").val();
+             var mydate = new Date(); // 获取年
+             var y = mydate.getFullYear();  // 获取月
+             var m = mydate.getMonth()+1;   // 获取日
+             var d = mydate.getDate();      // 获取小时
+             var h = mydate.getHours();     // 获取分钟
+             var mm = mydate.getMinutes();  // 获取秒
+             var s = mydate.getSeconds();
+             if(h<10)
+             {
+                 h = '0' + h;
+             }
+             if(mm < 10)
+             {
+                 mm = '0' + mm;
+             }
+             if(s < 10)
+             {
+                 s = '0' + s;
+             }
+             var str = y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + s;
+             $.ajax({
+                type:"POST",
+                url:'{{ url ("home/message") }}',
+                data:{ "_token":"{{ csrf_token() }}","messages_content":content,"messages_picture":p,"messages_time":str,"user_id":{{ session ('users.user_id')}} },
+                success:function(data){
+//                    alert(data);
+                    console.log(data);
+                    if(data.error == 0){
+                        //console.log("错误号"+res.error);
+                        //console.log("错误信息"+res.msg);
+                        layer.msg(data.msg, {icon: 5});
+                       location.href = location.href;
+                        var t =setTimeout("location.href = location.href;",1000);
+                    }else{
+                        layer.msg(data.msg, {icon: 6});
+                        var t =setTimeout("location.href = location.href;",1000);
+                        location.href = location.href;
+                    }
+             }
+             });
+             $("#content").html()="";
+         });
 
     $(function(){
 
@@ -289,56 +379,11 @@
             }
         });
 
-
         $(".pic").click(function(){
 
             $(".select_Img").click();
-
-
         })
 
-        // 	function confirm(){
-
-        // 		var r= new FileReader();
-        // f=$(".select_Img").files[0];
-        // r.readAsDataURL(f);
-        // r.onload=function(e) {
-        // 	$(".preview").src=this.result;
-
-        // };
-        // 	}
-
-        //点击按钮发送内容
-        $("#send").click(function(){
-
-            // var myDate = new Date();
-
-               //var min = myDate.getMinutes();
-
-              // var time = min-(min-1);
-
-               //alert(time);
-
-            var content=$("#content").html();
-
-            //判断选择的是否是图片格式
-            var imgPath = $(".imgPath").text();
-            var start  = imgPath.lastIndexOf(".");
-            var postfix = imgPath.substring(start,imgPath.length).toUpperCase();
-
-
-            if(imgPath!=""){
-
-                if(postfix!=".PNG"&&postfix!=".JPG"&&postfix!=".GIF"&&postfix!=".JPEG"){
-                    alert("图片格式需为png,gif,jpeg,jpg格式");
-                }else{
-                    $(".item_msg").append("<div class='col-sm-12 col-xs-12 message' > <img src="+"{{ asset('home/images/mywb/icon.png') }} class='col-sm-2 col-xs-2' style='border-radius: 50%'><div class='col-sm-10 col-xs-10'><span style='font-weight: bold;''>Jack.C</span> <br><small class='date' style='color:#999'>刚刚</small><div class='msg_content'>"+content+"<img class='mypic' onerror='this.src='img/bg_1.jpg' src='file:///"+imgPath+"' ></div></div></div>");
-                }
-            }else{
-                $(".item_msg").append("<div class='col-sm-12 col-xs-12 message' > <img src="+"{{ asset('home/images/mywb/icon.png') }} class='col-sm-2 col-xs-2' style='border-radius: 50%'><div class='col-sm-10 col-xs-10'><span style='font-weight: bold;''>Jack.C</span> <br><small class='date' style='color:#999'>刚刚</small><div class='msg_content'>"+content+"</div></div></div>");
-            }
-
-        });
 
         //添加表情包1
         for (var i = 1; i < 60; i++) {
@@ -367,14 +412,11 @@
 
 
         });
-
         //将表情添加到输入框
         $(".myEmoji img").each(function(){
             $(this).click(function(){
                 var url = $(this)[0].src;
-
-                $('#content').append("<img src='"+url+"' style='width:25px;height:25px' >");
-
+                $('#content').append("<img src='"+ url +"' style='width:25px;height:25px' >");
                 $("#send").removeClass("disabled");
             })
         })
@@ -391,6 +433,37 @@
             }
         });
     });
+    function delmessage(id) {
+        //询问框
+        layer.confirm('您确认删除吗？', {
+            btn: ['确认','取消'] //按钮
+        }, function(){
+//                如果用户发出删除请求，应该使用ajax向服务器发送删除请求
+//                $.get("请求服务器的路径","携带的参数", 获取执行成功后的额返回数据);
+            //admin/user/1
+            $.post("{{ url('home/message')}}/"+id,{"_method":"delete","_token":"{{ csrf_token() }}"},function(data){
+//                    alert(data);
+//                    data是json格式的字符串，在js中如何将一个json字符串变成json对象
+                //var res =  JSON.parse(data);
+//                    删除成功
+                if(data.error == 0){
+                    //console.log("错误号"+res.error);
+                    //console.log("错误信息"+res.msg);
+                    layer.msg(data.msg, {icon: 6});
+//                       location.href = location.href;
+                    var t=setTimeout("location.href = location.href;",1000);
+                }else{
+                    layer.msg(data.msg, {icon: 5});
+
+                    var t=setTimeout("location.href = location.href;",1000);
+                    //location.href = location.href;
+                }
+
+            });
+        }, function(){
+
+        });
+    }
 </script>
 </body>
 </html>

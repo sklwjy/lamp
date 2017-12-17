@@ -97,7 +97,7 @@ class NewsController extends Controller
 
 
         // 3执行添加操作
-        $news['news_time'] = date('Y-m-d H:i:s');
+        $news['news_time'] = time();
         // dd($news);
         $res = News::create($news);
         

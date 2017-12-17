@@ -35,7 +35,10 @@ class ConfigController extends Controller
     public function ContentChange(Request $request)
     {
         $input =  $request -> all();
-        // dd($input);
+
+
+//        dd($input);
+
  //  根据conf_id数组获 取要修改的网站配置记录，然后从conf_content的同下标中取出此网站配置记录要修改成的值
        foreach($input['conf_id'] as $k=> $v)
        {
@@ -236,5 +239,32 @@ class ConfigController extends Controller
 //        return  json_encode($data);
 
         return $data;;
+    }
+
+    public function changeOrder(Request $request)
+    {
+//        修改要排序的那条记录的cate_order字段为用户指定的值
+        //要修改的那条记录
+        $conf_id = $request->input('conf_id');
+
+        //要修改的值
+        $conf_order = $request->input('conf_order');
+
+        $cate = Config::find($conf_id);
+        $res = $cate->update(['conf_order'=>$conf_order]);
+
+        if($res){
+            $data =[
+                'status'=> 0,
+                'msg'=>'修改成功'
+            ];
+        }else{
+            $data =[
+                'status'=> 1,
+                'msg'=>'修改失败'
+            ];
+        }
+
+        return $data;
     }
 }

@@ -190,6 +190,11 @@ class RegisterController extends Controller
     }
 
 
+
+
+
+
+
     /**
      * 邮箱手机登录用户
      *
@@ -298,60 +303,13 @@ class RegisterController extends Controller
 
     }
 
-    //找回密码的页面
-//    public function forget()
-//    {
-//        return view ('home.forget');
-//    }
-//
-//    //发送找回密码的邮件
-//    public function doforget(Request $request)
-//    {
-//        //要发送的邮箱
-//        $email = $request['user_email'];
-////        dd($email);
-//        //根据邮箱获取收件人信息
-//        $res = Users::where('user_email',$email) ->first();
-//        //dd($res);
-//        Mail::send('email.forget',['user' => $res],function ($m) use ($res){
-//            $m->to($res->user_email, $res->user_name)->subject('微博密码找回!');
-//        });
-//        return '修改密码邮件已经发送成功，请登录邮箱修改您的密码';
-//    }
-//        //重置密码页面
-//    public function reset(Request $request)
-//    {
-//        //根据uid获取要修改的密码的用户,根据key确定链接的有效性
-//        $user = Users::find($request['uid']);
-//
-//        $user_name = $user -> user_name;
-//        dd($user_name);
-//        if ($request['key'] != $user ->token){
-//            return '无效的的链接';
-//        }
-//
-//        //如果有效，就返回修改密码的界面
-//        return view('home.reset',compact('user_name'));
-//    }
-//
-//
-//    //重置密码
-//    public function doreset(Request $request)
-//    {
-//        //dd($request);
-//        //1.找到要重置密码的用户
-//        $user = Users::where('user_email',$request['user_email']) -> first();
-//       // dd($user);
-//        //2.将用户的密码修改为传过来的密码
-//        $pass = Hash::make($request['user_password']);
-//        //dd($pass);
-//        $res = $user -> update(['user_password' => $pass]);
-//      //  dd($res);
-//        if($res){
-//            return redirect('emailregister');
-//        }else{
-//            return "密码修改失败，请重新修改";
-//        }
-//    }
-}
 
+    // 退出登陆
+    public function outlogin()
+    {
+        // return 111;
+        session()->flush();
+        return redirect('home/index');
+    }
+
+}

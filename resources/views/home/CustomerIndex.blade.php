@@ -21,7 +21,7 @@
         	<!-- topLogo部分的icoDIV -->
             <div id="topLogoIco"> <a href="CustomerIndex.html"><img src="images/logo_ipad.png" width="72" height="72" alt="" /></a>
           </div>
-            <!-- topLogo部分的icoDIV结束 -->
+            <!-- topLogo部分的icoDIV结束 -->zz
             
             <!-- topLogo部分的wordDIV -->
             <div id="topLogoWord"> <a href="CustomerIndex.html"><img src="images/LogoMaker.gif" width="128" height="60" alt="" /></a>

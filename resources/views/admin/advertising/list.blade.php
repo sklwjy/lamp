@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 @section('title')
-    <title>后台用户添加页面</title>
+    <title>轮播图添加页面</title>
 @endsection
 @section('body')
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">用户列表</a>
+        <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">录播图列表</a>
     </div>
     <!--面包屑导航 结束-->
 
@@ -64,7 +64,7 @@
                 <table class="list_tab">
                     <tr>
                         <th class="tc">ID</th>
-                        <th class="tc">广告名称</th>
+                        <th class="tc">轮播图名称</th>
                         <th class="tc">地址</th>
                         <th class="tc">缩略图</th>
                         <th class="tc">修改</th>

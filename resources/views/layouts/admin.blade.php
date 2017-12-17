@@ -8,6 +8,9 @@
     <script type="text/javascript" src="{{asset('admin/style/js/jquery.js')}}"></script>
     <script type="text/javascript" src="{{asset('admin/style/js/ch-ui.admin.js')}}"></script>
     <script type="text/javascript" src="{{asset('layer/layer.js')}}"></script>
+    
+
+  
 </head>
 <body style="background:#F3F3F4;">
 @section('body')
