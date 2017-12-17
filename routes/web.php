@@ -25,16 +25,16 @@ Route::get('active','RegisterController@active');
 
 
 //个人信息路由
-Route::get('account','Home\AccountController@account');
-Route::post('account','Home\AccountController@doaccount');
+//Route::get('account','Home\AccountController@account');
+//Route::post('account','Home\AccountController@doaccount');
 
 
 
 // 前台路由
 	
 	// 前台登录路由
-	Route::get('home/login','Home\LoginController@login');
-	Route::post('home/dologin', 'Home\LoginController@dologin');
+//	Route::get('home/login','Home\LoginController@login');
+//	Route::post('home/dologin', 'Home\LoginController@dologin');
 	Route::get('home/yzm', 'Home\LoginController@yzm');
 
 	// 退出登陆路由
@@ -51,6 +51,8 @@ Route::post('account','Home\AccountController@doaccount');
 
     Route::post('home/doregister', 'Home\LoginController@doregister');
 
+Route::post('home/asount','AccountController@update');
+
 
 // 忘记密码路由
     //找回密码页面
@@ -64,13 +66,21 @@ Route::post('account','Home\AccountController@doaccount');
 	// 前台主页面(未登录)
 	Route::get('home/index', 'Home\IndexController@index');
 
-    
-Route::group(['middleware'=>'homeislogin', 'prefix'=>'home', 'namespace'=>'Home'], function(){
+    Route::get('home/account','Home\AccountController@edit');
+    Route::post('home/account','Home\AccountController@update');
+    Route::post('home/file','Home\AccountController@file');
+    Route::post('home/accounts','Home\AccountController@accounts');
 
-	
+    Route::group([ 'prefix'=>'home', 'namespace'=>'Home'], function(){
+
+
+
+
 	// 主页信息页面
 	Route::resource('message','MessageController');
-	
+//	Route::resource('account','AccountController');
+//    Route::get('account','AccountController@account');
+//    Route::post('account','AccountController@doaccount');
 
 	// 微博详情页面
 	Route::get('info','MessageController@info');
@@ -79,7 +89,15 @@ Route::group(['middleware'=>'homeislogin', 'prefix'=>'home', 'namespace'=>'Home'
 
 });
 
+    //个人信息关注路由
+   //关注我的
+    Route::get('home/friend','Home\FriendController@test');
 
+
+    //我的关注
+    Route::get('home/focusonyou','Home\friendController@test1');
+    
+    
 
 // 后台路由
 

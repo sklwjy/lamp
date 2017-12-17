@@ -45,7 +45,7 @@
                     <a  href="{{url('home/message')}}"><i class="glyphicon glyphicon-home">首页</i>
                         </a>
                 </li>
-                <li ><a href="#"><i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;{{session('users.user_name')}}</a></li>
+                <li ><a href="{{ asset('home/account')  }}"><i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;{{session('users.user_name')}}</a></li>
                 <li>
                     <a data-ga="" data-ga-action="click" data-ga-category="Header Navigation " data-ga-title="Pricing" href="">
                         <i class="glyphicon glyphicon-envelope"></i>

@@ -15,6 +15,7 @@ class MessageController extends Controller
     public function index()
     {
 //        return 11;
+     //  dd(session('users')->user_email);
         return view( 'home/MyWB');
     }
 
