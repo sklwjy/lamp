@@ -38,6 +38,7 @@
 @endif
     {{csrf_field()}}
 <!-- container部分DIV -->
+
 <div id="container">
     <!-- banner部分DIV -->
     <div id="banner">
@@ -105,12 +106,12 @@
         
        
               <br>
-              <div>
+           <!--    <div>
               <label> 生日：</label>  
             <select class="sel_year" rel="2000"> </select> 年 
             <select class="sel_month" rel="2"> </select> 月 
             <select class="sel_day" rel="14"> </select> 日 
-            </div>
+            </div> -->
             {{--你在哪？让你周围的更多的朋友找到你</label></td>--}}
                 {{--</tr>--}}
                 <!-- 个人站点 -->
@@ -165,9 +166,16 @@
         <!-- banner_left部分DIV结束 -->
         <!-- banner_right部分DIV -->
         <div class="right" id="right"  class="box">
+        <div>
+        <a href="{{ asset('home/message') }}" class="fa fa-fw fa-arrows">首页</a>
+        &nbsp; &nbsp; &nbsp;
+       <span style="color:skyblue"> 退出</span><a href="{{ asset('home/index') }}">登录</a>
+       &nbsp;&nbsp;&nbsp;&nbsp;<a href="#">{{session('users')['user_name']}}欢迎您</a>
+        </div>
+
            <p>在这里
               ，你可以设置你账号的基本信息，隐私信息等</p>
-              <input type="text" size="20" id="art_thumb" name="art_thumb" style="display: none;">
+              <input type="text" size="20" id="art_thumb" value="{{asset($userinfo->userinfo['userinfo_file'])}}" name="art_thumb" style="display: none;">
               
           <div>
           <img src="{{asset($userinfo->userinfo['userinfo_file'])}}" onclick="abcd()" id="img1" alt="" style="width:130px;height:150px;border-radius:100px; margin:0 auto; ">
@@ -206,7 +214,8 @@
                             }else{
                                 layer.msg('更新失败');
                             };
-                        }
+                        },
+                        dataType:'json',
 
                     });
               });
@@ -278,16 +287,16 @@
     <a href="">我的好友</a> <br>
     <br> 
 
-            <ul>
-            <li>
-                <h3><i class="fa fa-fw fa-clipboard"   style="color: skyblue"><a href=""></i>我的关注</a></h3>
-                <ul class="sub_menu">
-                    <li><a href="{{url('home/friend')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>关注我的</a></li>
-                    <li><a href="{{url('home/focusonyou')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>我的关注</a></li>
+            
+          <!--   <li> -->
+               <!--  <h3><i class="fa fa-fw fa-clipboard"   style="color: skyblue"><a href=""></i>我的关注</a></h3> -->
+                <!-- <ul class="sub_menu"> -->
+                    <a href="{{url('home/friend')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>关注我的</a><br><br>
+                    <a href="{{url('home/focusonyou')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>我的关注</a>
 
-                </ul>
-            </li>
-            </ul>
+                <!-- </ul> -->
+            <!-- </li> -->
+            
          
     </div>
             </div>

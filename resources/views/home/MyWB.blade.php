@@ -41,16 +41,21 @@
         <div class="collapse navbar-collapse" id="my-navbar-collapse">
 
             <ul class="nav navbar-nav navbar-right" >
-
+           <!--   <li>
+                    {{session('users')['user_name']}}
+                </li> -->
+            
                 <li>
-                    <a  href="#"><i class="glyphicon glyphicon-home"></i>
+                    <a  href="{{asset('home/index')}}"><i class="glyphicon glyphicon-home"></i>
                         首页</a>
                 </li>
-<<<<<<< HEAD
+
+               
+
                 <li ><a href="{{ asset('home/account')  }}"><i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;{{session('users.user_name')}}</a></li>
-=======
-                <li ><a href="#"><i class="glyphicon glyphicon-user"></i>{{ session('users.user_name') }}</a></li>
->>>>>>> origin
+
+              <!--   <li ><a href="#"><i class="glyphicon glyphicon-user"></i>{{ session('users.user_name') }}</a></li>
+ -->
                 <li>
                     <a data-ga="" data-ga-action="click" data-ga-category="Header Navigation " data-ga-title="Pricing" href="">
                         <i class="glyphicon glyphicon-envelope"></i>

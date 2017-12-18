@@ -40,11 +40,11 @@ class MessageController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
+
 //        return 11;
      //  dd(session('users')->user_email);
-        return view( 'home/MyWB');
-=======
+        //return view( 'home/MyWB');
+
 
     // 判断当前的微博是否存在于redis中，如果在直接取 如果不在，先查数据库，将查到的数据放入redis中读取
         // 所有微博的ID
@@ -74,7 +74,7 @@ class MessageController extends Controller
             {
                 $messages[] = Redis::hgetall($hashkey.$n);
             }
-              return view( 'home/mywb',compact('messages'));
+              return view( 'home/MyWB',compact('messages'));
        }else{
 //            //如果redis中已经存在了要获取的文章列表
             $meagesall = Redis::lrange($listkey,0,-1);
@@ -86,8 +86,6 @@ class MessageController extends Controller
             return view( 'home/mywb',compact('messages'));
        }
 
-
->>>>>>> origin
     }
 
     /**

@@ -75,6 +75,7 @@
                         <td class="ld">电话:</td>
                         <td class="if"><input name="user_phone" type="text" class="la" id="user_email" /></td>
                         <td></td>
+                        <input type="hidden" name="user_name">
                     </tr>
                     <tr>
                         <td class="le"></td>

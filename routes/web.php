@@ -19,17 +19,12 @@
 	Route::post('sendcode','RegisterController@sendCode');
 	Route::post('phoneregister','RegisterController@doPhoneRegister');
 
-<<<<<<< HEAD
-//个人信息路由
-//Route::get('account','Home\AccountController@account');
-//Route::post('account','Home\AccountController@doaccount');
-=======
 	//使用邮箱注册的路由
 	Route::get('emailregister','RegisterController@EmailRegister');
 	Route::post('emailregister','RegisterController@doEmailRegister');
 	//邮件注册激活路由
 	Route::get('active','RegisterController@active');
->>>>>>> origin
+
 
 
 	//个人信息路由
@@ -42,19 +37,19 @@
 
 
 	// 前台登录路由
-<<<<<<< HEAD
+
 //	Route::get('home/login','Home\LoginController@login');
 //	Route::post('home/dologin', 'Home\LoginController@dologin');
 	Route::get('home/yzm', 'Home\LoginController@yzm');
-=======
+
 	// Route::get('home/login','Home\LoginController@login');
 	// Route::post('home/dologin', 'Home\LoginController@dologin');
 	// Route::get('home/yzm', 'Home\LoginController@yzm');
->>>>>>> origin
 
 
-	
-	
+
+
+
 
 	// 前台注册路由
 	Route::get('home/register', 'Home\LoginController@register');
@@ -78,28 +73,29 @@ Route::post('home/asount','AccountController@update');
 	Route::get('home/list', 'Home\IndexController@list');
 	Route::get('home/info', 'Home\IndexController@info');
 
-<<<<<<< HEAD
+
     Route::get('home/account','Home\AccountController@edit');
     Route::post('home/account','Home\AccountController@update');
     Route::post('home/file','Home\AccountController@file');
     Route::post('home/accounts','Home\AccountController@accounts');
 
-    Route::group([ 'prefix'=>'home', 'namespace'=>'Home'], function(){
+    Route::group([ 'prefix'=>'home', 'namespace'=>'Home'], function() {
 
 
-
-
-	// 主页信息页面
-	Route::resource('message','MessageController');
+        // 主页信息页面
+        Route::resource('message', 'MessageController');
 //	Route::resource('account','AccountController');
 //    Route::get('account','AccountController@account');
 //    Route::post('account','AccountController@doaccount');
 
-	// 微博详情页面
-	Route::get('info','MessageController@info');
-=======
-	// 瀑布流效果
-	Route::post('home/pbl', 'Home\IndexController@pbl');
+        // 微博详情页面
+        Route::get('info', 'MessageController@info');
+
+        // 瀑布流效果
+        Route::post('home/pbl', 'Home\IndexController@pbl');
+
+
+    });
     
 Route::group(['middleware'=>'homeislogin', 'prefix'=>'home', 'namespace'=>'Home'], function(){
 	// 修改密码
@@ -108,7 +104,7 @@ Route::group(['middleware'=>'homeislogin', 'prefix'=>'home', 'namespace'=>'Home'
 	// 主页信息页面
 	Route::resource('message','MessageController');
 	Route::post('upl','MessageController@upl');
->>>>>>> origin
+
 
 
 });

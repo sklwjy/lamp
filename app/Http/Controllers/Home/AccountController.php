@@ -136,20 +136,25 @@ class AccountController extends Controller
     public function accounts(Request $request)
     {
         $name = $request->except('_token');
-       
+        // dd($name);
+
           $user = session('users');
        //$user = session('users')['user_id'];
         // $id = $request -> input('id');
        // return $userinfo = Users::with('userinfo')->where('user_id',$user['user_id'])->first();
         // $userinfo = Users::where('user_id',$user['user_id'])->first();//user和userinfo的内容
-       $userinfos = Userinfo::where('userinfo_id',$user['user_id'])->first();//userinfo的内容
+       $res = Userinfo::where('user_id',$user['user_id'])-> update(['userinfo_realname'=>$name['n1']]);//userinfo的内容
        // dd($id);
        //return $id;
      //   $name = $request ->input('userinfo_name');
      // return   $request->input('n1');
-        $res = \DB::table('userinfo') -> where('userinfo_id',$user['userinfo']) -> update(['userinfo_realname'=>$name]);
+        // $res = \DB::table('userinfo') -> where('user_id',$user['userinfo']) -> update(['userinfo_realname'=>$name]);
        // dd($res);
-     return $res;
+         if($res){
+            return 1;
+         }else{
+            return 0;
+         }
     }
 
    // $user = session('users');
