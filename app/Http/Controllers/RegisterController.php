@@ -5,6 +5,7 @@ use App\Model\admin\User;
 use App\Model\home\Users;
 use App\Jobs\SendReminderEmail;
 //use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\SMS\SendTemplateSMS;
@@ -189,12 +190,6 @@ class RegisterController extends Controller
 
     }
 
-
-
-
-
-
-
     /**
      * 邮箱手机登录用户
      *
@@ -307,6 +302,12 @@ class RegisterController extends Controller
     // 退出登陆
     public function outlogin()
     {
+        // 所有微博的ID
+        $listkey = 'LIST:MESSAGE';
+        // 每个微博的内容
+        $hashkey = 'HASH:MESSAGE:';
+        Redis::del($listkey);
+        Redis::del($hashkey.'*');
         // return 111;
         session()->flush();
         return redirect('home/index');

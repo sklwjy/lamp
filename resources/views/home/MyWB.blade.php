@@ -48,7 +48,7 @@
                 </li>
                 <li ><a href="#"><i class="glyphicon glyphicon-user"></i>{{ session('users.user_name') }}</a></li>
                 <li>
-                    <a data-ga="" data-ga-action="click" data-ga-category="Header Navigation " data-ga-title="Pricing" href="">
+                    <a data-ga="" data-ga-action="click" data-ga-category="Header Navigation" data-ga-title="Pricing" href="">
                         <i class="glyphicon glyphicon-envelope"></i>
                     </a>
                 </li>
@@ -82,13 +82,6 @@
                         <li> <a href=""> <i class="fa fa-gift"></i> <strong>我的收藏</strong></a> </li>
                         <li> <a href=""> <i class="fa fa-globe"></i> <strong>我的赞</strong> </a> </li>
                         <li> <a href=""> <i class="fa fa-comments-o"></i> <strong>好友圈</strong>  </a>
-                            <ul>
-                                <li><a href="#"><i class="fa fa-globe"></i>朋友</a></li>
-                                <li> <a href="#"><i class="fa fa-group"></i>同学</a>
-                                </li>
-                                <li><a href="#"><i class="fa fa-trophy"></i>明星</a></li>
-                                <li><a href="#"><i class="fa fa-certificate"></i>其他</a></li>
-                            </ul>
                         </li>
                         <li> <a href=""> <i class="fa fa-picture-o"></i> <strong>@我</strong>  </a> </li>
                         <li> <a href=""> <i class="fa fa-envelope-o"></i> <strong>私信</strong> </a> </li>
@@ -98,15 +91,15 @@
                 </nav>
             </div>
         </div>
-    
 
-       <!--  微博显示区 -->
+
+        <!--  微博显示区 -->
         <div class="col-sm-6 col-xs-12 my_edit" id="weibo">
             <div class="row" id="edit_form" >
                 <span class="home/message"pull-left" style="margin:10px;font-size:18px;">编写新鲜事</span>
                 <span class="tips pull-right" style="margin:15px;"></span>
-    <form id="messages_form"  action="{{ url('home/message') }}" mothod="post" style="margin-top: 30px;" enctype="multipart/form-data">
-        {{ csrf_field() }}
+                <form id="messages_form"  action="{{ url('home/message') }}" mothod="post" style="margin-top: 30px;" enctype="multipart/form-data">
+                    {{ csrf_field() }}
                     <div class="form-group">
                         <div class="col-sm-12">
                             <div contentEditable="true" id="content" class="form-control " ></div>
@@ -150,7 +143,6 @@
 
                                     formData.append('file_upload', $('#file_upload')[0].files[0]);
                                     formData.append('_token',"{{csrf_token()}}");
-
                                     $.ajax({
                                         type: "POST",
                                         url: "/home/upl",
@@ -196,47 +188,47 @@
 
                                 </div>
                             </div>
-                             {{--<span> <input type="file" id="selectImg" value=""></input> </span>--}}
+                            {{--<span> <input type="file" id="selectImg" value=""></input> </span>--}}
                             <button type="button" id="send" class="btn btn-default pull-right" >发布</button>
                         </div>
                     </div>
-    </form>
+                </form>
             </div>
             <!-- 微博显示区结束 -->
             <div class="row item_msg" >
                 @foreach($messages as $k=>$v)
-                <div class="col-sm-12 col-xs-12 message" >
-                    <img src="{{ asset('home/images/mywb/icon.png') }}" class="col-sm-2 col-xs-2" style="border-radius: 50%">
-                    <div class="col-sm-9 col-xs-9">
-                        <span style="font-weight: bold;">{{ session('users.user_name') }}</span>
-                        <br>
-                        <small class="date" style="color:#999">{{ $v['messages_time'] }}</small>
-                        <div class="msg_content">{!! $v['messages_content'] !!}
-                            @if( !$v['messages_picture'] == '')
-                                <img class="mypic" src="{{ asset($v['messages_picture']) }}" >
-                             @endif
-                        </div>
-                    <ul class="WB_row_line WB_row_r4 clearfix S_line2">
-                        <li>
-                            <a class="S_txt2" suda-uatrack="key=profile_feed&amp;value=collect_guest" href="javascript:void(0);"><span class="pos"><span class="line  " ><span><em class="W_ficon ficon_favorite S_ficon">û</em><em>收藏</em></span></span></span></a>
-                         </li>
-                         <li>
-                            <a href="javascript:void(0);" class="S_txt2" ><span class="pos"><span class="line  "><span><em class="W_ficon ficon_forward S_ficon"></em><em>0</em></span></span></span></a>
-                        </li>
-                        <li class=" curr">
-                            <a href="javascript:void(0);" class="S_txt2"><span class="pos"><span class="line  "><span><em class="W_ficon ficon_repeat S_ficon"></em><em>0</em></span></span></span></a>
-                        </li>
-                        <li>
-                            <!--cuslike用于前端判断是否显示个性赞，1:显示-->
-                            <a href="javascript:void(0);" class="S_txt2"  title="赞" ><span class="pos"><span class="line  ">
+                    <div class="col-sm-12 col-xs-12 message" >
+                        <img src="{{ asset('home/images/mywb/icon.png') }}" class="col-sm-2 col-xs-2" style="border-radius: 50%">
+                        <div class="col-sm-9 col-xs-9">
+                            <span style="font-weight: bold;">{{ session('users.user_name') }}</span>
+                            <br>
+                            <small class="date" style="color:#999">{{ $v['messages_time'] }}</small>
+                            <div class="msg_content">{!! $v['messages_content'] !!}
+                                @if( !$v['messages_picture'] == '')
+                                    <img class="mypic" src="{{ asset($v['messages_picture']) }}" >
+                                @endif
+                            </div>
+                            <ul class="WB_row_line WB_row_r4 clearfix S_line2">
+                                <li>
+                                    <a class="S_txt2" suda-uatrack="key=profile_feed&amp;value=collect_guest" href="javascript:void(0);"><span class="pos"><span class="line  " ><span><em class="W_ficon ficon_favorite S_ficon">û</em><em>收藏</em></span></span></span></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" class="S_txt2" ><span class="pos"><span class="line  "><span><em class="W_ficon ficon_forward S_ficon"></em><em>0</em></span></span></span></a>
+                                </li>
+                                <li class=" curr">
+                                    <a href="javascript:void(0);" class="S_txt2"><span class="pos"><span class="line  "><span><em class="W_ficon ficon_repeat S_ficon"></em><em>0</em></span></span></span></a>
+                                </li>
+                                <li>
+                                    <!--cuslike用于前端判断是否显示个性赞，1:显示-->
+                                    <a href="javascript:void(0);" class="S_txt2"  title="赞" ><span class="pos"><span class="line  ">
                                 <span class=""><em class="W_ficon ficon_praised S_txt2">ñ</em><em>0</em></span>
-                         </li>
-                    </ul>
-                    </div>
-                    <div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
                             <span><a href="javascript:;" onclick="delmessage( {{ $v['messages_id'] }} )"><i class="glyphicon glyphicon-trash"></i> 删除</a></span>
+                        </div>
                     </div>
-                </div>
                 @endforeach
             </div>
         </div>
@@ -310,51 +302,51 @@
 <script type="text/javascript" src="{{asset('layer/layer.js')}}"></script>
 <script type="text/javascript">
     //  获取div 中的内容
-         $("#send").on('click',function(){
-             var content = $("#content").html();
-             var p = $("#message_thumb").val();
-             var mydate = new Date(); // 获取年
-             var y = mydate.getFullYear();  // 获取月
-             var m = mydate.getMonth()+1;   // 获取日
-             var d = mydate.getDate();      // 获取小时
-             var h = mydate.getHours();     // 获取分钟
-             var mm = mydate.getMinutes();  // 获取秒
-             var s = mydate.getSeconds();
-             if(h<10)
-             {
-                 h = '0' + h;
-             }
-             if(mm < 10)
-             {
-                 mm = '0' + mm;
-             }
-             if(s < 10)
-             {
-                 s = '0' + s;
-             }
-             var str = y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + s;
-             $.ajax({
-                type:"POST",
-                url:'{{ url ("home/message") }}',
-                data:{ "_token":"{{ csrf_token() }}","messages_content":content,"messages_picture":p,"messages_time":str,"user_id":{{ session ('users.user_id')}} },
-                success:function(data){
+    $("#send").on('click',function(){
+        var content = $("#content").html();
+        var p = $("#message_thumb").val();
+        var mydate = new Date(); // 获取年
+        var y = mydate.getFullYear();  // 获取月
+        var m = mydate.getMonth()+1;   // 获取日
+        var d = mydate.getDate();      // 获取小时
+        var h = mydate.getHours();     // 获取分钟
+        var mm = mydate.getMinutes();  // 获取秒
+        var s = mydate.getSeconds();
+        if(h<10)
+        {
+            h = '0' + h;
+        }
+        if(mm < 10)
+        {
+            mm = '0' + mm;
+        }
+        if(s < 10)
+        {
+            s = '0' + s;
+        }
+        var str = y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + s;
+        $.ajax({
+            type:"POST",
+            url:'{{ url ("home/message") }}',
+            data:{ "_token":"{{ csrf_token() }}","messages_content":content,"messages_picture":p,"messages_time":str,"user_id":{{ session ('users.user_id')}} },
+            success:function(data){
 //                    alert(data);
-                    console.log(data);
-                    if(data.error == 0){
-                        //console.log("错误号"+res.error);
-                        //console.log("错误信息"+res.msg);
-                        layer.msg(data.msg, {icon: 5});
-                       location.href = location.href;
-                        var t =setTimeout("location.href = location.href;",1000);
-                    }else{
-                        layer.msg(data.msg, {icon: 6});
-                        var t =setTimeout("location.href = location.href;",1000);
-                        location.href = location.href;
-                    }
-             }
-             });
-             $("#content").html()="";
-         });
+//                console.log(data);
+                if(data.error == 0){
+                    //console.log("错误号"+res.error);
+                    //console.log("错误信息"+res.msg);
+                    layer.msg(data.msg, {icon: 5});
+                    location.href = location.href;
+                    var t =setTimeout("location.href = location.href;",1000);
+                }else{
+                    layer.msg(data.msg, {icon: 6});
+                    var t =setTimeout("location.href = location.href;",1000);
+                    location.href = location.href;
+                }
+            }
+        });
+        $("#content").html()="";
+    });
 
     $(function(){
 
@@ -434,25 +426,16 @@
         layer.confirm('您确认删除吗？', {
             btn: ['确认','取消'] //按钮
         }, function(){
-//                如果用户发出删除请求，应该使用ajax向服务器发送删除请求
-//                $.get("请求服务器的路径","携带的参数", 获取执行成功后的额返回数据);
-            //admin/user/1
             $.post("{{ url('home/message')}}/"+id,{"_method":"delete","_token":"{{ csrf_token() }}"},function(data){
-//                    alert(data);
-//                    data是json格式的字符串，在js中如何将一个json字符串变成json对象
-                //var res =  JSON.parse(data);
-//                    删除成功
                 if(data.error == 0){
-                    //console.log("错误号"+res.error);
-                    //console.log("错误信息"+res.msg);
                     layer.msg(data.msg, {icon: 6});
-//                       location.href = location.href;
+                       location.href = location.href;
                     var t=setTimeout("location.href = location.href;",1000);
                 }else{
                     layer.msg(data.msg, {icon: 5});
 
                     var t=setTimeout("location.href = location.href;",1000);
-                    //location.href = location.href;
+                    location.href = location.href;
                 }
 
             });

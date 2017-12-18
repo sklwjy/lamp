@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Model\home\Message;
+use App\Model\home\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
@@ -41,36 +42,50 @@ class MessageController extends Controller
     public function index()
     {
 
+        $user = session('users');
+        $user_id = $user['user_id'];
     // 判断当前的微博是否存在于redis中，如果在直接取 如果不在，先查数据库，将查到的数据放入redis中读取
         // 所有微博的ID
         $listkey = 'LIST:MESSAGE';
         // 每个微博的内容
         $hashkey = 'HASH:MESSAGE:';
         //如果redis中不存在，需要查询的微博信息
-       if(!Redis::exists($listkey)){
+        if(!Redis::exists($listkey)){
 //            查询数据库，得到需要的数据，放入redis
-            $meages = Message::get()->toArray();
-//            dd($meages);
-           foreach($meages as $key => $value)
+            $user = session('users');
+            $user_id = $user['user_id'];
+            // dd($user_id);
+             $meages = Users::with('message')->where('user_id', $user_id)->get()->toArray();
+//            $message = Message::with('user')->where('user_id', $user_id)->get();
+//            dd($message);
+            foreach($meages as $key => $value)
             {
-//                //将所有微博的id写入$listkey变量
-                Redis::rpush($listkey,$meages[$key]['messages_id']);
+                // dd($value);
+                foreach($value['message'] as $k=>$v){
+                    // dd($k);
+                    // dd($v['messages_id']);
+                    //将所有微博的id写入$listkey变量
+                    Redis::rpush($listkey,$v['messages_id']);
+
+                    $listkey1 = Redis::lindex($listkey, $k);
+                    // dd($hashkey.$listkey);
+                    Redis::hmset($hashkey.$listkey1, $v);
+                }
+
             }
-//            //  获取所有微博的id作为遍历条件
-            $meagesall = Redis::lrange($listkey, 0, -1);
-            foreach($meagesall as $k=>$v){
-//                //每次遍历向redis的$hashkey对应的变量中写入一个微博的信息
-                Redis::hmset($hashkey.$v, $meages[$k]);
-            }
-//            //从Redis中获取需要的文章信息
-//            //存放最终绑定到页面上的文章列表数据
+            //从Redis中获取需要的文章信息
+            //存放最终绑定到页面上的文章列表数据
+            $messagesall = Redis::lrange($listkey, 0, -1);
+            // dd($messagesall);
             $messages = [];
-            foreach($meagesall as $n)
+            foreach($messagesall as $n)
             {
+                // dd($hashkey.$n);
                 $messages[] = Redis::hgetall($hashkey.$n);
             }
-              return view( 'home/mywb',compact('messages'));
-       }else{
+            // dd($messages);
+            return view( 'home/mywb',compact('messages'));
+        }else{
 //            //如果redis中已经存在了要获取的文章列表
             $meagesall = Redis::lrange($listkey,0,-1);
             $messages = [];
@@ -79,9 +94,7 @@ class MessageController extends Controller
                 $messages[] = Redis::hgetall($hashkey.$n);
             }
             return view( 'home/mywb',compact('messages'));
-       }
-
-
+        }
     }
 
     /**
@@ -179,21 +192,18 @@ class MessageController extends Controller
         $hashkey = 'HASH:MESSAGE:';
 
         $res = Message::find($id)->delete();
-
 //        dd($res);
         $data = [];
         if($res){
-
             Redis::del($listkey);
             Redis::del($hashkey.'*');
-
             $data['error'] = 0;
             $data['msg'] ="删除成功";
         }else{
             $data['error'] = 1;
             $data['msg'] ="删除失败";
         }
-        return $data;;
+        return $data;
     }
 
 

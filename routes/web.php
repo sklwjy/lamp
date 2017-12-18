@@ -25,25 +25,17 @@
 	//邮件注册激活路由
 	Route::get('active','RegisterController@active');
 
-
 	//个人信息路由
 	Route::get('account','Home\AccountController@account');
 	Route::post('account','Home\AccountController@doaccount');
 
 	// 退出登陆路由
 	Route::get('home/outlogin','RegisterController@outlogin');
-	
-
 
 	// 前台登录路由
 	// Route::get('home/login','Home\LoginController@login');
 	// Route::post('home/dologin', 'Home\LoginController@dologin');
 	// Route::get('home/yzm', 'Home\LoginController@yzm');
-
-
-	
-	
-
 	// 前台注册路由
 	Route::get('home/register', 'Home\LoginController@register');
     Route::post('home/doregister', 'LoginController@doregister');

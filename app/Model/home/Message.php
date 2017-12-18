@@ -12,4 +12,6 @@ class Message extends Model
     public $fillable = ['user_id','messages_time','messages_content','messages_picture'];
     public $guarded = [];
     public $timestamps = false;
+
 }
+
