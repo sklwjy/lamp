@@ -69,12 +69,6 @@
                         <td></td>
                         <td></td>
                     </tr>
-                    {{--<tr>--}}
-                        {{--<td class="le"></td>--}}
-                        {{--<td class="ld">手机号:</td>--}}
-                        {{--<td class="if"><input name="user_phone" type="text" class="la" id="user_email" /></td>--}}
-                        {{--<td></td>--}}
-                    {{--</tr>--}}
                     <tr>
                         <td class="le"></td>
                         <td class="ld">手机号/邮箱:</td>

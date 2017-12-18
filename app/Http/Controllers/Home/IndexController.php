@@ -61,6 +61,7 @@ class IndexController extends Controller
     // 新闻的具体信息
     public function info()
     {
+      
     	// 获取传过来的id
     	$id = $_GET['id'];
 

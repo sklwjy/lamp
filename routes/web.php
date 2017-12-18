@@ -26,6 +26,7 @@
 	Route::get('active','RegisterController@active');
 
 
+
 	//个人信息路由
 	Route::get('account','Home\AccountController@account');
 	Route::post('account','Home\AccountController@doaccount');
@@ -36,18 +37,26 @@
 
 
 	// 前台登录路由
+
+//	Route::get('home/login','Home\LoginController@login');
+//	Route::post('home/dologin', 'Home\LoginController@dologin');
+	Route::get('home/yzm', 'Home\LoginController@yzm');
+
 	// Route::get('home/login','Home\LoginController@login');
 	// Route::post('home/dologin', 'Home\LoginController@dologin');
 	// Route::get('home/yzm', 'Home\LoginController@yzm');
 
 
-	
-	
+
+
+
 
 	// 前台注册路由
 	Route::get('home/register', 'Home\LoginController@register');
     Route::post('home/doregister', 'LoginController@doregister');
     Route::post('home/doregister', 'Home\LoginController@doregister');
+
+Route::post('home/asount','AccountController@update');
 
 
 // 忘记密码路由
@@ -64,10 +73,18 @@
 	Route::get('home/list', 'Home\IndexController@list');
 	Route::get('home/info', 'Home\IndexController@info');
 
+
 	// 瀑布流效果
 	Route::post('home/pbl', 'Home\IndexController@pbl');
 	// 新闻收藏
 	// Route::get('home/shou', 'Home\IndexController@shou');
+
+
+	// 个人信息
+    Route::get('home/account','Home\AccountController@edit');
+    Route::post('home/account','Home\AccountController@update');
+    Route::post('home/file','Home\AccountController@file');
+    Route::post('home/accounts','Home\AccountController@accounts');
 
 
 // 路由组 
@@ -82,7 +99,32 @@ Route::group(['middleware'=>'homeislogin', 'prefix'=>'home', 'namespace'=>'Home'
 	// 新闻收藏
 	Route::get('shou/{id}','IndexController@shou');
 
+
+    // 主页信息页面
+   	Route::resource('message', 'MessageController');
+
+        // 微博详情页面
+        // Route::get('info', 'MessageController@info');
+
+
 });
+
+    //个人信息关注路由
+   //关注我的
+    // Route::get('home/friend','Home\FriendController@test');
+
+
+    // //我的关注
+    // Route::get('home/focusonyou','Home\friendController@test1');
+    
+    
+
+
+
+
+
+
+
 
 
 

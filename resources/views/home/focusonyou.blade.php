@@ -35,6 +35,7 @@
                 <li><a href="#">手机</a></li>
                 <li><a href="#">帮助</a></li>
                 <li><a href="index.html">退出</a></li>
+                <!-- <li><a href="home/account">返回</a></li> -->
             </ul>
         </div>
         <!-- top部分的文字导航结束 -->
@@ -42,6 +43,7 @@
     <!-- top部分结束 -->
  
   <!-- 页面主体 -->
+   <!-- <form id="form2" name="form2" method="post" action="home/friend"> -->
   <div id="banner">
     <table width="765" border="0" cellpadding="0" cellspacing="0" id="tb1">
       <tr>
@@ -54,10 +56,11 @@
       <tr>
         <td height="47" align="center" valign="middle" bgcolor="#e3f1fa" class="td2 font1">详细</td>
         <td height="47" align="center" valign="middle" bgcolor="#e3f1fa" class="td4 font1"> 列表
-        <form id="form2" name="form2" method="post" action="">
+        <form id="form2" name="form2" method="post" action="home/friend">
         <div id="search">
-          <input type="text" name="textfield2" id="textfield2" />
-          <img src="images/sousuo1.gif" alt="" width="27" height="25" align="absmiddle" />
+          <input type="text" name="keywords" id="textfield2" />
+          <img src="images/sousuo1.gif" alt="" width="27" height="25" align="absmiddle" type="submit"  value="查询"/>
+          
         </div>
         </form></td>
       </tr>

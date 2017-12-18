@@ -11,4 +11,8 @@ class Users extends Model
     public $guarded = [];
     public $timestamps = false;
 
+    public function userinfo()
+    {
+        return $this->hasOne('App\Model\home\Userinfo', 'user_id', 'user_id');
+    }
 }

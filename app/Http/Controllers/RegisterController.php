@@ -109,6 +109,7 @@ class RegisterController extends Controller
         if($input['code'] != session('phone')){
             return redirect('phoneregister')->with('errors', '验证码错误');
         }
+        $input['user_name'] = $input['user_email'];
 
 //        unset(session('phone'));
 //        if($input['code'] != Session::get('phone')) {
@@ -298,9 +299,11 @@ class RegisterController extends Controller
                     return redirect('phoneregister')->with('errors', '密码不正确');
                 }else{
                     Session::put('users', $user);
+
                     $url = session('url');
                     // dd($url);
                     return redirect($url);
+
                 }
 
             }
