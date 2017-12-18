@@ -32,9 +32,25 @@
                             <img class="mypic" src="{{$n->news_picture}}" >
                       
                         </div>
-
+                                      <ul class="WB_row_line WB_row_r4 clearfix S_line2">
+                        <li>
+                            <a class="S_txt2" suda-uatrack="key=profile_feed&amp;value=collect_guest" href="{{url('home/shou/'.$n->news_id)}}"><span class="pos"><span class="line  " ><span><em class="W_ficon ficon_favorite S_ficon">û</em><em>收藏</em></span></span></span></a>
+                         </li>
+                         <li>
+                            <a href="javascript:void(0);" class="S_txt2" ><span class="pos"><span class="line  "><span><em class="W_ficon ficon_forward S_ficon"></em><em>0</em></span></span></span></a>
+                        </li>
+                        <li class=" curr">
+                            <a href="javascript:void(0);" class="S_txt2"><span class="pos"><span class="line  "><span><em class="W_ficon ficon_repeat S_ficon"></em><em>0</em></span></span></span></a>
+                        </li>
+                        <li>
+                            <!--cuslike用于前端判断是否显示个性赞，1:显示-->
+                            <a href="javascript:void(0);" class="S_txt2"  title="赞" ><span class="pos"><span class="line  ">
+                                <span class=""><em class="W_ficon ficon_praised S_txt2">ñ</em><em>0</em></span>
+                         </li>
+                    </ul>
 
                     </div>
+
 
                 </div>
               @endforeach
@@ -43,7 +59,7 @@
 
             </div>
 
-
+        
 
         </div>
 
@@ -55,7 +71,11 @@
 <script src="{{ asset('home/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('layui/layui.js') }}"></script>
 
+<script type="text/javascript">
 
+    $("#msg").fadeToggle("slow","linear");
+
+</script>
 <script type="text/javascript">
 
       var p = 1;

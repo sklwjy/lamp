@@ -20,7 +20,7 @@
 	Route::post('phoneregister','RegisterController@doPhoneRegister');
 
 	//使用邮箱注册的路由
-	Route::get('emailregister','RegisterController@EmailRegister');
+	Route::get('emailregister','RegisterController@EmailRegister')->middleware('login');
 	Route::post('emailregister','RegisterController@doEmailRegister');
 	//邮件注册激活路由
 	Route::get('active','RegisterController@active');
@@ -66,7 +66,11 @@
 
 	// 瀑布流效果
 	Route::post('home/pbl', 'Home\IndexController@pbl');
-    
+	// 新闻收藏
+	// Route::get('home/shou', 'Home\IndexController@shou');
+
+
+// 路由组 
 Route::group(['middleware'=>'homeislogin', 'prefix'=>'home', 'namespace'=>'Home'], function(){
 	// 修改密码
 	Route::get('message/password', 'MessageController@password');
@@ -75,6 +79,8 @@ Route::group(['middleware'=>'homeislogin', 'prefix'=>'home', 'namespace'=>'Home'
 	Route::resource('message','MessageController');
 	Route::post('upl','MessageController@upl');
 
+	// 新闻收藏
+	Route::get('shou/{id}','IndexController@shou');
 
 });
 

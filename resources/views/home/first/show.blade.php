@@ -28,11 +28,11 @@
                 <span class="icon-bar"></span>
             </button>
         </div>
-        <form class="navbar-form navbar-left" role="search">
+         <form action="{{url('home/index')}}" class="navbar-form navbar-left" role="search">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="#热门话题#">
-                <i class="glyphicon glyphicon-search btn_search" ></i>
-                <!--  <button type="submit" class="btn btn-default">提交</button> -->
+                <input type="text" name="news_name" class="form-control" placeholder="#热门话题#">
+                <label for="tijiao"><i class="glyphicon glyphicon-search btn_search" ></i></label>
+                 <button id="tijiao" style="display:none" type="submit" class="btn btn-default"></button>
             </div>
 
         </form>
@@ -63,7 +63,10 @@
         <div class="col-sm-2" style="margin-top:70px; ">
             <div style="position:fixed;z-index:9999" class="container; ">
                 <nav>
-                    <ul class="mcd-menu" style="width:185px;height:0px">
+                    <ul class="mcd-menu" style="width:185px;height:0px">                   
+                        <li> <a href="{{url('home/index')}}"> <i class="fa fa-home"></i> <strong>首页</strong> </a> </li>
+
+                  
                     @foreach($navs as $k=>$v)
                         <li> <a href="{{url('home/list')}}?news_id={{$v->news_id}}"> <i class="fa fa-home"></i> <strong>{{$v->nav_name}}</strong> </a> </li>
                     @endforeach  

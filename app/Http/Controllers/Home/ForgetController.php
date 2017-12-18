@@ -70,7 +70,7 @@ class ForgetController extends Controller
         $res = $user->update(['user_password'=>$password]);
 
         if($res){
-            return redirect('home/login');
+            return redirect('emailregister');
         }else{
             return "密码修改失败，请重新修改";
         }

@@ -19,7 +19,13 @@ class HomeIsLogin
         if(\Session::get('users')){
             return $next($request);
         }else {
-            return redirect('home/login')->with('errors', '请先登录!!');
+            // 获取传过来的路由
+            $url = $request->url();
+             // dd($url);
+            \Session::put('url', $url);
+            // $url = session('url');
+            // dd($url);
+            return redirect('emailregister')->with('errors', '请先登录!!');
         }
     }
 }

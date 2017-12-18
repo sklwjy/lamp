@@ -12,4 +12,9 @@ class Message extends Model
     public $fillable = ['user_id','messages_time','messages_content','messages_picture'];
     public $guarded = [];
     public $timestamps = false;
+
+    public function user()
+    {
+        return $this->belongsTo('App\Model\home\Users', 'user_id', 'user_id');
+    }
 }

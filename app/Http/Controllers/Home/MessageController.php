@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Model\home\Message;
+use App\Model\home\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
@@ -49,8 +50,14 @@ class MessageController extends Controller
         //如果redis中不存在，需要查询的微博信息
        if(!Redis::exists($listkey)){
 //            查询数据库，得到需要的数据，放入redis
-            $meages = Message::get()->toArray();
-//            dd($meages);
+            $user = session('users');
+            $user_id = $user['user_id'];
+            // dd($user_id);
+            // $meages = Users::with('message')->where('user_id', $user_id)->get()->toArray();
+      
+           
+           $meages = Message::with('user')->where('user_id', $user_id)->orderBy('messages_time','desc')->get()->toArray();
+                // dd($meages);
            foreach($meages as $key => $value)
             {
 //                //将所有微博的id写入$listkey变量
@@ -58,10 +65,14 @@ class MessageController extends Controller
             }
 //            //  获取所有微博的id作为遍历条件
             $meagesall = Redis::lrange($listkey, 0, -1);
+            // dd($meagesall);
+
             foreach($meagesall as $k=>$v){
-//                //每次遍历向redis的$hashkey对应的变量中写入一个微博的信息
+
+                //每次遍历向redis的$hashkey对应的变量中写入一个微博的信息
                 Redis::hmset($hashkey.$v, $meages[$k]);
             }
+  
 //            //从Redis中获取需要的文章信息
 //            //存放最终绑定到页面上的文章列表数据
             $messages = [];
@@ -71,6 +82,7 @@ class MessageController extends Controller
             }
               return view( 'home/mywb',compact('messages'));
        }else{
+          // dd(2222);
 //            //如果redis中已经存在了要获取的文章列表
             $meagesall = Redis::lrange($listkey,0,-1);
             $messages = [];
@@ -78,9 +90,9 @@ class MessageController extends Controller
             {
                 $messages[] = Redis::hgetall($hashkey.$n);
             }
-            return view( 'home/mywb',compact('messages'));
+            //dd($messages);
+            return view( 'home.mywb',compact('messages'));
        }
-
 
     }
 

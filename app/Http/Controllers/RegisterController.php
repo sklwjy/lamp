@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\SMS\SendTemplateSMS;
 use App\SMS\M3Result;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Crypt;
@@ -256,7 +257,10 @@ class RegisterController extends Controller
                 return redirect('emailregister')->with('errors', '密码不正确');
             } else {
                 Session::put('users', $user);
-                return redirect('home/message')->with('errors', '登录成功');
+                Session::put('users', $user);
+                    $url = session('url');
+                    // dd($url);
+                    return redirect($url);
             }
 
         }
@@ -294,7 +298,9 @@ class RegisterController extends Controller
                     return redirect('phoneregister')->with('errors', '密码不正确');
                 }else{
                     Session::put('users', $user);
-                    return redirect('home/message')->with('errors', '登录成功');
+                    $url = session('url');
+                    // dd($url);
+                    return redirect($url);
                 }
 
             }
@@ -307,9 +313,17 @@ class RegisterController extends Controller
     // 退出登陆
     public function outlogin()
     {
+        // 清空缓存
+        $listkey = 'LIST:MESSAGE';    
+        $hashkey = 'HASH:MESSAGE:';
+        Redis::del($listkey);
+        Redis::del($hashkey.'*');
+
+
         // return 111;
         session()->flush();
         return redirect('home/index');
+        
     }
 
 }

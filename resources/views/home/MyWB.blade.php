@@ -43,8 +43,8 @@
             <ul class="nav navbar-nav navbar-right" >
 
                 <li>
-                    <a  href="#"><i class="glyphicon glyphicon-home"></i>
-                        首页</a>
+                    <a  href="{{url('home/index')}}"><i class="glyphicon glyphicon-home"></i>
+                        微博首页</a>
                 </li>
                 <li ><a href="#"><i class="glyphicon glyphicon-user"></i>{{ session('users.user_name') }}</a></li>
                 <li>
@@ -58,7 +58,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="#">账号设置</a></li>
-                        <li><a href="#">退出</a></li>
+                        <li><a href="{{url('home/outlogin')}}">退出</a></li>
 
                     </ul>
                 </li>
