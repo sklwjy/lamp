@@ -26,15 +26,9 @@
 	Route::get('active','RegisterController@active');
 
 
-
-	//个人信息路由
-	Route::get('account','Home\AccountController@account');
-	Route::post('account','Home\AccountController@doaccount');
-
+	
 	// 退出登陆路由
 	Route::get('home/outlogin','RegisterController@outlogin');
-	
-
 
 	// 前台登录路由
 
@@ -42,9 +36,8 @@
 //	Route::post('home/dologin', 'Home\LoginController@dologin');
 	Route::get('home/yzm', 'Home\LoginController@yzm');
 
-	// Route::get('home/login','Home\LoginController@login');
-	// Route::post('home/dologin', 'Home\LoginController@dologin');
-	// Route::get('home/yzm', 'Home\LoginController@yzm');
+
+
 
 
 
@@ -109,21 +102,7 @@ Route::group(['middleware'=>'homeislogin', 'prefix'=>'home', 'namespace'=>'Home'
 
 });
 
-    //个人信息关注路由
-   //关注我的
-    // Route::get('home/friend','Home\FriendController@test');
-
-
-    // //我的关注
-    // Route::get('home/focusonyou','Home\friendController@test1');
-    
-    
-
-
-
-
-
-
+  
 
 
 

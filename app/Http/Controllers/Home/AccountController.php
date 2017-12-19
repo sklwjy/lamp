@@ -72,15 +72,13 @@ class AccountController extends Controller
        // return 11;
        // $user_id = session('users')['user_id'];
         $user = session('users');
+
        // dd($user['user_id']);
         $userinfo = Users::with('userinfo')->where('user_id',$user['user_id'])->first();//user和userinfo的内容
-//        //$userinfo = Userinfo::where('user_id',$user['user_id'])->first();//userinfo的内容
-//        dd($userinfo);
-       // dd($userinfo['userinfo']['userinfo_realname']);//笨办法
-//        dd($userinfo['userinfo']['userinfo_sex']);
 
         return view('home/account',compact('userinfo'));
     }
+
 
     public function  update(Request $request)
     {
@@ -89,41 +87,55 @@ class AccountController extends Controller
        // dd($input);
        //dd($input['userinfo_file']);
 
-        $input['user_id'];
+        $user_id = $input['user_id'];
         //        1. 通过id找到要修改那个用户
-        $user = Users::find($input['user_id']);
-        //dd($user);
+        $user = Userinfo::where('user_id', $user_id)->first();
+        // dd($user);
+       
+        if($user){
+            $data['userinfo_address'] = $input['a'].$input['b'];
+            if(isset($input['c'])) {
+                $data['userinfo_address'] = $input['a'].$input['b'].$input['c'];
+            }
+            $data['userinfo_relaname'] = $input['userinfo_relaname'];
+            $data['userinfo_email'] = $input['userinfo_email'];
+            $data['userinfo_web'] = $input['userinfo_web'];
+            $data['userinfo_intro'] = $input['userinfo_intro'];
+            $data['userinfo_sex'] = $input['userinfo_sex'];
+            $data['userinfo_file'] = $input['art_thumb'];
+            $data['user_id'] = $user_id;
+           // dd($data);
+            $userinfo = Userinfo::where('user_id', $user_id)->first();
+            $res = $userinfo->update($data);
+            if($res){
+                return redirect('home/account');
+            }else{
+                return redirect('home/account/');
+            }
 
-      //  dd($input);
-        //表单验证
-        //获取前台表单提交的数据，如果数据为空，执行添加操作；如果不为空判断
+          }else{
+              $data['userinfo_address'] = $input['a'].$input['b'];
+              if(isset($input['c'])) {
+                  $data['userinfo_address'] = $input['a'].$input['b'].$input['c'];
+              }
+              $data['userinfo_relaname'] = $input['userinfo_relaname'];
+              $data['userinfo_email'] = $input['userinfo_email'];
+              $data['userinfo_web'] = $input['userinfo_web'];
+              $data['userinfo_intro'] = $input['userinfo_intro'];
+              $data['userinfo_sex'] = $input['userinfo_sex'];
+              $data['userinfo_file'] = $input['art_thumb'];
+              $data['user_id'] = $user_id;
 
-        //$input = ['userinfo_realname'] = $input['userinfo_realname'];
-//        $user = new Users();
-//        $input = $user ->userinfo_realname  = $input['userinfo_realname'];
-//        $userinfo = Users::where('user_id',$user['user_id'])->first();//user和userinfo的内容
-        $userinfos = Userinfo::where('user_id',$user['user_id'])->first();//userinfo的内容
-//        dd($userinfos);
-//        $userinfos = $userinfos ->toArray();
-       // dd($userinfos);
-//        dd($input);
-        $data['userinfo_address'] = $input['a'].$input['b'];
-        if(isset($input['c'])) {
-            $data['userinfo_address'] = $input['a'].$input['b'].$input['c'];
-        }
-        $data['userinfo_realname'] = $input['userinfo_realname'];
-        $data['userinfo_email'] = $input['userinfo_email'];
-        $data['userinfo_web'] = $input['userinfo_web'];
-        $data['userinfo_intro'] = $input['userinfo_intro'];
-        $data['userinfo_sex'] = $input['userinfo_sex'];
-        $data['userinfo_file'] = $input['art_thumb'];
-       // dd($data);
-        $res = $userinfos->update($data);
-        if($res){
-            return redirect('home/account');
-        }else{
-            return redirect('home/account/');
-        }
+               $res = Userinfo::create($data); 
+
+               if($res){
+                return redirect('home/account');
+                }else{
+                    return redirect('home/account/');
+                }
+          } 
+
+        
        //dd($res);
 //        $user ->
 

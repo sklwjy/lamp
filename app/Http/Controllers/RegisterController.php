@@ -1,15 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Model\home\Userinfo;
 use App\Model\admin\User;
 use App\Model\home\Users;
 use App\Jobs\SendReminderEmail;
 //use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\SMS\SendTemplateSMS;
 use App\SMS\M3Result;
-use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Crypt;
@@ -120,7 +121,7 @@ class RegisterController extends Controller
 //         $res =   Users::create($input);
 //        dd($res);
         $data = [
-            //'user_name'=>$input['user_name'],
+            'user_name'=>$input['user_email'],
             'user_time' => time(),
             'user_phone' => $input['user_phone'],
             'user_password' => Hash::make($input['user_password']),
@@ -130,6 +131,8 @@ class RegisterController extends Controller
             'token' => Hash::make($input['user_password']),
         ];
 
+
+
         //dd($data);
 
 
@@ -137,6 +140,7 @@ class RegisterController extends Controller
 
         // dd($input);
         //添加成功后，返回刚才添加的那条用户记录
+    
         $res = Users::create($data);
         // dd($res);
         if ($res) {
@@ -190,12 +194,6 @@ class RegisterController extends Controller
         }
 
     }
-
-
-
-
-
-
 
     /**
      * 邮箱手机登录用户
@@ -321,9 +319,8 @@ class RegisterController extends Controller
         $hashkey = 'HASH:MESSAGE:';
         Redis::del($listkey);
         Redis::del($hashkey.'*');
-
-
-        // return 111;
+        
+        // 清空session
         session()->flush();
         return redirect('home/index');
         

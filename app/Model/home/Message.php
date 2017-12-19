@@ -13,8 +13,11 @@ class Message extends Model
     public $guarded = [];
     public $timestamps = false;
 
+
     public function user()
     {
         return $this->belongsTo('App\Model\home\Users', 'user_id', 'user_id');
     }
+
 }
+

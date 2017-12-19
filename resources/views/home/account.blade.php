@@ -51,7 +51,7 @@
                     <td width="120" height="50" align="right"><strong>昵称</strong></td>
                     <td width="20" height="60">&nbsp;</td>
                     <td width="425" height="60"><label>
-                         <input name="userinfo_realname" type="text" class="n1" id="realname" value="{{  $userinfo->userinfo ['userinfo_realname'] }}"/>
+                         <input name="userinfo_relaname" type="text" class="n1" id="relaname" value="{{  $userinfo->userinfo ['userinfo_relaname'] }}"/>
 
 
                             &nbsp;
